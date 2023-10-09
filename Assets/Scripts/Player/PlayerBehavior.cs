@@ -40,7 +40,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Interact()
     {
-        Debug.Log("Kar interact");
+        //Debug.Log("Kar interact");
     }
 
     private void Move(Vector2 direction)

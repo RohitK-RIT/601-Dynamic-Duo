@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Test_character2 : MonoBehaviour
 {
 
     [SerializeField] private float speed = 10f;
+
+    private GameObject characterPanal;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        characterPanal = GameObject.Find("Player2Panel");
+        DeactivatePanel();
     }
 
     // Update is called once per frame
@@ -25,10 +30,10 @@ public class Test_character2 : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
             movementDirection += Vector2.down;
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
             movementDirection += Vector2.left;
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
             movementDirection += Vector2.right;
 
         Move(movementDirection);
@@ -39,5 +44,16 @@ public class Test_character2 : MonoBehaviour
         var delta = direction * (speed * Time.deltaTime);
 
         transform.position += new Vector3(delta.x, 0, delta.y);
+    }
+
+
+    public void ActivatePanel()
+    {
+        characterPanal.SetActive(true);
+    }
+
+    public void DeactivatePanel()
+    {
+        characterPanal.SetActive(false);
     }
 }

@@ -6,8 +6,8 @@ public class BasicInteraction : MonoBehaviour
 {
 
     //Check if the player is in range
-    private bool isPlayer1InRange = false;
-    private bool isPlayer2InRange = false;
+    protected bool isPlayer1InRange = false;
+    protected bool isPlayer2InRange = false;
 
     //The interaction key
     [Tooltip("Use which key to interact")]
@@ -20,6 +20,10 @@ public class BasicInteraction : MonoBehaviour
         if (isPlayer1InRange == true && Input.GetKeyDown(p1InteractKey))
         {
             OnInteract();
+            GameObject.Find("Player1").GetComponent<PlayerBehavior>().ActivatePanel();
+
+            //Testing
+            print("Player1");
         }
 
         //if player2 interact
@@ -27,17 +31,21 @@ public class BasicInteraction : MonoBehaviour
         {
             OnInteract();
             GameObject.Find("Player2").GetComponent<Test_character2>().ActivatePanel();
+
+            //Testing
             print("Player2");
         }
 
+
     }
+
 
     protected virtual void OnInteract()
     {
         Debug.Log("Interact");
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -50,11 +58,12 @@ public class BasicInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayer1InRange = false;
+            GameObject.Find("Player1").GetComponent<PlayerBehavior>().DeactivatePanel();
         }
         else if(other.CompareTag("Player2"))
         {

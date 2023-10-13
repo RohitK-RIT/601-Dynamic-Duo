@@ -6,9 +6,19 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
 
+    //Player's panel------by Rin
+    private GameObject characterPanal;
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        //Set player panel and deactivate-----by Rin
+        characterPanal = GameObject.Find("Player1Panel");
+        DeactivatePanel();
     }
 
     // Update is called once per frame
@@ -48,5 +58,20 @@ public class PlayerBehavior : MonoBehaviour
         var delta = direction * (speed * Time.deltaTime);
 
         transform.position += new Vector3(delta.x, 0, delta.y);
+    }
+
+
+
+
+
+    //Player Panel-------by Rin
+    public void ActivatePanel()
+    {
+        characterPanal.SetActive(true);
+    }
+
+    public void DeactivatePanel()
+    {
+        characterPanal.SetActive(false);
     }
 }

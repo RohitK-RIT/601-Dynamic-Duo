@@ -6,13 +6,13 @@ namespace Interaction
     [RequireComponent(typeof(BoxCollider))]
     public class InteractiveObject : MonoBehaviour
     {
-        public bool OnInteractionStart(CharacterController controller)
+        public virtual bool OnInteractionStart(CharacterController controller)
         {
             Debug.Log($"Interaction Started by {controller.name} with {name}");
             return true;
         }
 
-        public void OnInteractionEnd()
+        public virtual void OnInteractionEnd()
         {
             Debug.Log("Interaction Ended");
         }

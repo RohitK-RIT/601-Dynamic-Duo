@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 600917245}
   - component: {fileID: 600917249}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Dummy Interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -646,8 +646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2b10cac006df0449b22962c913e2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1InteractKey: 101
-  p2InteractKey: 102
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,8 +707,9 @@ GameObject:
   - component: {fileID: 992515247}
   - component: {fileID: 992515246}
   - component: {fileID: 992515245}
-  - component: {fileID: 992515249}
   - component: {fileID: 992515250}
+  - component: {fileID: 992515252}
+  - component: {fileID: 992515251}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -805,19 +804,6 @@ Transform:
   - {fileID: 1830941912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &992515249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992515244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24baf4675c559544f9800d9c9d0c3198, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
 --- !u!54 &992515250
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -845,6 +831,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &992515251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992515244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbeae3f894840cc80cc658853f4f50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: 119
+  down: 115
+  left: 97
+  right: 100
+  interaction: 101
+  characterHUD: {fileID: 1764436695}
+--- !u!114 &992515252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992515244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee096702bfa3216449a487ae7f637ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &1355683950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +1083,8 @@ GameObject:
   - component: {fileID: 1624608672}
   - component: {fileID: 1624608671}
   - component: {fileID: 1624608669}
-  - component: {fileID: 1624608675}
+  - component: {fileID: 1624608677}
+  - component: {fileID: 1624608676}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -1188,7 +1206,7 @@ Transform:
   - {fileID: 2102246188}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1624608675
+--- !u!114 &1624608676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1197,7 +1215,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1624608668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1104de63cccf9e44399bea8673d58b48, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dbeae3f894840cc80cc658853f4f50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: 273
+  down: 274
+  left: 276
+  right: 275
+  interaction: 47
+  characterHUD: {fileID: 1355683950}
+--- !u!114 &1624608677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624608668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee096702bfa3216449a487ae7f637ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
@@ -1317,12 +1353,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1536, y: 1440}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

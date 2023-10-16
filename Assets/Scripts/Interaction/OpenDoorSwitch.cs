@@ -1,19 +1,22 @@
-using Interaction;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
-public class OpenDoorSwitch : InteractiveObject
+namespace Interaction
 {
-    //Testing: change color if door is opened
-    public GameObject Door;
-    public Material newMaterial;
-
-    public override bool OnInteractionStart(CharacterController controller)
+    public class OpenDoorSwitch : InteractiveObject
     {
-        Renderer renderer = Door.GetComponent<Renderer>();
-        renderer.material = newMaterial;
+        //Testing: change color if door is opened
+        [SerializeField] private Renderer doorRenderer;
+        [SerializeField] private Material newMaterial;
 
-        Debug.Log($"{controller.name} opened the door!");
-        return true;
+        public override bool OnInteractionStart(CharacterController controller)
+        {
+            if (!base.OnInteractionStart(controller))
+                return false;
+
+            Debug.Log($"{controller.name} opened the door!");
+            doorRenderer.material = newMaterial;
+            return true;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Core.Player
     {
         private CharacterController Controller { get; set; }
 
-        [SerializeField] private float speed = 10f;
+        [SerializeField] public float speed = 10f;
 
 
         internal void Init(CharacterController controller)

@@ -16,25 +16,39 @@ public class CanvasWireSwitch : MonoBehaviour
     private float startTimeGreen = 0f;
     private float startTimePurple = 0f;
 
+
+    //Hold time for 2 players
     public float requiredHoldTime = 3f;
 
+    //Wire Image
     public Image wireRed;
     public Image wireBlue;
     public Image wireGreen;
     public Image wirePurple;
 
+    //Player Icon Image
     public Image p1Icon;
     public Image p2Icon;
 
-
+    //Players
     private GameObject player1;
     private GameObject player2;
 
+
+    //Success Image
+    public GameObject successImage;
+
+
+    //Player Controllers
     private CharacterController characterController1;
     private CharacterController characterController2;
 
     //Used to delete the interact object
     public Test_TriggerWire parent;
+
+
+    //Audio
+    AudioSource audioSource;
 
 
     void Awake()
@@ -44,16 +58,23 @@ public class CanvasWireSwitch : MonoBehaviour
         wireGreen.enabled = false;
         wirePurple.enabled = false;
 
+        successImage.SetActive(false);
+
+
         //Player icons
         p1Icon.enabled = false;
         p2Icon.enabled = false;
 
+        this.enabled = true;
 
         //Get player control
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
         characterController1 = player1.GetComponent<CharacterController>();
         characterController2 = player2.GetComponent<CharacterController>();
+
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -63,15 +84,20 @@ public class CanvasWireSwitch : MonoBehaviour
         //if succeed, destroy interaction object and puzzle canvas
         if(wireRed.enabled && wireBlue.enabled && wireGreen.enabled && wirePurple.enabled)
         {
-            Debug.Log("Destroy");
+            //successImage.enabled = true;
+            successImage.SetActive(true);
+            if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Slash))
+            {
 
-            //retrieve player control
-            characterController1.enabled = true;
-            characterController2.enabled = true;
+                //retrieve player control
+                characterController1.enabled = true;
+                characterController2.enabled = true;
+                //Destroy puzzle
+                Destroy(parent);
+                Destroy(gameObject);
+            }
+            
 
-            //Destroy puzzle
-            Destroy(parent);
-            Destroy(gameObject);
         }
 
         //Check if wire should be connected
@@ -89,6 +115,12 @@ public class CanvasWireSwitch : MonoBehaviour
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.RightArrow))
         {
 
+            if(audioSource.isPlaying == false)
+            {
+                audioSource.Play();
+            }
+            
+
             if (startTimePurple == 0f)
             {
                 startTimePurple = Time.time;
@@ -96,17 +128,25 @@ public class CanvasWireSwitch : MonoBehaviour
 
             if (Time.time - startTimePurple >= requiredHoldTime)
             {
+                audioSource.Stop();
                 wirePurple.enabled = true;
             }
+            return;
         }
         else
         {
+            //audioSource.Stop();
             startTimePurple = 0f;
         }
 
         //Check Green
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftArrow))
         {
+
+            if (audioSource.isPlaying == false)
+            {
+                audioSource.Play();
+            }
 
             if (startTimeGreen == 0f)
             {
@@ -115,11 +155,15 @@ public class CanvasWireSwitch : MonoBehaviour
 
             if (Time.time - startTimeGreen >= requiredHoldTime)
             {
+                audioSource.Stop();
                 wireGreen.enabled = true;
             }
+
+            return;
         }
         else
         {
+            //audioSource.Stop();
             startTimeGreen = 0f;
         }
 
@@ -127,6 +171,10 @@ public class CanvasWireSwitch : MonoBehaviour
         //Check Red
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.UpArrow))
         {
+            if (audioSource.isPlaying == false)
+            {
+                audioSource.Play();
+            }
 
             if (startTimeRed == 0f)
             {
@@ -135,11 +183,15 @@ public class CanvasWireSwitch : MonoBehaviour
 
             if (Time.time - startTimeRed >= requiredHoldTime)
             {
+                audioSource.Stop();
                 wireRed.enabled = true;
             }
+
+            return;
         }
         else
         {
+            //audioSource.Stop();
             startTimeRed = 0f;
         }
 
@@ -147,6 +199,10 @@ public class CanvasWireSwitch : MonoBehaviour
         //Check Blue
         if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.DownArrow))
         {
+            if (audioSource.isPlaying == false)
+            {
+                audioSource.Play();
+            }
 
             if (startTimeBlue == 0f)
             {
@@ -155,13 +211,19 @@ public class CanvasWireSwitch : MonoBehaviour
 
             if (Time.time - startTimeBlue >= requiredHoldTime)
             {
+                audioSource.Stop();
                 wireBlue.enabled = true;
             }
+
+            return;
         }
         else
         {
+            //audioSource.Stop();
             startTimeBlue = 0f;
         }
+
+        audioSource.Stop();
     }
 
 

@@ -15,6 +15,8 @@ public class Test_TriggerWire : MonoBehaviour
     private CharacterController characterController1;
     private CharacterController characterController2;
 
+    bool isInRange;
+
 
     void Start()
     {
@@ -25,19 +27,37 @@ public class Test_TriggerWire : MonoBehaviour
         characterController2 = player2.GetComponent<CharacterController>();
     }
 
-    void OnTriggerEnter(Collider other)
+    void Update()
     {
-        if (other.gameObject.tag == "Player")
+        if (isInRange = true && (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Slash)))
         {
             Debug.Log("start mini game wire switch");
             GameObject newPrefabInstance = Instantiate(prefabToInstantiate, transform.position, Quaternion.identity);
-            newPrefabInstance.GetComponent< CanvasWireSwitch>().parent = this;
+            newPrefabInstance.GetComponent<CanvasWireSwitch>().parent = this;
 
             //Stop player movement
             characterController1.enabled = false;
             characterController2.enabled = false;
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            isInRange = true;
+        }
         
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+
+        if (other.gameObject.tag == "Player")
+        {
+            isInRange = false;
+        }
+
     }
 
 

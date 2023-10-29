@@ -15,7 +15,10 @@ public class Test_TriggerWire : MonoBehaviour
     private CharacterController characterController1;
     private CharacterController characterController2;
 
-    bool isInRange;
+    bool isP1InRange;
+    bool isP2InRange;
+
+    bool isTrigger;
 
 
     void Start()
@@ -29,23 +32,34 @@ public class Test_TriggerWire : MonoBehaviour
 
     void Update()
     {
-        if (isInRange = true && (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Slash)))
-        {
-            Debug.Log("start mini game wire switch");
-            GameObject newPrefabInstance = Instantiate(prefabToInstantiate, transform.position, Quaternion.identity);
-            newPrefabInstance.GetComponent<CanvasWireSwitch>().parent = this;
 
-            //Stop player movement
-            characterController1.enabled = false;
-            characterController2.enabled = false;
+        if (!isTrigger) 
+        { 
+            if ((isP1InRange == true && Input.GetKey(KeyCode.E)) || (Input.GetKey(KeyCode.Slash) && isP2InRange == true))
+            {
+                Debug.Log("start mini game wire switch");
+                GameObject newPrefabInstance = Instantiate(prefabToInstantiate, transform.position, Quaternion.identity);
+                newPrefabInstance.GetComponent<CanvasWireSwitch>().parent = this;
+
+                //Stop player movement
+                characterController1.enabled = false;
+                characterController2.enabled = false;
+
+                isTrigger = true;
+            }
         }
+
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            isInRange = true;
+            isP1InRange = true;
+        }
+        else if(other.gameObject.tag == "Player2")
+        {
+            isP2InRange = true;
         }
         
     }
@@ -55,7 +69,11 @@ public class Test_TriggerWire : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            isInRange = false;
+            isP1InRange = false;
+        }
+        else if (other.gameObject.tag == "Player2")
+        {
+            isP2InRange = false;
         }
 
     }

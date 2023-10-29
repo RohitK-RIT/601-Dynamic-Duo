@@ -7,7 +7,7 @@ using CharacterController = Core.Player.CharacterController;
 public class CanvasWireSwitch : MonoBehaviour
 {
     //A list to store different y vale
-    List<float> yValueList = new List<float> { 84f, 15f, -63f, -137f };
+    List<float> yValueList = new List<float> { 218f, 50f, -161f, -322f };
 
 
     //Set time for different wires

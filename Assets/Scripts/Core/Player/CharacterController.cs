@@ -80,12 +80,12 @@ namespace Core.Player
             }
             else if (!_isInteracting && playerInput.IsInteractionButtonPressed())
             {
-                ActivatePanel();
                 foreach (var iObject in _interactableObjects.Where(iObject => iObject.OnInteractionStart(this)))
                 {
                     _currenInteractiveObject = iObject;
                     _currenInteractiveObject.OnInteractionCompleted += OnInteractionCompleted;
                     _isInteracting = true;
+                    ActivatePanel();
                     break;
                 }
             }

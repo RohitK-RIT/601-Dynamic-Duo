@@ -8,6 +8,8 @@ namespace Interaction
     {
         [SerializeField] private MiniGame miniGamePrefabToInstantiate;
 
+        public bool IsMiniGameCompleted { get; private set; }
+        
         private MiniGame _miniGameInstance;
 
         public override bool OnInteractionStart(CharacterController controller)
@@ -23,7 +25,10 @@ namespace Interaction
         private void OnMiniGameClosed(bool successful)
         {
             if (successful)
+            {
+                IsMiniGameCompleted = true;
                 InteractionCompleted();
+            }
             else
                 OnInteractionEnd();
         }

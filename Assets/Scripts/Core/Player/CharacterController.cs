@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
+using Systems.Player_Input;
 using UnityEngine;
 
 namespace Core.Player
@@ -12,16 +14,8 @@ namespace Core.Player
 
         public event MovementControlDelegate CharacterMoved;
 
-        [Header("Player Controls")] [SerializeField]
-        private KeyCode up = KeyCode.W;
-
-        [SerializeField] private KeyCode down = KeyCode.S;
-        [SerializeField] private KeyCode left = KeyCode.A;
-        [SerializeField] private KeyCode right = KeyCode.D;
-        [SerializeField, Space] private KeyCode interaction = KeyCode.E;
-
-        [Header("Character UI")] [SerializeField]
-        private GameObject characterHUD;
+        [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private GameObject characterHUD;
 
         private Character _character;
         private bool _isInteracting;
@@ -45,9 +39,27 @@ namespace Core.Player
             DeactivatePanel();
         }
 
+        public PlayerInput GetPlayerInput()
+        {
+            StartCoroutine(SetPlayerInputNull());
+            return playerInput;
+        }
+
+        private IEnumerator SetPlayerInputNull()
+        {
+            yield return new WaitForSeconds(0.1f);
+            playerInput = null;
+        }
+
+        public void SetPlayerInput(PlayerInput playerInput = null)
+        {
+            this.playerInput = playerInput;
+        }
+
         private void Update()
         {
-            ProcessInput();
+            if (playerInput)
+                ProcessInput();
         }
 
         private void ProcessInput()
@@ -62,37 +74,40 @@ namespace Core.Player
         {
             if (_interactableObjects.Count <= 0) return false;
 
-            if (!Input.GetKeyDown(interaction)) return _isInteracting;
-
-            if (_isInteracting)
+            if (_isInteracting && playerInput.IsInteractionCancelledButtonPressed())
             {
-                if (_currenInteractiveObject)
-                    _currenInteractiveObject.OnInteractionEnd();
-
-                DeactivatePanel();
-                _currenInteractiveObject = null;
+                OnInteractionCompleted();
             }
-            else
+            else if (!_isInteracting && playerInput.IsInteractionButtonPressed())
             {
                 ActivatePanel();
                 foreach (var iObject in _interactableObjects.Where(iObject => iObject.OnInteractionStart(this)))
                 {
                     _currenInteractiveObject = iObject;
+                    _currenInteractiveObject.OnInteractionCompleted += OnInteractionCompleted;
+                    _isInteracting = true;
                     break;
                 }
             }
 
-            _isInteracting = !_isInteracting;
-
             return _isInteracting;
+        }
+
+        private void OnInteractionCompleted()
+        {
+            if (_currenInteractiveObject)
+                _currenInteractiveObject.OnInteractionEnd();
+
+            _currenInteractiveObject.OnInteractionCompleted -= OnInteractionCompleted;
+
+            DeactivatePanel();
+            _currenInteractiveObject = null;
+            _isInteracting = false;
         }
 
         private void CheckMovementInput()
         {
-            var movementDirection = (Input.GetKey(up) ? Vector2.up : Vector2.zero)
-                                    + (Input.GetKey(down) ? Vector2.down : Vector2.zero)
-                                    + (Input.GetKey(left) ? Vector2.left : Vector2.zero)
-                                    + (Input.GetKey(right) ? Vector2.right : Vector2.zero);
+            var movementDirection = playerInput.GetMovementDirection();
 
             if (movementDirection == Vector2.zero) return;
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
-namespace Interaction
+namespace Interaction.OpenDoor
 {
     public class OpenDoorSwitch : InteractiveObject
     {
@@ -16,6 +16,7 @@ namespace Interaction
 
             Debug.Log($"{controller.name} opened the door!");
             doorRenderer.material = newMaterial;
+            Invoke(nameof(InteractionCompleted), 0.1f);
             return true;
         }
     }

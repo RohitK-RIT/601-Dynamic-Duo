@@ -31,7 +31,7 @@ namespace Interaction.OpenDoor
 
         public override bool OnInteractionStart(CharacterController controller)
         {
-            if (!_interactable)
+            if (!Interactable)
                 return false;
             
             if (!base.OnInteractionStart(controller))

@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Systems
+namespace Core.Managers
 {
     public abstract class GameEvent
     {
         public void Raise(bool raiseOnce = false)
         {
-            EventSystem.Raise(this, raiseOnce);
+            EventManager.Raise(this, raiseOnce);
         }
     }
 
-    public class EventSystem
+    public class EventManager
     {
-        private static EventSystem instance;
+        private static EventManager instance;
 
-        private static EventSystem Instance
+        private static EventManager Instance
         {
-            get { return instance ??= new EventSystem(); }
+            get { return instance ??= new EventManager(); }
         }
 
         public delegate void EventDelegate<in T>(T @event) where T : GameEvent;

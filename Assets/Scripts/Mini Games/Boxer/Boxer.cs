@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Core.Mini_Games.Boxer
+namespace Mini_Games.Boxer
 {
     public class Boxer : MiniGame
     {

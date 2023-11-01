@@ -1,4 +1,4 @@
-using Core.Mini_Games;
+using Mini_Games;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 

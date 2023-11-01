@@ -1,10 +1,9 @@
 using System;
-using Interaction;
-using Systems.Player_Input;
+using Core.Game_Systems;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
-namespace Core.Mini_Games
+namespace Mini_Games
 {
     public abstract class MiniGame : MonoBehaviour
     {

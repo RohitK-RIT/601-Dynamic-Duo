@@ -27,6 +27,15 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadLevelAsyncCoroutine(levelName));
     }
 
+    public void RestartLevel()
+    {
+
+        SceneManager.LoadScene("Loading Scene");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        StartCoroutine(LoadLevelAsyncCoroutine(currentSceneName));
+    }
+
     public void QuitGame()
     {
         Application.Quit();

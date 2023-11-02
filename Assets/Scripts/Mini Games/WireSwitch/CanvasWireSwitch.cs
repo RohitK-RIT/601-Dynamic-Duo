@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
-public class CanvasWireSwitch : MonoBehaviour
+public class CanvasWireSwitch : Mini_Games.MiniGame
 {
     //A list to store different y vale
     List<float> yValueList = new List<float> { 218f, 50f, -161f, -322f };
@@ -43,12 +43,13 @@ public class CanvasWireSwitch : MonoBehaviour
     private CharacterController characterController1;
     private CharacterController characterController2;
 
-    //Used to delete the interact object
-    public Test_TriggerWire parent;
-
 
     //Audio
     AudioSource audioSource;
+
+
+    //Progress Bar
+    public Slider progressBar;
 
 
     void Awake()
@@ -86,14 +87,17 @@ public class CanvasWireSwitch : MonoBehaviour
         {
             //successImage.enabled = true;
             successImage.SetActive(true);
+            progressBar.gameObject.SetActive(false);
+
+
             if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Slash))
             {
 
                 //retrieve player control
                 characterController1.enabled = true;
                 characterController2.enabled = true;
-                //Destroy puzzle
-                Destroy(parent);
+                isCompleted = true;
+
                 Destroy(gameObject);
             }
             
@@ -126,6 +130,8 @@ public class CanvasWireSwitch : MonoBehaviour
                 startTimePurple = Time.time;
             }
 
+            progressBar.value = (Time.time - startTimePurple) / requiredHoldTime;
+
             if (Time.time - startTimePurple >= requiredHoldTime)
             {
                 audioSource.Stop();
@@ -152,6 +158,8 @@ public class CanvasWireSwitch : MonoBehaviour
             {
                 startTimeGreen = Time.time;
             }
+
+            progressBar.value = (Time.time - startTimeGreen) / requiredHoldTime;
 
             if (Time.time - startTimeGreen >= requiredHoldTime)
             {
@@ -181,6 +189,8 @@ public class CanvasWireSwitch : MonoBehaviour
                 startTimeRed = Time.time;
             }
 
+            progressBar.value = (Time.time - startTimeRed) / requiredHoldTime;
+
             if (Time.time - startTimeRed >= requiredHoldTime)
             {
                 audioSource.Stop();
@@ -209,6 +219,8 @@ public class CanvasWireSwitch : MonoBehaviour
                 startTimeBlue = Time.time;
             }
 
+            progressBar.value = (Time.time - startTimeBlue) / requiredHoldTime;
+
             if (Time.time - startTimeBlue >= requiredHoldTime)
             {
                 audioSource.Stop();
@@ -221,8 +233,11 @@ public class CanvasWireSwitch : MonoBehaviour
         {
             //audioSource.Stop();
             startTimeBlue = 0f;
+            
         }
 
+
+        progressBar.value = 0f;
         audioSource.Stop();
     }
 

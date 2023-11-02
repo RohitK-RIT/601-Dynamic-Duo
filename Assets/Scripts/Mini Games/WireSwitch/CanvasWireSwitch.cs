@@ -43,9 +43,6 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     private CharacterController characterController1;
     private CharacterController characterController2;
 
-    //Used to delete the interact object
-    public Test_TriggerWire parent;
-
 
     //Audio
     AudioSource audioSource;
@@ -92,8 +89,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
                 //retrieve player control
                 characterController1.enabled = true;
                 characterController2.enabled = true;
-                //Destroy puzzle
-                Destroy(parent);
+                isCompleted = true;
                 Destroy(gameObject);
             }
             

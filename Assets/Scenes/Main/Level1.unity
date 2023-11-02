@@ -1667,6 +1667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649697212914502463, guid: 846a927ab121dd74e8d825014fc6e7c6,
         type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649697212914502463, guid: 846a927ab121dd74e8d825014fc6e7c6,
+        type: 3}
       propertyPath: m_BackGroundColor.b
       value: 0
       objectReference: {fileID: 0}
@@ -2228,6 +2233,11 @@ PrefabInstance:
     - target: {fileID: 6600334180938257149, guid: 9a36dfb1e3419b4478d540ba3734f9b3,
         type: 3}
       propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600334180938257149, guid: 9a36dfb1e3419b4478d540ba3734f9b3,
+        type: 3}
+      propertyPath: orthographic
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6600334180938257149, guid: 9a36dfb1e3419b4478d540ba3734f9b3,

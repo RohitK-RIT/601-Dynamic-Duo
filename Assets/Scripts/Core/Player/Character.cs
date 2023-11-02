@@ -7,7 +7,7 @@ namespace Core.Player
     public class Character : MonoBehaviour
     {
         [SerializeField] public float speed = 10f;
-        
+
         private CharacterController _controller;
         private Rigidbody _characterRigidbody;
 
@@ -31,8 +31,7 @@ namespace Core.Player
 
         private void Move(Vector2 direction)
         {
-            Debug.Log("Aa rha hai kya dekh");
-            var delta = direction * (speed * Time.deltaTime);
+            var delta = direction * (speed * Time.deltaTime) * new Vector2(1, 1.5f);
             _characterRigidbody.velocity = new Vector3(delta.x, 0, delta.y);
         }
 

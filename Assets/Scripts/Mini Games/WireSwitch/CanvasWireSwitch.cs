@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
-public class CanvasWireSwitch : MonoBehaviour
+public class CanvasWireSwitch : Mini_Games.MiniGame
 {
     //A list to store different y vale
     List<float> yValueList = new List<float> { 218f, 50f, -161f, -322f };

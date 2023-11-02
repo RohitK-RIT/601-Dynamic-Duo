@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4284110673533959196}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.4125185, y: 2.009342, z: 0.101511}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 8161134323808607862}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,7 +168,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.5005493, y: 2.410605, z: 0.58138275}
-  m_Center: {x: -3.4750443, y: 2.1351619, z: 0.018992424}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5391129473111841490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee096702bfa3216449a487ae7f637ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 750
 --- !u!114 &8161134323808607862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,8 +223,8 @@ Transform:
   m_GameObject: {fileID: 5829579790283665190}
   serializedVersion: 2
   m_LocalRotation: {x: 0.30070576, y: -0, z: -0, w: 0.953717}
-  m_LocalPosition: {x: -3.4125185, y: 5.37, z: -4.8500004}
-  m_LocalScale: {x: 0.3, y: 0.35868248, z: 0.34131765}
+  m_LocalPosition: {x: 0, y: 4, z: -6.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6068482549635796938}
@@ -260,11 +260,11 @@ Camera:
     y: 0
     width: 0.5
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 7.68
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

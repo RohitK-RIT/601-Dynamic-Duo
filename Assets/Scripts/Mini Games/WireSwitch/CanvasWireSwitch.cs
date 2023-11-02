@@ -48,6 +48,10 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     AudioSource audioSource;
 
 
+    //Progress Bar
+    public Slider progressBar;
+
+
     void Awake()
     {
         wireRed.enabled = false;
@@ -83,6 +87,9 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
         {
             //successImage.enabled = true;
             successImage.SetActive(true);
+            progressBar.gameObject.SetActive(false);
+
+
             if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Slash))
             {
 
@@ -90,6 +97,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
                 characterController1.enabled = true;
                 characterController2.enabled = true;
                 isCompleted = true;
+
                 Destroy(gameObject);
             }
             
@@ -122,6 +130,8 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
                 startTimePurple = Time.time;
             }
 
+            progressBar.value = (Time.time - startTimePurple) / requiredHoldTime;
+
             if (Time.time - startTimePurple >= requiredHoldTime)
             {
                 audioSource.Stop();
@@ -148,6 +158,8 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
             {
                 startTimeGreen = Time.time;
             }
+
+            progressBar.value = (Time.time - startTimeGreen) / requiredHoldTime;
 
             if (Time.time - startTimeGreen >= requiredHoldTime)
             {
@@ -177,6 +189,8 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
                 startTimeRed = Time.time;
             }
 
+            progressBar.value = (Time.time - startTimeRed) / requiredHoldTime;
+
             if (Time.time - startTimeRed >= requiredHoldTime)
             {
                 audioSource.Stop();
@@ -205,6 +219,8 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
                 startTimeBlue = Time.time;
             }
 
+            progressBar.value = (Time.time - startTimeBlue) / requiredHoldTime;
+
             if (Time.time - startTimeBlue >= requiredHoldTime)
             {
                 audioSource.Stop();
@@ -217,8 +233,11 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
         {
             //audioSource.Stop();
             startTimeBlue = 0f;
+            
         }
 
+
+        progressBar.value = 0f;
         audioSource.Stop();
     }
 

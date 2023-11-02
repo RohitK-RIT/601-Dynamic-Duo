@@ -1888,11 +1888,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7926540409206623639, guid: 846a927ab121dd74e8d825014fc6e7c6,
-        type: 3}
-      propertyPath: speed
-      value: 750
-      objectReference: {fileID: 0}
     - target: {fileID: 8790725346339344373, guid: 846a927ab121dd74e8d825014fc6e7c6,
         type: 3}
       propertyPath: characterHUD
@@ -2323,11 +2318,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5391129473111841490, guid: 9a36dfb1e3419b4478d540ba3734f9b3,
-        type: 3}
-      propertyPath: speed
-      value: 750
-      objectReference: {fileID: 0}
     - target: {fileID: 5635313633509212604, guid: 9a36dfb1e3419b4478d540ba3734f9b3,
         type: 3}
       propertyPath: m_Name

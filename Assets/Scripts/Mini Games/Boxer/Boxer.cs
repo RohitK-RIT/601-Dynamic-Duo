@@ -193,9 +193,9 @@ namespace Mini_Games.Boxer
 
         private void ProcessPlayer1Input()
         {
+            var playerMovement = Vector2Int.CeilToInt(Player1Input.GetMovementDirection());
             if ((DateTime.Now - _player1MoveTime).Seconds >= ChainMovementDelay || _player1NotMoving)
             {
-                var playerMovement = Vector2Int.CeilToInt(Player1Input.GetMovementDirection());
                 if (playerMovement.sqrMagnitude > 0)
                 {
                     _player1MoveTime = DateTime.Now;
@@ -204,7 +204,7 @@ namespace Mini_Games.Boxer
                 }
             }
 
-            _player1NotMoving = Player1Input.GetMovementDirection() == Vector2.zero;
+            _player1NotMoving = playerMovement == Vector2Int.zero;
 
             if (Player1Input.IsInteractionButtonPressed())
             {
@@ -237,56 +237,13 @@ namespace Mini_Games.Boxer
             {
                 _player1SelectedPanel.SetHighlightColor(_player1Color + Color.black);
             }
-
-            if ((DateTime.Now - _player2MoveTime).Seconds >= ChainMovementDelay)
-            {
-                var playerMovement = Vector2Int.CeilToInt(Player2Input.GetMovementDirection());
-                if (playerMovement.sqrMagnitude > 0)
-                {
-                    _player2MoveTime = DateTime.Now;
-                    Player2GridPos += playerMovement * (Vector2Int.down + Vector2Int.right);
-                }
-            }
-
-
-            if (Player2Input.IsInteractionButtonPressed())
-            {
-                var currentPanel = _player2GridPos.y == 3 ? _player2Panels[_player2GridPos.x] : _gameGrid[_player2GridPos.x, _player2GridPos.y];
-                if (_player2SelectedPanel != null && _player2SelectedPanel.index != _player2GridPos)
-                {
-                    // Shift the color of the selected panel
-                    if (_player2SelectedPanel[1].color != Color.clear)
-                    {
-                        currentPanel[1].color = _player2SelectedPanel[1].color;
-                        _player2SelectedPanel[1].color = Color.clear;
-                        _player2SelectedPanel.SetHighlightColor(Color.clear);
-                        _player2SelectedPanel = null;
-                    }
-                    else if (_player2SelectedPanel[0].color != Color.clear)
-                    {
-                        currentPanel[0].color = _player2SelectedPanel[0].color;
-                        _player2SelectedPanel[0].color = Color.clear;
-                        _player2SelectedPanel.SetHighlightColor(Color.clear);
-                        _player2SelectedPanel = null;
-                    }
-                }
-                else
-                {
-                    // Select the box
-                    _player2SelectedPanel = currentPanel;
-                }
-            }
-            else if (_player2SelectedPanel != null && _player2SelectedPanel.index != _player2GridPos)
-            {
-                _player2SelectedPanel.SetHighlightColor(_player2Color + Color.black);
-            }
         }
 
         private void ProcessPlayer2Input()
         {
+            var playerMovement = Vector2Int.CeilToInt(Player2Input.GetMovementDirection());
             if ((DateTime.Now - _player2MoveTime).Seconds >= ChainMovementDelay || _player2NotMoving)
             {
-                var playerMovement = Vector2Int.CeilToInt(Player2Input.GetMovementDirection());
                 if (playerMovement.sqrMagnitude > 0)
                 {
                     _player2MoveTime = DateTime.Now;
@@ -294,7 +251,7 @@ namespace Mini_Games.Boxer
                 }
             }
 
-            _player2NotMoving = Player2Input.GetMovementDirection() == Vector2.zero;
+            _player2NotMoving = playerMovement == Vector2Int.zero;
 
             if (Player2Input.IsInteractionButtonPressed())
             {

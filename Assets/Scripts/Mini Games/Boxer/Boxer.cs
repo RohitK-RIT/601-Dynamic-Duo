@@ -284,7 +284,7 @@ namespace Mini_Games.Boxer
 
         private void ProcessPlayer2Input()
         {
-            if ((DateTime.Now - _player2MoveTime).Seconds >= ChainMovementDelay)
+            if ((DateTime.Now - _player2MoveTime).Seconds >= ChainMovementDelay || _player2NotMoving)
             {
                 var playerMovement = Vector2Int.CeilToInt(Player2Input.GetMovementDirection());
                 if (playerMovement.sqrMagnitude > 0)

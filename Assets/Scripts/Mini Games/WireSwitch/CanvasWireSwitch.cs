@@ -96,7 +96,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
                 //retrieve player control
                 characterController1.enabled = true;
                 characterController2.enabled = true;
-                isCompleted = true;
+                IsCompleted = true;
 
                 Destroy(gameObject);
             }

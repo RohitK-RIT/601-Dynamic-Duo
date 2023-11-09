@@ -23,7 +23,8 @@ namespace Mini_Games.Boxer
         private Panel _player1SelectedPanel, _player2SelectedPanel;
 
         private DateTime _player1MoveTime, _player2MoveTime;
-        private const float ChainMovementDelay = 0.25f;
+        [SerializeField] private float ChainMovementDelay = 0.05f;
+        private bool _player1NotMoving, _player2NotMoving;
 
         private Vector2Int Player1GridPos
         {
@@ -44,14 +45,22 @@ namespace Mini_Games.Boxer
             set
             {
                 SetGridHighlight(_player2GridPos, _player1GridPos.Equals(_player2GridPos) ? _player1Color : Color.clear, false);
-                _player2GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 3), Mathf.Clamp(value.y, 0, 4));
+                _player2GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 2), Mathf.Clamp(value.y, 0, 3));
                 SetGridHighlight(_player2GridPos, Color.magenta, false);
             }
         }
 
         private void SetGridHighlight(Vector2Int gridPos, Color color, bool isPlayer1 = true)
         {
-            var panel = gridPos.y == 3 ? (isPlayer1 ? _player1Panels : _player2Panels)[gridPos.x] : _gameGrid[gridPos.x, gridPos.y];
+            Panel panel;
+            if (gridPos.y == 3)
+            {
+                var playerPanels = isPlayer1 ? _player1Panels : _player2Panels;
+                panel = playerPanels[gridPos.x];
+            }
+            else
+                panel = _gameGrid[gridPos.x, gridPos.y];
+
             panel.SetHighlightColor(color);
         }
 
@@ -75,6 +84,8 @@ namespace Mini_Games.Boxer
 
             return gridData;
         }
+
+        #region Initialization
 
         private void StartGame()
         {
@@ -144,43 +155,58 @@ namespace Mini_Games.Boxer
             return playerPanels;
         }
 
+        #endregion
+
         private void Update()
         {
-            if (player1Input && player2Input)
-                ProcessPlayerInput();
+            if (!Player1Input || !Player2Input)
+            {
+                Debug.LogError("Player Input not found");
+                Destroy(gameObject);
+                return;
+            }
+
+            try
+            {
+                ProcessPlayer1Input();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Player 1 error: {e}");
+            }
+
+            try
+            {
+                ProcessPlayer2Input();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Player 2 error: {e}");
+            }
 
             if (!CheckAnswer())
                 return;
 
-            isCompleted = true;
+            IsCompleted = true;
             Destroy(gameObject);
         }
 
-        private bool CheckAnswer()
+        private void ProcessPlayer1Input()
         {
-            foreach (var answer in _answerDictionary)
+            if ((DateTime.Now - _player1MoveTime).Seconds >= ChainMovementDelay || _player1NotMoving)
             {
-                var point = answer.Key;
-                if (_gameGrid[point.x, point.y][point.z].color != answer.Value)
-                    return false;
-            }
-
-            return true;
-        }
-
-        private void ProcessPlayerInput()
-        {
-            if ((DateTime.Now - _player1MoveTime).Seconds >= ChainMovementDelay)
-            {
-                var playerMovement = Vector2Int.CeilToInt(player1Input.GetMovementDirection());
+                var playerMovement = Vector2Int.CeilToInt(Player1Input.GetMovementDirection());
                 if (playerMovement.sqrMagnitude > 0)
                 {
                     _player1MoveTime = DateTime.Now;
                     Player1GridPos += playerMovement * (Vector2Int.down + Vector2Int.right);
+                    _player1NotMoving = true;
                 }
             }
 
-            if (player1Input.IsInteractionButtonPressed())
+            _player1NotMoving = Player1Input.GetMovementDirection() == Vector2.zero;
+
+            if (Player1Input.IsInteractionButtonPressed())
             {
                 var currentPanel = _player1GridPos.y == 3 ? _player1Panels[_player1GridPos.x] : _gameGrid[_player1GridPos.x, _player1GridPos.y];
                 if (_player1SelectedPanel != null && _player1SelectedPanel.index != _player1GridPos)
@@ -214,7 +240,7 @@ namespace Mini_Games.Boxer
 
             if ((DateTime.Now - _player2MoveTime).Seconds >= ChainMovementDelay)
             {
-                var playerMovement = Vector2Int.CeilToInt(player2Input.GetMovementDirection());
+                var playerMovement = Vector2Int.CeilToInt(Player2Input.GetMovementDirection());
                 if (playerMovement.sqrMagnitude > 0)
                 {
                     _player2MoveTime = DateTime.Now;
@@ -223,7 +249,7 @@ namespace Mini_Games.Boxer
             }
 
 
-            if (player2Input.IsInteractionButtonPressed())
+            if (Player2Input.IsInteractionButtonPressed())
             {
                 var currentPanel = _player2GridPos.y == 3 ? _player2Panels[_player2GridPos.x] : _gameGrid[_player2GridPos.x, _player2GridPos.y];
                 if (_player2SelectedPanel != null && _player2SelectedPanel.index != _player2GridPos)
@@ -254,6 +280,65 @@ namespace Mini_Games.Boxer
             {
                 _player2SelectedPanel.SetHighlightColor(_player2Color + Color.black);
             }
+        }
+
+        private void ProcessPlayer2Input()
+        {
+            if ((DateTime.Now - _player2MoveTime).Seconds >= ChainMovementDelay)
+            {
+                var playerMovement = Vector2Int.CeilToInt(Player2Input.GetMovementDirection());
+                if (playerMovement.sqrMagnitude > 0)
+                {
+                    _player2MoveTime = DateTime.Now;
+                    Player2GridPos += playerMovement * (Vector2Int.down + Vector2Int.right);
+                }
+            }
+
+            _player2NotMoving = Player2Input.GetMovementDirection() == Vector2.zero;
+
+            if (Player2Input.IsInteractionButtonPressed())
+            {
+                var currentPanel = _player2GridPos.y == 3 ? _player2Panels[_player2GridPos.x] : _gameGrid[_player2GridPos.x, _player2GridPos.y];
+                if (_player2SelectedPanel != null && _player2SelectedPanel.index != _player2GridPos)
+                {
+                    // Shift the color of the selected panel
+                    if (_player2SelectedPanel[1].color != Color.clear)
+                    {
+                        currentPanel[1].color = _player2SelectedPanel[1].color;
+                        _player2SelectedPanel[1].color = Color.clear;
+                        _player2SelectedPanel.SetHighlightColor(Color.clear);
+                        _player2SelectedPanel = null;
+                    }
+                    else if (_player2SelectedPanel[0].color != Color.clear)
+                    {
+                        currentPanel[0].color = _player2SelectedPanel[0].color;
+                        _player2SelectedPanel[0].color = Color.clear;
+                        _player2SelectedPanel.SetHighlightColor(Color.clear);
+                        _player2SelectedPanel = null;
+                    }
+                }
+                else
+                {
+                    // Select the box
+                    _player2SelectedPanel = currentPanel;
+                }
+            }
+            else if (_player2SelectedPanel != null && _player2SelectedPanel.index != _player2GridPos)
+            {
+                _player2SelectedPanel.SetHighlightColor(_player2Color + Color.black);
+            }
+        }
+
+        private bool CheckAnswer()
+        {
+            foreach (var answer in _answerDictionary)
+            {
+                var point = answer.Key;
+                if (_gameGrid[point.x, point.y][point.z].color != answer.Value)
+                    return false;
+            }
+
+            return true;
         }
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Core.Game_Systems;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
@@ -8,22 +9,29 @@ namespace Mini_Games
     public abstract class MiniGame : MonoBehaviour
     {
         public event Action<bool> OnClosed;
-        protected bool isCompleted;
+        protected bool IsCompleted;
 
-        protected PlayerInput player1Input, player2Input;
+        protected PlayerInput Player1Input, Player2Input;
         private CharacterController _characterController1, _characterController2;
 
         public static bool IsOpen { get; private set; }
 
         protected virtual void OnEnable()
         {
-            _characterController1 = GameObject.Find("Player1").GetComponent<CharacterController>();
-            _characterController2 = GameObject.Find("Player2").GetComponent<CharacterController>();
+            var controllers = FindObjectsOfType<CharacterController>();
+            _characterController1 = controllers.FirstOrDefault(controller => controller.name == "Player1");
+            _characterController2 = controllers.FirstOrDefault(controller => controller.name == "Player2");
 
-            player1Input = _characterController1.GetPlayerInput();
-            player2Input = _characterController2.GetPlayerInput();
+            if(!_characterController1 || !_characterController2)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
             
-            isCompleted = false;
+            Player1Input = _characterController1.GetPlayerInput();
+            Player2Input = _characterController2.GetPlayerInput();
+            
+            IsCompleted = false;
             IsOpen = true;
         }
 
@@ -39,16 +47,16 @@ namespace Mini_Games
 
         private void OnReset()
         {
-            if(!player1Input || !player2Input)
+            if(!Player1Input || !Player2Input)
                 return;
             
-            _characterController1.SetPlayerInput(player1Input);
-            _characterController2.SetPlayerInput(player2Input);
+            _characterController1.SetPlayerInput(Player1Input);
+            _characterController2.SetPlayerInput(Player2Input);
 
-            player1Input = null;
-            player2Input = null;
+            Player1Input = null;
+            Player2Input = null;
             
-            OnClosed?.Invoke(isCompleted);
+            OnClosed?.Invoke(IsCompleted);
             IsOpen = false;
         }
     }

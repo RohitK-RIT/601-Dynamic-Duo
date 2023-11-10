@@ -6,14 +6,14 @@ namespace Core.Game_Systems
     public class PlayerInput : ScriptableObject
     {
         [Header("Movement")]
-        [SerializeField] private KeyCode up = KeyCode.W;
-        [SerializeField] private KeyCode down = KeyCode.S;
-        [SerializeField] private KeyCode left = KeyCode.A;
-        [SerializeField] private KeyCode right = KeyCode.D;
+        [SerializeField] public KeyCode up = KeyCode.W;
+        [SerializeField] public KeyCode down = KeyCode.S;
+        [SerializeField] public KeyCode left = KeyCode.A;
+        [SerializeField] public KeyCode right = KeyCode.D;
 
         [Header("Interaction")]
-        [SerializeField, Space] private KeyCode interaction = KeyCode.E;
-        [SerializeField] private KeyCode interactionCancelled = KeyCode.Q;
+        [SerializeField, Space] public KeyCode interaction = KeyCode.E;
+        [SerializeField] public KeyCode interactionCancelled = KeyCode.Q;
 
         private bool _interactionButtonPress;
 

@@ -90,7 +90,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
             progressBar.gameObject.SetActive(false);
 
 
-            if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Slash))
+            if (Input.GetKey(Player1Input.interaction) || Input.GetKey(Player2Input.interaction))
             {
 
                 //retrieve player control
@@ -116,7 +116,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     public void CheckKeys()
     {
         //Check purple wire
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(Player1Input.up) && Input.GetKey(Player2Input.right))
         {
 
             if(audioSource.isPlaying == false)
@@ -146,7 +146,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
         }
 
         //Check Green
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(Player1Input.left) && Input.GetKey(Player1Input.left))
         {
 
             if (audioSource.isPlaying == false)
@@ -177,7 +177,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
 
 
         //Check Red
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(Player1Input.down) && Input.GetKey(Player2Input.up))
         {
             if (audioSource.isPlaying == false)
             {
@@ -207,7 +207,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
 
 
         //Check Blue
-        if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(Player1Input.right) && Input.GetKey(Player2Input.down))
         {
             if (audioSource.isPlaying == false)
             {
@@ -245,22 +245,22 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     public void MovePlayerIcon()
     {
         //Pl Icon
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(Player1Input.up))
         {
             p1Icon.enabled = true;
             p1Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[0]);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(Player1Input.left))
         {
             p1Icon.enabled = true;
             p1Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[1]);
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(Player1Input.down))
         {
             p1Icon.enabled = true;
             p1Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[2]);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(Player1Input.right))
         {
             p1Icon.enabled = true;
             p1Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[3]);
@@ -271,22 +271,22 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
         }
 
         //P2 Icon
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(Player2Input.up))
         {
             p2Icon.enabled = true;
             p2Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[0]);
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(Player2Input.down))
         {
             p2Icon.enabled = true;
             p2Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[1]);
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(Player2Input.left))
         {
             p2Icon.enabled = true;
             p2Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[2]);
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(Player2Input.right))
         {
             p2Icon.enabled = true;
             p2Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[3]);

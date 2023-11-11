@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
@@ -52,6 +53,18 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     public Slider progressBar;
 
 
+    //Onboarding
+    public TextMeshProUGUI p1k1;
+    public TextMeshProUGUI p1k2;
+    public TextMeshProUGUI p1k3;
+    public TextMeshProUGUI p1k4;
+
+    public TextMeshProUGUI p2k1;
+    public TextMeshProUGUI p2k2;
+    public TextMeshProUGUI p2k3;
+    public TextMeshProUGUI p2k4;
+
+
     void Awake()
     {
         wireRed.enabled = false;
@@ -76,6 +89,28 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
 
 
         audioSource = GetComponent<AudioSource>();
+
+
+
+
+
+    }
+
+    void Start()
+    {
+        p1k1.text = Player1Input.up.ToString();
+        p1k2.text = Player1Input.left.ToString();
+        p1k3.text = Player1Input.down.ToString();
+        p1k4.text = Player1Input.right.ToString();
+
+        p2k1.text = Player2Input.up.ToString();
+        p2k2.text = Player2Input.down.ToString();
+        p2k3.text = Player2Input.left.ToString();
+        p2k4.text = Player2Input.right.ToString();
+
+        Transform successIntro = successImage.transform.Find("Intro");
+        successIntro.gameObject.GetComponent<TextMeshProUGUI>().text = "Press " + Player1Input.interaction.ToString() + "/" + Player2Input.interaction.ToString() + " to close";
+
     }
 
     // Update is called once per frame
@@ -99,6 +134,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
                 IsCompleted = true;
 
                 Destroy(gameObject);
+                return;
             }
             
 

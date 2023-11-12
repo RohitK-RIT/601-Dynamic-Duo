@@ -33,7 +33,8 @@ namespace Mini_Games.Boxer
             set
             {
                 SetGridHighlight(_player1GridPos, _player1GridPos.Equals(_player2GridPos) ? _player2Color : Color.clear);
-                _player1GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 3), Mathf.Clamp(value.y, 0, 4));
+                _player1GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 2), Mathf.Clamp(value.y, 0, 3));
+                Debug.Log($"New clamped player 1 pos ({_player1GridPos.x},{_player1GridPos.y})");
                 SetGridHighlight(_player1GridPos, Color.cyan);
             }
         }
@@ -46,6 +47,7 @@ namespace Mini_Games.Boxer
             {
                 SetGridHighlight(_player2GridPos, _player1GridPos.Equals(_player2GridPos) ? _player1Color : Color.clear, false);
                 _player2GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 2), Mathf.Clamp(value.y, 0, 3));
+                Debug.Log($"Player 2 new Pos ({_player2GridPos.x},{_player2GridPos.y})");
                 SetGridHighlight(_player2GridPos, Color.magenta, false);
             }
         }
@@ -66,6 +68,7 @@ namespace Mini_Games.Boxer
 
 
         #region Initialization
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -202,16 +205,18 @@ namespace Mini_Games.Boxer
                 if (playerMovement.sqrMagnitude > 0)
                 {
                     _player1MoveTime = DateTime.Now;
-                    Player1GridPos += playerMovement * (Vector2Int.down + Vector2Int.right);
-                    _player1NotMoving = true;
+                    var newPlayer1GridPos = Player1GridPos + playerMovement * (Vector2Int.down + Vector2Int.right);
+                    Debug.Log($"New unclamped player 1 pos {newPlayer1GridPos}");
+                    Player1GridPos = newPlayer1GridPos;
                 }
             }
 
             _player1NotMoving = playerMovement == Vector2Int.zero;
 
+            var currentPanel = _player1GridPos.y == 3 ? _player1Panels[_player1GridPos.x] : _gameGrid[_player1GridPos.x, _player1GridPos.y];
+
             if (Player1Input.IsInteractionButtonPressed())
             {
-                var currentPanel = _player1GridPos.y == 3 ? _player1Panels[_player1GridPos.x] : _gameGrid[_player1GridPos.x, _player1GridPos.y];
                 if (_player1SelectedPanel != null)
                 {
                     if (_player1SelectedPanel != currentPanel)
@@ -240,9 +245,9 @@ namespace Mini_Games.Boxer
                     _player1SelectedPanel.Transform.localScale *= 1.1f;
                 }
             }
-            else if (_player1SelectedPanel != null && _player1SelectedPanel.index != _player1GridPos)
+            else if (_player1SelectedPanel != null && _player1SelectedPanel != currentPanel)
             {
-                _player1SelectedPanel.SetHighlightColor(_player1Color + Color.black);
+                _player1SelectedPanel.SetHighlightColor((_player1Color + Color.black) / 2);
             }
         }
 
@@ -255,7 +260,6 @@ namespace Mini_Games.Boxer
                 {
                     _player2MoveTime = DateTime.Now;
                     Player2GridPos += playerMovement * (Vector2Int.down + Vector2Int.right);
-                    _player2NotMoving = true;
                 }
             }
 
@@ -323,6 +327,8 @@ namespace Mini_Games.Boxer
 
         public GameObject GameObject { get; }
         public Transform Transform { get; }
+
+        public bool IsEmpty => _smallPanelImage.color == Color.clear && _bigPanelImage.color == Color.clear;
 
         public Panel(Vector2Int index, Transform panel)
         {

@@ -5712,6 +5712,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1552526053736773165, guid: 846a927ab121dd74e8d825014fc6e7c6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2694112002225701255, guid: 846a927ab121dd74e8d825014fc6e7c6,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -5781,6 +5786,16 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 2300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423587971083675442, guid: 846a927ab121dd74e8d825014fc6e7c6,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.0017014
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423587971083675442, guid: 846a927ab121dd74e8d825014fc6e7c6,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.012001038
       objectReference: {fileID: 0}
     - target: {fileID: 8790725346339344373, guid: 846a927ab121dd74e8d825014fc6e7c6,
         type: 3}
@@ -5889,6 +5904,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1736932279}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae64ba5b5efb64347bd756914ecdf28f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1736932282}
   m_SourcePrefab: {fileID: 100100000, guid: ae64ba5b5efb64347bd756914ecdf28f, type: 3}
 --- !u!4 &1736932276 stripped
 Transform:
@@ -5918,6 +5937,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8733429697405204941, guid: ae64ba5b5efb64347bd756914ecdf28f, type: 3}
+--- !u!114 &1736932282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350637471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9746117d2df1e44a0ba44e6ec08e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 2
+  fadeAmount: 0.5
+  DoFade: 0
 --- !u!1 &1770745495
 GameObject:
   m_ObjectHideFlags: 0

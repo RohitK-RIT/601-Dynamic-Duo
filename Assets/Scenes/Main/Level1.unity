@@ -447,7 +447,7 @@ RectTransform:
   m_GameObject: {fileID: 194203070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 651254455}
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -564,6 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniGamePrefabToInstantiate: {fileID: 4170055092910298910, guid: 1eb48d03905aace4e97271b245d346cd,
     type: 3}
+  doorToDestroy: {fileID: 0}
 --- !u!65 &268750161
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -644,7 +645,7 @@ Transform:
   m_GameObject: {fileID: 268750159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.1, y: 0.77, z: 14.8}
+  m_LocalPosition: {x: -9.1, y: 0.77, z: 16.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -678,7 +679,7 @@ RectTransform:
   m_GameObject: {fileID: 269083755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1908928001}
@@ -702,7 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1386,12 +1387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edff3e6e6ee55814db723c72dcf154a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameTriggers:
-  - {fileID: 268750160}
-  interactableDoor: {fileID: 2100000, guid: e2f844e607817b34ab30acf6ed483461, type: 2}
-  unInteractableDoor: {fileID: 2100000, guid: 07cb22d4829958d40824090a9bb58e84, type: 2}
-  doorRenderer: {fileID: 831585316}
-  newMaterial: {fileID: 2100000, guid: 366638c8a2e7c7643a693d2b14a9cfe7, type: 2}
   controlDoor: {fileID: 0}
 --- !u!1 &651254454
 GameObject:
@@ -1450,7 +1445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press E To complete
+  m_text: Wait for your companion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1713,6 +1708,11 @@ PrefabInstance:
     - target: {fileID: 6983386855967979646, guid: 846a927ab121dd74e8d825014fc6e7c6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790725346339344373, guid: 846a927ab121dd74e8d825014fc6e7c6,
+        type: 3}
+      propertyPath: playerID
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8790725346339344373, guid: 846a927ab121dd74e8d825014fc6e7c6,
@@ -2202,6 +2202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8161134323808607862, guid: 9a36dfb1e3419b4478d540ba3734f9b3,
         type: 3}
+      propertyPath: playerID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8161134323808607862, guid: 9a36dfb1e3419b4478d540ba3734f9b3,
+        type: 3}
       propertyPath: characterHUD
       value: 
       objectReference: {fileID: 1355683950}
@@ -2349,6 +2354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniGamePrefabToInstantiate: {fileID: 8220847404907943815, guid: b7ce1f6647d0d61438a0451a8834660c,
     type: 3}
+  doorToDestroy: {fileID: 0}
 --- !u!1001 &996508478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2602,6 +2608,50 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.020000007, y: 0.064, z: 0.0408691}
   m_Center: {x: 0.00000005961398, y: 0.012057498, z: -0.010434552}
+--- !u!1 &1084640185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084640187}
+  - component: {fileID: 1084640186}
+  m_Layer: 0
+  m_Name: Player Input System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1084640186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084640185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca31563331a448c9137f861529b3de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1084640187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084640185}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.621529, y: 0.24321198, z: 17.659828}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105590559
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,10 +2971,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 960, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3729,10 +3779,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 960, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4157,7 +4207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press / To complete
+  m_text: Wait for your companion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4836,3 +4886,4 @@ SceneRoots:
   - {fileID: 689124564}
   - {fileID: 872625182}
   - {fileID: 1442034987978647974}
+  - {fileID: 1084640187}

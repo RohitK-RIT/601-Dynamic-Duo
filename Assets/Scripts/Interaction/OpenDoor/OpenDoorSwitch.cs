@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
@@ -6,53 +6,38 @@ namespace Interaction.OpenDoor
 {
     public class OpenDoorSwitch : InteractiveObject
     {
-        [SerializeField] private MiniGameTrigger[] miniGameTriggers;
-
-        [SerializeField] private Material interactableDoor, unInteractableDoor;
-        //[SerializeField] private Renderer switchRenderer;
-        //Testing: change color if door is opened
-        [SerializeField] private Renderer doorRenderer;
-        [SerializeField] private Material newMaterial;
-
         AudioSource audioSource;
 
         public GameObject controlDoor;
 
-        private bool Interactable
+        protected override void Start()
         {
-            get => _interactable;
-            set
-            {
-                //switchRenderer.material = value ? interactableDoor : unInteractableDoor;
-                _interactable = value;
-            }
-        }
-        private bool _interactable;
-        private void Start()
-        {
-            Interactable = false;
+            base.Start();
             audioSource = GetComponent<AudioSource>();
         }
 
         public override bool OnInteractionStart(CharacterController controller)
         {
-            if (!Interactable)
-                return false;
-            
             if (!base.OnInteractionStart(controller))
                 return false;
 
-            //Debug.Log($"{controller.name} opened the door!");
-            Destroy(controlDoor);
-            audioSource.Play();
-            //Invoke(nameof(InteractionCompleted), 0.1f);
-            return false;
+            StartCoroutine(DoorOpened());
+            return true;
         }
 
-        private void Update()
+        private IEnumerator DoorOpened()
         {
-            if (miniGameTriggers.All(trigger => trigger.IsMiniGameCompleted))
-                Interactable = true;
+            yield return null;
+
+            OnInteractionEnd(true);
+            Destroy(controlDoor);
+            audioSource.Play();
+        }
+
+        protected override void OnInteractionEnd(bool successful)
+        {
+            base.OnInteractionEnd(successful);
+            Interactable = !successful;
         }
     }
 }

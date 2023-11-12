@@ -1,19 +1,27 @@
 using UnityEngine;
 
-namespace Core.Game_Systems
+namespace Core.Game_Systems.Player_Input
 {
-    [CreateAssetMenu(fileName = "Player Input", menuName = "Player Input Asset", order = 0)]
-    public class PlayerInput : ScriptableObject
+    [CreateAssetMenu(fileName = "Player Input Map", menuName = "Player Input Map Asset", order = 0)]
+    public class PlayerInputMap : ScriptableObject
     {
-        [Header("Movement")]
-        [SerializeField] public KeyCode up = KeyCode.W;
-        [SerializeField] public KeyCode down = KeyCode.S;
-        [SerializeField] public KeyCode left = KeyCode.A;
-        [SerializeField] public KeyCode right = KeyCode.D;
+        [Header("Navigation")]
+        [SerializeField] private KeyCode up = KeyCode.W;
+        [SerializeField] private KeyCode down = KeyCode.S;
+        [SerializeField] private KeyCode left = KeyCode.A;
+        [SerializeField] private KeyCode right = KeyCode.D;
 
         [Header("Interaction")]
-        [SerializeField, Space] public KeyCode interaction = KeyCode.E;
-        [SerializeField] public KeyCode interactionCancelled = KeyCode.Q;
+        [SerializeField, Space] private KeyCode interaction = KeyCode.E;
+        [SerializeField] private KeyCode interactionCancelled = KeyCode.Q;
+
+        public KeyCode Up => up;
+        public KeyCode Down => down;
+        public KeyCode Left => left;
+        public KeyCode Right => right;
+        public KeyCode Interaction => interaction;
+        public KeyCode InteractionCancelled => interactionCancelled;
+        
 
         private bool _interactionButtonPress;
 

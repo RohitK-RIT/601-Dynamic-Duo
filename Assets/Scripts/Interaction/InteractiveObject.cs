@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
@@ -8,49 +7,32 @@ namespace Interaction
     [RequireComponent(typeof(BoxCollider))]
     public abstract class InteractiveObject : MonoBehaviour
     {
-        protected List<CharacterController> CurrentInteractingCharacters { get; private set; }
-        protected List<CharacterController> PlayersInRange { get; private set; }
-        public event Action<bool> OnInteractionCompleted;
+        protected List<CharacterController> InteractingCharacters { get; private set; }
 
-        private void Start()
+        public bool Interactable { get; protected set; }
+
+        protected virtual void Start()
         {
-            CurrentInteractingCharacters = new List<CharacterController>();
-            PlayersInRange = new List<CharacterController>();
+            InteractingCharacters = new List<CharacterController>();
+            Interactable = true;
         }
 
         public virtual bool OnInteractionStart(CharacterController controller)
         {
-            if (PlayersInRange.Count <= 0)
-                return false;
+            if (!Interactable) return false;
 
-            CurrentInteractingCharacters.Add(controller);
+            InteractingCharacters.Add(controller);
             Debug.Log($"Interaction Started by {controller.name} with {name}");
             return true;
         }
 
         protected virtual void OnInteractionEnd(bool successful)
         {
-            OnInteractionCompleted?.Invoke(successful);
-            CurrentInteractingCharacters.Clear();
+            foreach (var interactingCharacter in InteractingCharacters)
+                interactingCharacter.OnInteractionEnd(successful);
+
+            InteractingCharacters.Clear();
             Debug.Log("Interaction Ended");
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            var player = other.GetComponent<CharacterController>();
-            if (player)
-            {
-                PlayersInRange.Add(player);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            var player = other.GetComponent<CharacterController>();
-            if (player)
-            {
-                PlayersInRange.Remove(player);
-            }
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Core.Player
 {
     [RequireComponent(typeof(Collider), typeof(Rigidbody))]
-    public class Character : MonoBehaviour
+    public class CharacterBody : MonoBehaviour
     {
         [SerializeField] public float speed = 10f;
 
@@ -15,21 +15,9 @@ namespace Core.Player
         {
             _controller = controller;
             _characterRigidbody = GetComponent<Rigidbody>();
-            OnEnable();
         }
-
-
-        private void OnEnable()
-        {
-            if (_controller) _controller.CharacterMoved += Move;
-        }
-
-        private void OnDisable()
-        {
-            if (_controller) _controller.CharacterMoved -= Move;
-        }
-
-        private void Move(Vector2 direction)
+        
+        public void Move(Vector2 direction)
         {
             var delta = direction * (speed * Time.deltaTime) * new Vector2(1, 1.5f) /*Movement factor added by Matt*/;
             _characterRigidbody.velocity = new Vector3(delta.x, 0, delta.y);
@@ -38,7 +26,7 @@ namespace Core.Player
         private void OnTriggerEnter(Collider other)
         {
             var iObject = other.gameObject.GetComponent<InteractiveObject>();
-            if (iObject)
+            if (iObject && iObject.Interactable)
                 _controller.AddInteractableObjects(iObject);
         }
 

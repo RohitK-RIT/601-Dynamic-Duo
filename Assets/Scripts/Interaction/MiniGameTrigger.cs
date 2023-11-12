@@ -1,5 +1,6 @@
 using Mini_Games;
 using UnityEngine;
+using UnityEngine.Serialization;
 using CharacterController = Core.Player.CharacterController;
 
 namespace Interaction
@@ -7,6 +8,7 @@ namespace Interaction
     public class MiniGameTrigger : InteractiveObject
     {
         [SerializeField] private MiniGame miniGamePrefabToInstantiate;
+        [FormerlySerializedAs("gameObjectToDestroy")] [SerializeField] private GameObject doorToDestroy;
 
         public bool IsMiniGameCompleted { get; private set; }
 
@@ -17,19 +19,25 @@ namespace Interaction
             if (!base.OnInteractionStart(controller) || MiniGame.IsOpen)
                 return false;
 
-            if (CurrentInteractingCharacters.Count < 2)
-                return false;
+            if (InteractingCharacters.Count >= 2)
+            {
+                _miniGameInstance = Instantiate(miniGamePrefabToInstantiate, Vector3.zero, Quaternion.identity);
+                _miniGameInstance.OnClosed += OnInteractionEnd;
+            }
 
-            _miniGameInstance = Instantiate(miniGamePrefabToInstantiate, Vector3.zero, Quaternion.identity);
-            _miniGameInstance.Init(CurrentInteractingCharacters);
-            _miniGameInstance.OnClosed += OnMiniGameClosed;
             return true;
         }
 
-        private void OnMiniGameClosed(bool successful)
+        protected override void OnInteractionEnd(bool successful)
         {
+            _miniGameInstance.OnClosed -= OnInteractionEnd;
             IsMiniGameCompleted = successful;
-            OnInteractionEnd(successful);
+            Interactable = !successful;
+            
+            if(doorToDestroy)
+                Destroy(doorToDestroy);
+            
+            base.OnInteractionEnd(successful);
         }
     }
 }

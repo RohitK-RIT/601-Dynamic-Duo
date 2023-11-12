@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Game_Systems;
@@ -7,103 +7,87 @@ using UnityEngine;
 
 namespace Core.Player
 {
-    [RequireComponent(typeof(Character))]
+    [RequireComponent(typeof(CharacterBody))]
     public class CharacterController : MonoBehaviour
     {
-        public delegate void MovementControlDelegate(Vector2 direction);
+        public PlayerID PlayerID => playerID;
 
-        public event MovementControlDelegate CharacterMoved;
-
-        public int PlayerID => playerID;
-
-        [SerializeField] private int playerID;
-        [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private PlayerID playerID;
         [SerializeField] private GameObject characterHUD;
 
-        private Character _character;
-
-        private bool _isInteractPressed;
-
+        private CharacterInputHandler _inputHandler;
+        private CharacterBody _characterBody;
         private List<InteractiveObject> _interactableObjects;
-        private InteractiveObject _currenInteractiveObject;
+
+        private bool _firstRun = true;
 
         private void Start()
         {
-            _character = GetComponent<Character>();
-            if (!_character)
+            _characterBody = GetComponent<CharacterBody>();
+            if (!_characterBody)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            _character.Init(this);
+            _characterBody.Init(this);
             _interactableObjects = new List<InteractiveObject>();
             DeactivatePanel();
         }
 
-        public PlayerInput GetPlayerInput()
+        private void OnEnable()
         {
-            StartCoroutine(SetPlayerInputNull());
-            return playerInput;
-        }
-
-        private IEnumerator SetPlayerInputNull()
-        {
-            yield return new WaitForSeconds(0.1f);
-            SetPlayerInput();
-        }
-
-        public void SetPlayerInput(PlayerInput playerInput = null)
-        {
-            this.playerInput = playerInput;
-        }
-
-        private void Update()
-        {
-            ProcessInput();
-        }
-
-        private void ProcessInput()
-        {
-            if (!playerInput) return;
-            if (!Input.anyKey) return;
-            if (CheckInteractionInput()) return;
-
-            CheckMovementInput();
-        }
-
-        private bool CheckInteractionInput()
-        {
-            if (_interactableObjects.Count <= 0) return false;
-
-            if (!playerInput.IsInteractionButtonPressed()) return false;
-
-            foreach (var iObject in _interactableObjects.Where(iObject => iObject.OnInteractionStart(this)))
+            if (_firstRun)
             {
-                _currenInteractiveObject = iObject;
-                _currenInteractiveObject.OnInteractionCompleted += OnInteractionCompleted;
-                ActivatePanel();
-                return true;
+                _firstRun = false;
+                Invoke(nameof(EnableInput), 0.2f);
             }
-
-            return false;
+            else
+            {
+                EnableInput();
+            }
         }
 
-        private void OnInteractionCompleted(bool interactionComplete)
+        private void EnableInput()
         {
-            _currenInteractiveObject.OnInteractionCompleted -= OnInteractionCompleted;
+            _inputHandler ??= new CharacterInputHandler(PlayerID, this);
+            _inputHandler.Enable();
 
+            _inputHandler.OnPlayerMoved += PlayerMove;
+            _inputHandler.OnPlayerInteract += PlayerInteract;
+        }
+
+        private void OnDisable()
+        {
+            DisableInput();
+        }
+
+        private void DisableInput()
+        {
+            _inputHandler.Disable();
+
+            _inputHandler.OnPlayerMoved -= PlayerMove;
+            _inputHandler.OnPlayerInteract -= PlayerInteract;
+        }
+
+        private void PlayerMove(Vector2 movementDirection)
+        {
+            _characterBody.Move(movementDirection);
+        }
+
+        private void PlayerInteract()
+        {
+            if (_interactableObjects.Count <= 0) return;
+            if (!_interactableObjects.Any(iObject => iObject.OnInteractionStart(this))) return;
+
+            DisableInput();
+            ActivatePanel();
+        }
+
+        public void OnInteractionEnd(bool interactionComplete)
+        {
+            EnableInput();
             DeactivatePanel();
-            _currenInteractiveObject = null;
-        }
-
-        private void CheckMovementInput()
-        {
-            var movementDirection = playerInput.GetMovementDirection();
-
-            if (movementDirection == Vector2.zero) return;
-
-            CharacterMoved?.Invoke(movementDirection);
         }
 
         private void ActivatePanel()

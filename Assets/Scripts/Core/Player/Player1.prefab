@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbeae3f894840cc80cc658853f4f50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 1
   playerInput: {fileID: 11400000, guid: 656be242e5b6c5e48b5be5a6443a4b17, type: 2}
   characterHUD: {fileID: 0}
 --- !u!1 &8989165959174414271

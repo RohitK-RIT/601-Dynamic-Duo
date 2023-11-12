@@ -31,7 +31,7 @@ namespace Core.Player
 
         private void Move(Vector2 direction)
         {
-            var delta = direction * (speed * Time.deltaTime) * new Vector2(1, 1.5f);
+            var delta = direction * (speed * Time.deltaTime) * new Vector2(1, 1.5f) /*Movement factor added by Matt*/;
             _characterRigidbody.velocity = new Vector3(delta.x, 0, delta.y);
         }
 

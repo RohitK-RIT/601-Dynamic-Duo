@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core.Game_Systems;
 using UnityEngine;
@@ -16,21 +17,27 @@ namespace Mini_Games
 
         public static bool IsOpen { get; private set; }
 
-        protected virtual void OnEnable()
+        public void Init(List<CharacterController> controllers)
         {
-            var controllers = FindObjectsOfType<CharacterController>();
-            _characterController1 = controllers.FirstOrDefault(controller => controller.name == "Player1");
-            _characterController2 = controllers.FirstOrDefault(controller => controller.name == "Player2");
-
-            if(!_characterController1 || !_characterController2)
+            for (var i = 0; i < 2; i++)
             {
-                gameObject.SetActive(false);
-                return;
+                switch (controllers[i].PlayerID)
+                {
+                    case 1:
+                        _characterController1 = controllers[i];
+                        break;
+                    case 2:
+                        _characterController2 = controllers[i];
+                        break;
+                }
             }
-            
+
             Player1Input = _characterController1.GetPlayerInput();
             Player2Input = _characterController2.GetPlayerInput();
-            
+        }
+
+        protected virtual void OnEnable()
+        {
             IsCompleted = false;
             IsOpen = true;
         }
@@ -47,15 +54,15 @@ namespace Mini_Games
 
         private void OnReset()
         {
-            if(!Player1Input || !Player2Input)
+            if (!Player1Input || !Player2Input)
                 return;
-            
+
             _characterController1.SetPlayerInput(Player1Input);
             _characterController2.SetPlayerInput(Player2Input);
 
             Player1Input = null;
             Player2Input = null;
-            
+
             OnClosed?.Invoke(IsCompleted);
             IsOpen = false;
         }

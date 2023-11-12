@@ -14,11 +14,13 @@ namespace Core.Player
 
         public event MovementControlDelegate CharacterMoved;
 
+        public int PlayerID => playerID;
+
+        [SerializeField] private int playerID;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private GameObject characterHUD;
 
         private Character _character;
-        private bool _isInteracting;
 
         private bool _isInteractPressed;
 
@@ -48,7 +50,7 @@ namespace Core.Player
         private IEnumerator SetPlayerInputNull()
         {
             yield return new WaitForSeconds(0.1f);
-            playerInput = null;
+            SetPlayerInput();
         }
 
         public void SetPlayerInput(PlayerInput playerInput = null)
@@ -58,12 +60,12 @@ namespace Core.Player
 
         private void Update()
         {
-            if (playerInput)
-                ProcessInput();
+            ProcessInput();
         }
 
         private void ProcessInput()
         {
+            if (!playerInput) return;
             if (!Input.anyKey) return;
             if (CheckInteractionInput()) return;
 
@@ -74,35 +76,25 @@ namespace Core.Player
         {
             if (_interactableObjects.Count <= 0) return false;
 
-            if (_isInteracting && playerInput.IsInteractionCancelledButtonPressed())
+            if (!playerInput.IsInteractionButtonPressed()) return false;
+
+            foreach (var iObject in _interactableObjects.Where(iObject => iObject.OnInteractionStart(this)))
             {
-                OnInteractionCompleted();
-            }
-            else if (!_isInteracting && playerInput.IsInteractionButtonPressed())
-            {
-                foreach (var iObject in _interactableObjects.Where(iObject => iObject.OnInteractionStart(this)))
-                {
-                    _currenInteractiveObject = iObject;
-                    _currenInteractiveObject.OnInteractionCompleted += OnInteractionCompleted;
-                    _isInteracting = true;
-                    ActivatePanel();
-                    break;
-                }
+                _currenInteractiveObject = iObject;
+                _currenInteractiveObject.OnInteractionCompleted += OnInteractionCompleted;
+                ActivatePanel();
+                return true;
             }
 
-            return _isInteracting;
+            return false;
         }
 
-        private void OnInteractionCompleted()
+        private void OnInteractionCompleted(bool interactionComplete)
         {
-            if (_currenInteractiveObject)
-                _currenInteractiveObject.OnInteractionEnd();
-
             _currenInteractiveObject.OnInteractionCompleted -= OnInteractionCompleted;
 
             DeactivatePanel();
             _currenInteractiveObject = null;
-            _isInteracting = false;
         }
 
         private void CheckMovementInput()

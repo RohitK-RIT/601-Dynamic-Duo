@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Mini_Games.Boxer
@@ -11,16 +10,16 @@ namespace Mini_Games.Boxer
     {
         [SerializeField] private Transform answerPanel, gamePanel;
         [SerializeField] private Transform player1Pool, player2Pool;
+        [SerializeField] private Color player1Color = Color.cyan, player1SelectedColor = Color.cyan, player2Color = Color.magenta, player2SelectedColor = Color.magenta;
 
         private readonly Color[] _randomColors = { Color.red, Color.blue, Color.green, Color.yellow };
-        private readonly Color _player1Color = Color.cyan, _player2Color = Color.magenta;
 
         private Panel[,] _answerGrid, _gameGrid;
         private Panel[] _player1Panels, _player2Panels;
         private Vector2Int _player1GridPos, _player2GridPos;
         private Vector3Int _player1SelectedPanelPos, _player2SelectedPanelPos;
-        private Dictionary<Vector3Int, Color> _answerDictionary;
         private Panel _player1SelectedPanel, _player2SelectedPanel;
+        private Dictionary<Vector3Int, Color> _answerDictionary;
 
         private DateTime _player1MoveTime, _player2MoveTime;
         [SerializeField] private float ChainMovementDelay = 0.05f;
@@ -32,9 +31,8 @@ namespace Mini_Games.Boxer
 
             set
             {
-                SetGridHighlight(_player1GridPos, _player1GridPos.Equals(_player2GridPos) ? _player2Color : Color.clear);
+                SetGridHighlight(_player1GridPos, _player1GridPos.Equals(_player2GridPos) ? player2Color : Color.clear);
                 _player1GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 2), Mathf.Clamp(value.y, 0, 3));
-                Debug.Log($"New clamped player 1 pos ({_player1GridPos.x},{_player1GridPos.y})");
                 SetGridHighlight(_player1GridPos, Color.cyan);
             }
         }
@@ -45,9 +43,8 @@ namespace Mini_Games.Boxer
 
             set
             {
-                SetGridHighlight(_player2GridPos, _player1GridPos.Equals(_player2GridPos) ? _player1Color : Color.clear, false);
+                SetGridHighlight(_player2GridPos, _player1GridPos.Equals(_player2GridPos) ? player1Color : Color.clear, false);
                 _player2GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 2), Mathf.Clamp(value.y, 0, 3));
-                Debug.Log($"Player 2 new Pos ({_player2GridPos.x},{_player2GridPos.y})");
                 SetGridHighlight(_player2GridPos, Color.magenta, false);
             }
         }
@@ -171,26 +168,10 @@ namespace Mini_Games.Boxer
                 return;
             }
 
-            try
-            {
-                ProcessPlayer1Input();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Player 1 error: {e}");
-            }
+            ProcessPlayer1Input();
+            ProcessPlayer2Input();
 
-            try
-            {
-                ProcessPlayer2Input();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Player 2 error: {e}");
-            }
-
-            if (!CheckAnswer())
-                return;
+            if (!IsAnswerAchieved) return;
 
             IsCompleted = true;
             Destroy(gameObject);
@@ -206,7 +187,6 @@ namespace Mini_Games.Boxer
                 {
                     _player1MoveTime = DateTime.Now;
                     var newPlayer1GridPos = Player1GridPos + playerMovement * (Vector2Int.down + Vector2Int.right);
-                    Debug.Log($"New unclamped player 1 pos {newPlayer1GridPos}");
                     Player1GridPos = newPlayer1GridPos;
                 }
             }
@@ -214,7 +194,6 @@ namespace Mini_Games.Boxer
             _player1NotMoving = playerMovement == Vector2Int.zero;
 
             var currentPanel = _player1GridPos.y == 3 ? _player1Panels[_player1GridPos.x] : _gameGrid[_player1GridPos.x, _player1GridPos.y];
-
             if (Player1Input.IsInteractionButtonPressed())
             {
                 if (_player1SelectedPanel != null)
@@ -232,13 +211,13 @@ namespace Mini_Games.Boxer
 
                         currentPanel[index].color = _player1SelectedPanel[index].color;
                         _player1SelectedPanel[index].color = Color.clear;
+                        _player1SelectedPanel.SetHighlightColor(Color.clear);
                     }
 
-                    _player1SelectedPanel.SetHighlightColor(Color.clear);
                     _player1SelectedPanel.Transform.localScale = Vector3.one;
                     _player1SelectedPanel = null;
                 }
-                else
+                else if (!currentPanel.IsEmpty)
                 {
                     // Select the box
                     _player1SelectedPanel = currentPanel;
@@ -247,7 +226,7 @@ namespace Mini_Games.Boxer
             }
             else if (_player1SelectedPanel != null && _player1SelectedPanel != currentPanel)
             {
-                _player1SelectedPanel.SetHighlightColor((_player1Color + Color.black) / 2);
+                _player1SelectedPanel.SetHighlightColor(player1SelectedColor);
             }
         }
 
@@ -265,9 +244,9 @@ namespace Mini_Games.Boxer
 
             _player2NotMoving = playerMovement == Vector2Int.zero;
 
+            var currentPanel = _player2GridPos.y == 3 ? _player2Panels[_player2GridPos.x] : _gameGrid[_player2GridPos.x, _player2GridPos.y];
             if (Player2Input.IsInteractionButtonPressed())
             {
-                var currentPanel = _player2GridPos.y == 3 ? _player2Panels[_player2GridPos.x] : _gameGrid[_player2GridPos.x, _player2GridPos.y];
                 if (_player2SelectedPanel != null)
                 {
                     if (_player2SelectedPanel != currentPanel)
@@ -283,77 +262,28 @@ namespace Mini_Games.Boxer
 
                         currentPanel[index].color = _player2SelectedPanel[index].color;
                         _player2SelectedPanel[index].color = Color.clear;
+                        _player2SelectedPanel.SetHighlightColor(Color.clear);
                     }
 
-                    _player2SelectedPanel.SetHighlightColor(Color.clear);
                     _player2SelectedPanel.Transform.localScale = Vector3.one;
                     _player2SelectedPanel = null;
                 }
-                else
+                else if (!currentPanel.IsEmpty)
                 {
                     // Select the box
                     _player2SelectedPanel = currentPanel;
                     _player2SelectedPanel.Transform.localScale *= 1.1f;
                 }
             }
-            else if (_player2SelectedPanel != null && _player2SelectedPanel.index != _player2GridPos)
+            else if (_player2SelectedPanel != null && _player2SelectedPanel != currentPanel)
             {
-                _player2SelectedPanel.SetHighlightColor(_player2Color + Color.black);
+                _player2SelectedPanel.SetHighlightColor(player2SelectedColor);
             }
         }
 
-        private bool CheckAnswer()
-        {
-            foreach (var answer in _answerDictionary)
-            {
-                var point = answer.Key;
-                if (_gameGrid[point.x, point.y][point.z].color != answer.Value)
-                    return false;
-            }
-
-            return true;
-        }
+        private bool IsAnswerAchieved =>
+            !(from answer in _answerDictionary let point = answer.Key where _gameGrid[point.x, point.y][point.z].color != answer.Value select answer).Any();
 
         #endregion
-    }
-
-    public class Panel
-    {
-        public readonly Vector2Int index;
-
-        private readonly Image _highlight;
-        private readonly Image _smallPanelImage;
-        private readonly Image _bigPanelImage;
-
-        public GameObject GameObject { get; }
-        public Transform Transform { get; }
-
-        public bool IsEmpty => _smallPanelImage.color == Color.clear && _bigPanelImage.color == Color.clear;
-
-        public Panel(Vector2Int index, Transform panel)
-        {
-            this.index = index;
-
-            Transform = panel;
-            GameObject = panel.gameObject;
-
-            _highlight = panel.GetChild(0).GetComponent<Image>();
-            _bigPanelImage = panel.GetChild(2).GetComponent<Image>();
-            _smallPanelImage = panel.GetChild(3).GetComponent<Image>();
-
-            SetHighlightColor(Color.clear);
-        }
-
-        public void SetHighlightColor(Color color)
-        {
-            _highlight.color = color;
-        }
-
-        public void SetColor(int panelIndex, Color color)
-        {
-            this[panelIndex].color = color;
-        }
-
-        public Image this[int i] => i == 0 ? _bigPanelImage : _smallPanelImage;
     }
 }

@@ -9,7 +9,7 @@ namespace Interaction
         [SerializeField] private MiniGame miniGamePrefabToInstantiate;
 
         public bool IsMiniGameCompleted { get; private set; }
-        
+
         private MiniGame _miniGameInstance;
 
         public override bool OnInteractionStart(CharacterController controller)
@@ -17,20 +17,19 @@ namespace Interaction
             if (!base.OnInteractionStart(controller) || MiniGame.IsOpen)
                 return false;
 
+            if (CurrentInteractingCharacters.Count < 2)
+                return false;
+
             _miniGameInstance = Instantiate(miniGamePrefabToInstantiate, Vector3.zero, Quaternion.identity);
+            _miniGameInstance.Init(CurrentInteractingCharacters);
             _miniGameInstance.OnClosed += OnMiniGameClosed;
             return true;
         }
 
         private void OnMiniGameClosed(bool successful)
         {
-            if (successful)
-            {
-                IsMiniGameCompleted = true;
-                InteractionCompleted();
-            }
-            else
-                OnInteractionEnd();
+            IsMiniGameCompleted = successful;
+            OnInteractionEnd(successful);
         }
     }
 }

@@ -9,17 +9,21 @@ namespace Interaction.OpenDoor
         [SerializeField] private MiniGameTrigger[] miniGameTriggers;
 
         [SerializeField] private Material interactableDoor, unInteractableDoor;
-        [SerializeField] private Renderer switchRenderer;
+        //[SerializeField] private Renderer switchRenderer;
         //Testing: change color if door is opened
         [SerializeField] private Renderer doorRenderer;
         [SerializeField] private Material newMaterial;
+
+        AudioSource audioSource;
+
+        public GameObject controlDoor;
 
         private bool Interactable
         {
             get => _interactable;
             set
             {
-                switchRenderer.material = value ? interactableDoor : unInteractableDoor;
+                //switchRenderer.material = value ? interactableDoor : unInteractableDoor;
                 _interactable = value;
             }
         }
@@ -27,6 +31,7 @@ namespace Interaction.OpenDoor
         private void Start()
         {
             Interactable = false;
+            audioSource = GetComponent<AudioSource>();
         }
 
         public override bool OnInteractionStart(CharacterController controller)
@@ -37,10 +42,11 @@ namespace Interaction.OpenDoor
             if (!base.OnInteractionStart(controller))
                 return false;
 
-            Debug.Log($"{controller.name} opened the door!");
-            doorRenderer.material = newMaterial;
-            Invoke(nameof(InteractionCompleted), 0.1f);
-            return true;
+            //Debug.Log($"{controller.name} opened the door!");
+            Destroy(controlDoor);
+            audioSource.Play();
+            //Invoke(nameof(InteractionCompleted), 0.1f);
+            return false;
         }
 
         private void Update()

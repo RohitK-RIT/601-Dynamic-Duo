@@ -36,7 +36,7 @@ namespace Interaction.Doors
             yield return null;
 
             Destroy(controlDoor);
-            _audioSource.Play();
+            _audioSource?.Play();
         }
     }
 }

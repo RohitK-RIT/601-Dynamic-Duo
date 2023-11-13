@@ -78,7 +78,7 @@ namespace Core.Player
         private void PlayerInteract()
         {
             if (_interactableObjects.Count <= 0) return;
-            if (!_interactableObjects.Any(iObject => iObject.OnInteractionStart(this))) return;
+            if (!_interactableObjects.Any(iObject => iObject.OnHandleInteractee(this))) return;
 
             DisableInput();
             ActivatePanel();

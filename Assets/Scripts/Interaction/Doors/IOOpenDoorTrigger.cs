@@ -2,9 +2,9 @@ using System.Collections;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
-namespace Interaction.OpenDoor
+namespace Interaction.Doors
 {
-    public class OpenDoorSwitch : InteractiveObject
+    public class IOOpenDoorTrigger : IOTaskTrigger
     {
         AudioSource audioSource;
 
@@ -16,9 +16,9 @@ namespace Interaction.OpenDoor
             audioSource = GetComponent<AudioSource>();
         }
 
-        public override bool OnInteractionStart(CharacterController controller)
+        public override bool OnHandleInteractee(CharacterController controller)
         {
-            if (!base.OnInteractionStart(controller))
+            if (!base.OnHandleInteractee(controller))
                 return false;
 
             StartCoroutine(DoorOpened());

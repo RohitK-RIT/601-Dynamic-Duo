@@ -5,18 +5,17 @@ using CharacterController = Core.Player.CharacterController;
 
 namespace Interaction
 {
-    public class MiniGameTrigger : InteractiveObject
+    public class IOMiniGameTrigger : IOTaskTrigger
     {
         [SerializeField] private MiniGame miniGamePrefabToInstantiate;
         [FormerlySerializedAs("gameObjectToDestroy")] [SerializeField] private GameObject doorToDestroy;
 
-        public bool IsMiniGameCompleted { get; private set; }
 
         private MiniGame _miniGameInstance;
 
-        public override bool OnInteractionStart(CharacterController controller)
+        public override bool OnHandleInteractee(CharacterController controller)
         {
-            if (!base.OnInteractionStart(controller) || MiniGame.IsOpen)
+            if (!base.OnHandleInteractee(controller) || MiniGame.IsOpen)
                 return false;
 
             if (InteractingCharacters.Count >= 2)
@@ -31,7 +30,6 @@ namespace Interaction
         protected override void OnInteractionEnd(bool successful)
         {
             _miniGameInstance.OnClosed -= OnInteractionEnd;
-            IsMiniGameCompleted = successful;
             Interactable = !successful;
             
             if(doorToDestroy)

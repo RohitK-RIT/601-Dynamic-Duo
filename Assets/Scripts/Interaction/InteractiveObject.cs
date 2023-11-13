@@ -9,7 +9,7 @@ namespace Interaction
     {
         protected List<CharacterController> InteractingCharacters { get; private set; }
 
-        public bool Interactable { get; protected set; }
+        public virtual bool Interactable { get; protected set; }
 
         protected virtual void Start()
         {
@@ -17,7 +17,7 @@ namespace Interaction
             Interactable = true;
         }
 
-        public virtual bool OnInteractionStart(CharacterController controller)
+        public virtual bool OnHandleInteractee(CharacterController controller)
         {
             if (!Interactable) return false;
 
@@ -28,6 +28,7 @@ namespace Interaction
 
         protected virtual void OnInteractionEnd(bool successful)
         {
+            Interactable = !successful;
             foreach (var interactingCharacter in InteractingCharacters)
                 interactingCharacter.OnInteractionEnd(successful);
 

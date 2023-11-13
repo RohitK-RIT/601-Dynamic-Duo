@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0b0be5413d4bf5ad7aa9322f1684c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskTitle: Complete the Boxer Puzzle
   miniGamePrefabToInstantiate: {fileID: 4170055092910298910, guid: 1eb48d03905aace4e97271b245d346cd,
     type: 3}
   doorToDestroy: {fileID: 0}
@@ -1060,6 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edff3e6e6ee55814db723c72dcf154a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskTitle: Open Door For Player 2
   controlDoor: {fileID: 1925283489}
 --- !u!65 &395919697
 BoxCollider:
@@ -1921,6 +1923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0b0be5413d4bf5ad7aa9322f1684c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskTitle: Complete the Wire Puzzle
   miniGamePrefabToInstantiate: {fileID: 8220847404907943815, guid: b7ce1f6647d0d61438a0451a8834660c,
     type: 3}
   doorToDestroy: {fileID: 1620982113}
@@ -3942,6 +3945,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1188145648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1188145652}
+  - component: {fileID: 1188145651}
+  - component: {fileID: 1188145650}
+  - component: {fileID: 1188145649}
+  m_Layer: 5
+  m_Name: UI System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1188145649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188145648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1188145650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188145648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1188145651
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188145648}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &1188145652
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188145648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1001 &1206517832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4994,10 +5098,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1506909764}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01448fb2c4dab924db98f4b88b883b39,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1506909763}
   m_SourcePrefab: {fileID: 100100000, guid: 01448fb2c4dab924db98f4b88b883b39, type: 3}
 --- !u!4 &1506909761 stripped
 Transform:
@@ -5011,20 +5111,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1506909760}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1506909763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506909762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f0b0be5413d4bf5ad7aa9322f1684c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  miniGamePrefabToInstantiate: {fileID: 0}
-  doorToDestroy: {fileID: 0}
 --- !u!65 &1506909764
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6229,6 +6315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edff3e6e6ee55814db723c72dcf154a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskTitle: Open Door For Player 1
   controlDoor: {fileID: 404671658}
 --- !u!65 &1868069620
 BoxCollider:
@@ -6609,7 +6696,7 @@ GameObject:
   - component: {fileID: 1914528879}
   - component: {fileID: 1914528880}
   m_Layer: 3
-  m_Name: Door
+  m_Name: Final Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6905,27 +6992,14 @@ GameObject:
   - component: {fileID: 2013406607}
   - component: {fileID: 2013406606}
   - component: {fileID: 2013406605}
-  - component: {fileID: 2013406604}
+  - component: {fileID: 2013406609}
   m_Layer: 0
-  m_Name: Switch
+  m_Name: Final Door Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2013406604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013406603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edff3e6e6ee55814db723c72dcf154a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlDoor: {fileID: 0}
 --- !u!65 &2013406605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7012,6 +7086,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2013406609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013406603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3f86ad387c4198b689e1da5b8fcb87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskTitle: 
+  controlDoor: {fileID: 1914528878}
+--- !u!1 &2015146015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015146016}
+  - component: {fileID: 2015146017}
+  m_Layer: 0
+  m_Name: Task System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2015146016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015146015}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.276626, y: 2.2171786, z: 21.293243}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2015146017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015146015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1240fdf6af4d401684eb048dc19a5e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskList:
+  - taskTrigger: {fileID: 1868069619}
+  - taskTrigger: {fileID: 395919696}
+  - taskTrigger: {fileID: 636000303}
+  - taskTrigger: {fileID: 42439828}
 --- !u!1 &2016496664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5136720b378b5404da3d5913b3a80950,
@@ -7238,7 +7375,6 @@ SceneRoots:
   - {fileID: 404671662}
   - {fileID: 2013406608}
   - {fileID: 1184830154}
-  - {fileID: 42439832}
   - {fileID: 1707241321}
   - {fileID: 1585871055}
   - {fileID: 1000446599}
@@ -7246,4 +7382,7 @@ SceneRoots:
   - {fileID: 395919698}
   - {fileID: 1868069621}
   - {fileID: 636000305}
+  - {fileID: 42439832}
   - {fileID: 1243370911}
+  - {fileID: 2015146016}
+  - {fileID: 1188145652}

@@ -14,8 +14,7 @@ namespace UI
 
         private void ReloadLevel()
         {
-            var scene = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(scene);
+            SceneManager.LoadScene("Menu Scene");
         }
     }
 }

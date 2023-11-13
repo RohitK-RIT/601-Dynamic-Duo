@@ -1113,6 +1113,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskTitle: Open Door For Player 2
   controlDoor: {fileID: 1925283489}
+  wireList:
+  - {fileID: 1215186591}
+  wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
 --- !u!65 &395919697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4249,6 +4252,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.019999998, y: 0.019999994, z: 0.019999994}
   m_Center: {x: 0, y: -0.00000011920929, z: 0.0000000013969839}
+--- !u!1 &1215186591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f1152d0ed9be9f4b9be40b7a78b2133,
+    type: 3}
+  m_PrefabInstance: {fileID: 2100203915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1225275283
 GameObject:
   m_ObjectHideFlags: 0
@@ -5833,6 +5842,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1630777193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cedf99b032bbcee439da364e3ba9480e,
+    type: 3}
+  m_PrefabInstance: {fileID: 639189673}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1682302543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6423,6 +6438,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskTitle: Open Door For Player 1
   controlDoor: {fileID: 404671658}
+  wireList:
+  - {fileID: 1630777193}
+  wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
 --- !u!65 &1868069620
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7476,6 +7494,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level Complete Page
       objectReference: {fileID: 0}
+    - target: {fileID: 4862847966602496070, guid: 31700da54fb59f546ba4b94ab1769b65,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5641175116181394071, guid: 31700da54fb59f546ba4b94ab1769b65,
         type: 3}
       propertyPath: m_Pivot.x
@@ -7589,6 +7612,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1188145652}
     m_Modifications:
+    - target: {fileID: 239005716497988242, guid: 35775dc8896e2234eaaf86b32cc3c80b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8284777417948632905, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
       propertyPath: m_Pivot.x

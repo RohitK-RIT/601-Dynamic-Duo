@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 using CharacterController = Core.Player.CharacterController;
 
 namespace Interaction.Doors
@@ -9,6 +10,9 @@ namespace Interaction.Doors
         AudioSource audioSource;
 
         public GameObject controlDoor;
+
+        public List<GameObject> wireList = new List<GameObject>();
+        public Material wireMat;
 
         protected override void Start()
         {
@@ -30,6 +34,16 @@ namespace Interaction.Doors
             yield return null;
 
             OnInteractionEnd(true);
+
+            if(wireList.Count > 0)
+            {
+                foreach (GameObject go in wireList)
+                {
+                    Renderer renderer = go.GetComponent<Renderer>();
+                    renderer.material = wireMat;
+                }
+            }
+
             Destroy(controlDoor);
             audioSource.Play();
         }

@@ -1,11 +1,12 @@
 using System.Collections;
+using Core.Game_Systems.Level_System;
 using Core.Game_Systems.Task_System;
 using UnityEngine;
 using CharacterController = Core.Player.CharacterController;
 
 namespace Interaction.Doors
 {
-    public class IOFinalDoorSwitch : IOTaskTrigger
+    public class IOFinalDoorSwitch : InteractiveObject
     {
         public override bool Interactable => TaskSystem.Instance.AllTasksCompleted;
 
@@ -36,7 +37,9 @@ namespace Interaction.Doors
             yield return null;
 
             Destroy(controlDoor);
-            _audioSource?.Play();
+            if (_audioSource)
+                _audioSource.Play();
+            new LevelCompletedEvent().Raise();
         }
     }
 }

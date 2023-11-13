@@ -111,6 +111,18 @@ namespace Core.Game_Systems.Player_Input
                 default: return;
             }
         }
+        
+        public void EnableAllInput()
+        {
+            ActiveP1Handler?.Enable();
+            ActiveP2Handler?.Enable();
+        }
+
+        public void DisableAllInput()
+        {
+            ActiveP1Handler?.Disable();
+            ActiveP2Handler?.Disable();
+        }
     }
 
     public class PlayerInputHandlerRegistrationEvent : GameEvent

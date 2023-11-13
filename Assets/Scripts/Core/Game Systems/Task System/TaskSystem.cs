@@ -9,8 +9,10 @@ namespace Core.Game_Systems.Task_System
     public class TaskSystem : MonoBehaviour
     {
         public static TaskSystem Instance { get; private set; }
+        public List<Task> TaskList => taskList;
         public bool AllTasksCompleted => taskList.All(task => task.IsCompleted);
         
+
         [SerializeField] private List<Task> taskList;
 
         private void Awake()
@@ -29,7 +31,8 @@ namespace Core.Game_Systems.Task_System
     public class Task
     {
         public bool IsCompleted => taskTrigger.IsCompleted;
-        
+        public string Title => taskTrigger.TaskTitle;
+
         [SerializeField] private IOTaskTrigger taskTrigger;
     }
 }

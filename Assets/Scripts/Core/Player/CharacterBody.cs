@@ -16,11 +16,12 @@ namespace Core.Player
             _controller = controller;
             _characterRigidbody = GetComponent<Rigidbody>();
         }
-        
+
         public void Move(Vector2 direction)
         {
-            var delta = direction * (speed * Time.deltaTime) * new Vector2(1, 1.5f) /*Movement factor added by Matt*/;
-            _characterRigidbody.velocity = new Vector3(delta.x, 0, delta.y);
+            direction.Normalize();
+            var newVelocity = speed * direction;
+            _characterRigidbody.velocity = new Vector3(newVelocity.x, 0, newVelocity.y);
         }
 
         private void OnTriggerEnter(Collider other)

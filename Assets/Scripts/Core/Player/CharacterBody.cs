@@ -19,8 +19,7 @@ namespace Core.Player
 
         public void Move(Vector2 direction)
         {
-            direction.Normalize();
-            var newVelocity = speed * direction;
+            var newVelocity = speed * direction.normalized;
             _characterRigidbody.velocity = new Vector3(newVelocity.x, 0, newVelocity.y);
         }
 

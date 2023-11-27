@@ -77,7 +77,8 @@ namespace Core.Player
         private void PlayerMove(Vector2 movementDirection)
         {
             _characterBody.Move(movementDirection);
-            _animator.SetFloat(XDir, movementDirection.x);
+            if (_animator)
+                _animator.SetFloat(XDir, movementDirection.x);
         }
 
         private void PlayerInteract()

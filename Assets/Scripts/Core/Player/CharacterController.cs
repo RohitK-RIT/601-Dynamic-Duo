@@ -19,7 +19,10 @@ namespace Core.Player
         private CharacterBody _characterBody;
         private List<InteractiveObject> _interactableObjects;
 
+        private Animator _animator;
+
         private bool _firstRun = true;
+        private static readonly int XDir = Animator.StringToHash("xDir");
 
         private void Start()
         {
@@ -31,6 +34,7 @@ namespace Core.Player
             }
 
             _characterBody.Init(this);
+            _animator = GetComponent<Animator>();
             _interactableObjects = new List<InteractiveObject>();
             DeactivatePanel();
         }
@@ -73,6 +77,7 @@ namespace Core.Player
         private void PlayerMove(Vector2 movementDirection)
         {
             _characterBody.Move(movementDirection);
+            _animator.SetFloat(XDir, movementDirection.x);
         }
 
         private void PlayerInteract()
@@ -108,6 +113,14 @@ namespace Core.Player
         public void RemoveInteractableObjects(InteractiveObject iObject)
         {
             _interactableObjects.Remove(iObject);
+        }
+
+        private void FixedUpdate()
+        {
+            if (_characterBody.CharacterRigidBody.velocity.x == 0 && _animator)
+            {
+                _animator.SetFloat(XDir, 0);
+            }
         }
     }
 }

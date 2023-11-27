@@ -8,19 +8,20 @@ namespace Core.Player
     {
         [SerializeField] public float speed = 10f;
 
+        public Rigidbody CharacterRigidBody { get; private set; }
+
         private CharacterController _controller;
-        private Rigidbody _characterRigidbody;
 
         internal void Init(CharacterController controller)
         {
             _controller = controller;
-            _characterRigidbody = GetComponent<Rigidbody>();
+            CharacterRigidBody = GetComponent<Rigidbody>();
         }
 
         public void Move(Vector2 direction)
         {
             var newVelocity = speed * direction.normalized;
-            _characterRigidbody.velocity = new Vector3(newVelocity.x, 0, newVelocity.y);
+            CharacterRigidBody.velocity = new Vector3(newVelocity.x, 0, newVelocity.y);
         }
 
         private void OnTriggerEnter(Collider other)

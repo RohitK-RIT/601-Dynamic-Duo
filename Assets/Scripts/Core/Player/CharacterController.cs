@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Game_Systems;
 using Interaction;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace Core.Player
@@ -24,6 +25,8 @@ namespace Core.Player
         private bool _firstRun = true;
         private static readonly int XDir = Animator.StringToHash("xDir");
 
+        Canvas popupCanvas;
+
         private void Start()
         {
             _characterBody = GetComponent<CharacterBody>();
@@ -36,6 +39,13 @@ namespace Core.Player
             _characterBody.Init(this);
             _animator = GetComponent<Animator>();
             _interactableObjects = new List<InteractiveObject>();
+
+
+            //Set pop up canvas
+            Transform childObject = transform.Find("InteractionPopUp");
+            popupCanvas = childObject.GetComponent<Canvas>();
+            popupCanvas.enabled = false;
+
             DeactivatePanel();
         }
 
@@ -109,11 +119,29 @@ namespace Core.Player
         public void AddInteractableObjects(InteractiveObject iObject)
         {
             _interactableObjects.Insert(0, iObject);
+
+            //Show Popup
+            if(_interactableObjects.Count > 0)
+            {
+                popupCanvas.enabled = true;
+            }
+            else
+            {
+                popupCanvas.enabled = false;
+            }
         }
 
         public void RemoveInteractableObjects(InteractiveObject iObject)
         {
             _interactableObjects.Remove(iObject);
+            if (_interactableObjects.Count > 0)
+            {
+                popupCanvas.enabled = true;
+            }
+            else
+            {
+                popupCanvas.enabled = false;
+            }
         }
 
         private void FixedUpdate()

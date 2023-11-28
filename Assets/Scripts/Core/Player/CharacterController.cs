@@ -26,6 +26,7 @@ namespace Core.Player
         private static readonly int XDir = Animator.StringToHash("xDir");
 
         Canvas popupCanvas;
+        RectTransform popupCanvasRectTrans;
 
         private void Start()
         {
@@ -45,6 +46,7 @@ namespace Core.Player
             Transform childObject = transform.Find("InteractionPopUp");
             popupCanvas = childObject.GetComponent<Canvas>();
             popupCanvas.enabled = false;
+            popupCanvasRectTrans = popupCanvas.GetComponent<RectTransform>();
 
             DeactivatePanel();
         }
@@ -89,6 +91,7 @@ namespace Core.Player
             _characterBody.Move(movementDirection);
             if (_animator)
                 _animator.SetFloat(XDir, movementDirection.x);
+
         }
 
         private void PlayerInteract()
@@ -134,6 +137,8 @@ namespace Core.Player
         public void RemoveInteractableObjects(InteractiveObject iObject)
         {
             _interactableObjects.Remove(iObject);
+
+            //Hide popup
             if (_interactableObjects.Count > 0)
             {
                 popupCanvas.enabled = true;

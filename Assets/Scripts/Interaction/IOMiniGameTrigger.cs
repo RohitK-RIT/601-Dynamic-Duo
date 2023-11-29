@@ -1,6 +1,7 @@
 using Mini_Games;
 using UnityEngine;
 using UnityEngine.Serialization;
+using System.Collections.Generic;
 using CharacterController = Core.Player.CharacterController;
 
 namespace Interaction
@@ -12,6 +13,11 @@ namespace Interaction
 
 
         private MiniGame _miniGameInstance;
+
+
+        //Physical wires
+        public List<GameObject> wireList = new List<GameObject>();
+        public Material wireMat;
 
         public override bool OnHandleInteractee(CharacterController controller)
         {
@@ -31,8 +37,17 @@ namespace Interaction
         {
             _miniGameInstance.OnClosed -= OnInteractionEnd;
             Interactable = !successful;
-            
-            if(doorToDestroy)
+
+            if (wireList.Count > 0)
+            {
+                foreach (GameObject go in wireList)
+                {
+                    Renderer renderer = go.GetComponent<Renderer>();
+                    renderer.material = wireMat;
+                }
+            }
+
+            if (doorToDestroy)
                 Destroy(doorToDestroy);
             
             base.OnInteractionEnd(successful);

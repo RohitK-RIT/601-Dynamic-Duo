@@ -44,8 +44,16 @@ namespace Interaction.Doors
                 }
             }
 
-            Destroy(controlDoor);
-            audioSource.Play();
+            if(controlDoor)
+            {
+                Destroy(controlDoor);
+            }
+            
+            if(audioSource)
+            {
+                audioSource.Play();
+            }
+            
         }
 
         protected override void OnInteractionEnd(bool successful)

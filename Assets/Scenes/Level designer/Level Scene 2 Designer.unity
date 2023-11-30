@@ -2319,7 +2319,7 @@ MonoBehaviour:
   taskTitle: Open Door For Player 2
   controlDoor: {fileID: 1925283489}
   wireList:
-  - {fileID: 0}
+  - {fileID: 1204467859}
   wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
 --- !u!65 &395919697
 BoxCollider:
@@ -3071,8 +3071,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.3082314, y: 1.16113, z: 1.737154}
-  m_Center: {x: 0.3712635, y: -0.080564976, z: 0.8837843}
+  m_Size: {x: 2.5031548, y: 1.16113, z: 1.737154}
+  m_Center: {x: 0.2738018, y: -0.080564976, z: 0.8837843}
 --- !u!4 &636000305
 Transform:
   m_ObjectHideFlags: 0
@@ -5654,6 +5654,18 @@ MonoBehaviour:
   pages:
   - {fileID: 493452035}
   - {fileID: 1383308132}
+--- !u!1 &1204467859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 41cbadcfe3acfd6489d110ee24b154cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1930917029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1204733257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2bc571e662540344a9c5f65fe4458902,
+    type: 3}
+  m_PrefabInstance: {fileID: 432731653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1206517832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7867,7 +7879,7 @@ MonoBehaviour:
   taskTitle: Open Door For Player 1
   controlDoor: {fileID: 404671658}
   wireList:
-  - {fileID: 0}
+  - {fileID: 1204733257}
   wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
 --- !u!65 &1868069620
 BoxCollider:

@@ -11,8 +11,14 @@ namespace Interaction.Doors
 
         public GameObject controlDoor;
 
+
+        //Physical wires
         public List<GameObject> wireList = new List<GameObject>();
         public Material wireMat;
+
+        //Lights to control
+        public List<GameObject> lightList = new List<GameObject>();
+
 
         protected override void Start()
         {
@@ -44,7 +50,16 @@ namespace Interaction.Doors
                 }
             }
 
-            if(controlDoor)
+            if (lightList.Count > 0)
+            {
+                foreach (GameObject go in wireList)
+                {
+                    Light light = go.GetComponent<Light>();
+                    light.enabled = true;
+                }
+            }
+
+            if (controlDoor)
             {
                 Destroy(controlDoor);
             }

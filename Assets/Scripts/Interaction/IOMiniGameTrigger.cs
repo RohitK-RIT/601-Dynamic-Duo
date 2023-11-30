@@ -19,6 +19,9 @@ namespace Interaction
         public List<GameObject> wireList = new List<GameObject>();
         public Material wireMat;
 
+        //Lights to control
+        public List<GameObject> lightList = new List<GameObject>();
+
         public override bool OnHandleInteractee(CharacterController controller)
         {
             if (!base.OnHandleInteractee(controller) || MiniGame.IsOpen)
@@ -44,6 +47,15 @@ namespace Interaction
                 {
                     Renderer renderer = go.GetComponent<Renderer>();
                     renderer.material = wireMat;
+                }
+            }
+
+            if(lightList.Count > 0)
+            {
+                foreach (GameObject go in wireList)
+                {
+                    Light light = go.GetComponent<Light>();
+                    light.enabled = true;
                 }
             }
 

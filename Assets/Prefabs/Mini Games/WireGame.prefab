@@ -1205,6 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b341e80a7fa6c804fa4c073913168b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionMap: 2
   requiredHoldTime: 1.5
   wireRed: {fileID: 1500319317705590972}
   wireBlue: {fileID: 3003972496390773374}

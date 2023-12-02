@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Core.Game_Systems;
+using Core.Game_Systems.Player_Input;
 using Mini_Games.Boxer;
 using Mini_Games.WireSwitch;
 using UnityEngine.UI;
@@ -67,9 +68,9 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     public TextMeshProUGUI p2k3;
     public TextMeshProUGUI p2k4;
 
-    private WirePuzzleInputHandler _p1InputHandler, _p2InputHandler;
+    private WirePuzzleInputListener _p1InputListener, _p2InputListener;
     private bool _playerInteracted, _waitingForPlayerToInteract;
-    
+
     void Awake()
     {
         wireRed.enabled = false;
@@ -116,33 +117,33 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
 
     private void EnableInput()
     {
-        _p1InputHandler ??= new WirePuzzleInputHandler(PlayerID.Player1, this);
-        _p2InputHandler ??= new WirePuzzleInputHandler(PlayerID.Player2, this);
+        _p1InputListener ??= new WirePuzzleInputListener(PlayerID.Player1, actionMap, this);
+        _p2InputListener ??= new WirePuzzleInputListener(PlayerID.Player2, actionMap, this);
 
-        _p1InputHandler.Enable();
-        _p2InputHandler.Enable();
+        _p1InputListener.TryEnable();
+        _p2InputListener.TryEnable();
     }
 
     private void DisableInput()
     {
-        _p1InputHandler.Disable();
-        _p2InputHandler.Disable();
+        _p1InputListener.Disable();
+        _p2InputListener.Disable();
     }
 
     void Start()
     {
-        p1k1.text = _p1InputHandler.UpKey;
-        p1k2.text = _p1InputHandler.LeftKey;
-        p1k3.text = _p1InputHandler.DownKey;
-        p1k4.text = _p1InputHandler.RightKey;
+        p1k1.text = _p1InputListener.UpKey;
+        p1k2.text = _p1InputListener.LeftKey;
+        p1k3.text = _p1InputListener.DownKey;
+        p1k4.text = _p1InputListener.RightKey;
 
-        p2k1.text = _p2InputHandler.UpKey;
-        p2k2.text = _p2InputHandler.DownKey;
-        p2k3.text = _p2InputHandler.LeftKey;
-        p2k4.text = _p2InputHandler.RightKey;
+        p2k1.text = _p2InputListener.UpKey;
+        p2k2.text = _p2InputListener.DownKey;
+        p2k3.text = _p2InputListener.LeftKey;
+        p2k4.text = _p2InputListener.RightKey;
 
         var successIntro = successImage.transform.Find("Intro");
-        successIntro.gameObject.GetComponent<TextMeshProUGUI>().text = "Press " + _p1InputHandler.InteractKey + "/" + _p2InputHandler.InteractKey + " to close";
+        successIntro.gameObject.GetComponent<TextMeshProUGUI>().text = "Press " + _p1InputListener.InteractKey + "/" + _p2InputListener.InteractKey + " to close";
     }
 
     // Update is called once per frame
@@ -154,26 +155,25 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
             //successImage.enabled = true;
             successImage.SetActive(true);
             progressBar.gameObject.SetActive(false);
-            
-            if(!_waitingForPlayerToInteract)
+
+            if (!_waitingForPlayerToInteract)
             {
                 _waitingForPlayerToInteract = true;
-                _p1InputHandler.OnInteractPressed += OnInteractPressed;
-                _p2InputHandler.OnInteractPressed += OnInteractPressed;
-            } 
+                _p1InputListener.OnInteractPressed += OnInteractPressed;
+                _p2InputListener.OnInteractPressed += OnInteractPressed;
+            }
 
             if (_playerInteracted)
             {
-                _p1InputHandler.OnInteractPressed -= OnInteractPressed;
-                _p2InputHandler.OnInteractPressed -= OnInteractPressed;
-                
+                _p1InputListener.OnInteractPressed -= OnInteractPressed;
+                _p2InputListener.OnInteractPressed -= OnInteractPressed;
+
                 //retrieve player control
                 IsCompleted = true;
 
                 Destroy(gameObject);
                 return;
             }
-
         }
 
         //Check if wire should be connected
@@ -192,7 +192,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     public void CheckKeys()
     {
         //Check purple wire
-        if (_p1InputHandler.UpPressed && _p2InputHandler.RightPressed)
+        if (_p1InputListener.UpPressed && _p2InputListener.RightPressed)
         {
             if (audioSource.isPlaying == false)
             {
@@ -222,7 +222,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
         }
 
         //Check Green
-        if (_p1InputHandler.LeftPressed && _p2InputHandler.LeftPressed)
+        if (_p1InputListener.LeftPressed && _p2InputListener.LeftPressed)
         {
             if (audioSource.isPlaying == false)
             {
@@ -252,7 +252,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
 
 
         //Check Red
-        if (_p1InputHandler.DownPressed && _p2InputHandler.UpPressed)
+        if (_p1InputListener.DownPressed && _p2InputListener.UpPressed)
         {
             if (audioSource.isPlaying == false)
             {
@@ -282,7 +282,7 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
 
 
         //Check Blue
-        if (_p1InputHandler.RightPressed && _p2InputHandler.DownPressed)
+        if (_p1InputListener.RightPressed && _p2InputListener.DownPressed)
         {
             if (audioSource.isPlaying == false)
             {
@@ -319,22 +319,22 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     public void MovePlayerIcon()
     {
         //Pl Icon
-        if (_p1InputHandler.UpPressed)
+        if (_p1InputListener.UpPressed)
         {
             p1Icon.enabled = true;
             p1Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[0]);
         }
-        else if (_p1InputHandler.LeftPressed)
+        else if (_p1InputListener.LeftPressed)
         {
             p1Icon.enabled = true;
             p1Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[1]);
         }
-        else if (_p1InputHandler.DownPressed)
+        else if (_p1InputListener.DownPressed)
         {
             p1Icon.enabled = true;
             p1Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[2]);
         }
-        else if (_p1InputHandler.RightPressed)
+        else if (_p1InputListener.RightPressed)
         {
             p1Icon.enabled = true;
             p1Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[3]);
@@ -345,22 +345,22 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
         }
 
         //P2 Icon
-        if (_p2InputHandler.UpPressed)
+        if (_p2InputListener.UpPressed)
         {
             p2Icon.enabled = true;
             p2Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[0]);
         }
-        else if (_p2InputHandler.DownPressed)
+        else if (_p2InputListener.DownPressed)
         {
             p2Icon.enabled = true;
             p2Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[1]);
         }
-        else if (_p2InputHandler.LeftPressed)
+        else if (_p2InputListener.LeftPressed)
         {
             p2Icon.enabled = true;
             p2Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[2]);
         }
-        else if (_p2InputHandler.RightPressed)
+        else if (_p2InputListener.RightPressed)
         {
             p2Icon.enabled = true;
             p2Icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Icon.GetComponent<RectTransform>().anchoredPosition.x, yValueList[3]);

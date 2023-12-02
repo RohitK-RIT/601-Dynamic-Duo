@@ -355,6 +355,7 @@ MonoBehaviour:
   doorToDestroy: {fileID: 0}
   wireList: []
   wireMat: {fileID: 0}
+  lightList: []
 --- !u!65 &42439829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2439,6 +2440,7 @@ MonoBehaviour:
   wireList:
   - {fileID: 1204467859}
   wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
+  lightList: []
 --- !u!65 &395919697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3210,6 +3212,7 @@ MonoBehaviour:
   - {fileID: 228114508}
   - {fileID: 505818459}
   wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
+  lightList: []
 --- !u!65 &636000304
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6146,6 +6149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca31563331a448c9137f861529b3de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  p1ActionAsset: {fileID: -944628639613478452, guid: 4cf9e071c0c153f4a9e4cb633d714aa8,
+    type: 3}
+  p2ActionAsset: {fileID: -944628639613478452, guid: 53a2dd91e45b9b74faad97adf9639dcb,
+    type: 3}
 --- !u!1001 &1290739856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8775,6 +8782,7 @@ MonoBehaviour:
   wireList:
   - {fileID: 1204733257}
   wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
+  lightList: []
 --- !u!65 &1868069620
 BoxCollider:
   m_ObjectHideFlags: 0

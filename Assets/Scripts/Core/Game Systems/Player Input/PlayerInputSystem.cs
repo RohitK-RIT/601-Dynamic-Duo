@@ -1,39 +1,44 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core.Managers;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 namespace Core.Game_Systems.Player_Input
 {
     public class PlayerInputSystem : MonoBehaviour
     {
-        private List<PlayerInputHandler> _p1InputHandlers, _p2InputHandlers;
+        [SerializeField] private InputActionAsset p1ActionAsset, p2ActionAsset;
 
-        private PlayerInputHandler _activeP1Handler, _activeP2Handler;
+        private PlayerInput _p1Input, _p2Input;
+        private List<PlayerInputListener> _p1InputListeners, _p2InputListeners;
+        private PlayerInputListener _activeP1Listener, _activeP2Listener;
 
-        private PlayerInputHandler ActiveP1Handler
+        private PlayerInputListener ActiveP1Listener
         {
-            get => _activeP1Handler;
+            get => _activeP1Listener;
             set
             {
-                if (_activeP1Handler == value) return;
+                if (_activeP1Listener == value) return;
 
-                _activeP1Handler?.Disable();
-                _activeP1Handler = value;
-                _activeP1Handler.Enable();
+                _activeP1Listener?.Disable();
+                _activeP1Listener = value;
+                _activeP1Listener.TryEnable();
             }
         }
 
-        private PlayerInputHandler ActiveP2Handler
+        private PlayerInputListener ActiveP2Listener
         {
-            get => _activeP2Handler;
+            get => _activeP2Listener;
             set
             {
-                if (_activeP2Handler == value) return;
+                if (_activeP2Listener == value) return;
 
-                _activeP2Handler?.Disable();
-                _activeP2Handler = value;
-                _activeP2Handler?.Enable();
+                _activeP2Listener?.Disable();
+                _activeP2Listener = value;
+                _activeP2Listener?.TryEnable();
             }
         }
 
@@ -41,9 +46,91 @@ namespace Core.Game_Systems.Player_Input
 
         private void Awake()
         {
+            if (Instance && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             Instance = this;
-            _p1InputHandlers = new List<PlayerInputHandler>();
-            _p2InputHandlers = new List<PlayerInputHandler>();
+
+            Init();
+        }
+
+        private void Init()
+        {
+            _p1Input = CreatePlayerInput(PlayerID.Player1);
+            _p2Input = CreatePlayerInput(PlayerID.Player2);
+
+            _p1Input.onDeviceLost += input =>
+            {
+                // input.user.UnpairDevices();
+                input.SwitchCurrentControlScheme(nameof(Keyboard));
+                var keyboard = InputSystem.devices.FirstOrDefault(device => device is Keyboard);
+                InputUser.PerformPairingWithDevice(keyboard, input.user);
+            };
+            _p2Input.onDeviceLost += input =>
+            {
+                input.user.UnpairDevices();
+                input.SwitchCurrentControlScheme(nameof(Keyboard));
+                var keyboards = InputSystem.devices.Where(device => device is Keyboard).ToArray();
+                InputUser.PerformPairingWithDevice(keyboards[keyboards.Length > 1 ? 1 : 0], input.user);
+            };
+
+            var gamepads = InputSystem.devices.Where(device => device is Gamepad).ToArray();
+            var keyboards = InputSystem.devices.Where(device => device is Keyboard).ToArray();
+            
+            if (gamepads.Any())
+            {
+                _p1Input.SwitchCurrentControlScheme(nameof(Gamepad));
+                InputUser.PerformPairingWithDevice(gamepads[0], _p1Input.user);
+
+                if (gamepads.Length > 1)
+                {
+                    _p2Input.SwitchCurrentControlScheme(nameof(Gamepad));
+                    InputUser.PerformPairingWithDevice(gamepads[1], _p2Input.user);
+                }
+                else
+                {
+                    _p2Input.SwitchCurrentControlScheme(nameof(Keyboard));
+                    InputUser.PerformPairingWithDevice(keyboards[0], _p2Input.user);
+                }
+            }
+            else
+            {
+                _p1Input.SwitchCurrentControlScheme(nameof(Keyboard));
+                InputUser.PerformPairingWithDevice(keyboards[0], _p1Input.user);
+
+                _p2Input.SwitchCurrentControlScheme(nameof(Keyboard));
+                InputUser.PerformPairingWithDevice(keyboards[keyboards.Length > 1 ? 1 : 0], _p2Input.user);
+            }
+
+            _p1InputListeners = new List<PlayerInputListener>();
+            _p2InputListeners = new List<PlayerInputListener>();
+        }
+
+        private PlayerInput CreatePlayerInput(PlayerID playerID)
+        {
+            var go = new GameObject($"{playerID.ToString()} Input");
+            go.transform.SetParent(transform);
+
+            var input = go.AddComponent<PlayerInput>();
+            input.actions = playerID switch
+            {
+                PlayerID.Player1 => p1ActionAsset,
+                PlayerID.Player2 => p2ActionAsset,
+                _ => null
+            };
+
+            input.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
+
+            return input;
+        }
+
+        [ContextMenu("Dummy")]
+        public void Dummy()
+        {
+            Debug.Log($"{nameof(Gamepad)}");
         }
 
         private void OnEnable()
@@ -51,6 +138,8 @@ namespace Core.Game_Systems.Player_Input
             EventManager.AddListener<PlayerInputHandlerRegistrationEvent>(RegisterPlayerInputHandler);
             EventManager.AddListener<PlayerInputHandlerUnregistrationEvent>(UnregisterPlayerInputHandler);
             EventManager.AddListener<PlayerInputAccessRequest>(RequestInputAccess);
+
+            InputSystem.onDeviceChange += OnDeviceChanged;
         }
 
         private void OnDisable()
@@ -60,99 +149,163 @@ namespace Core.Game_Systems.Player_Input
             EventManager.RemoveListener<PlayerInputAccessRequest>(RequestInputAccess);
         }
 
-        private void RequestInputAccess(PlayerInputAccessRequest request)
+        #region Device Handling
+
+        private void OnDeviceChanged(InputDevice device, InputDeviceChange change)
         {
-            switch (request.PlayerInputHandler.PlayerID)
+            if (change != InputDeviceChange.Added) return;
+
+            PlayerInput input = null;
+            string controlScheme = null;
+
+            switch (device)
             {
-                case PlayerID.Player1:
-                    if (_p1InputHandlers.Contains(request.PlayerInputHandler))
-                    {
-                        ActiveP1Handler = request.PlayerInputHandler;
-                        request.OnCompleted?.Invoke(ActiveP1Handler == request.PlayerInputHandler);
-                    }
+                case Gamepad:
+                    controlScheme = nameof(Gamepad);
+                    if (!_p1Input.devices.Any(inputDevice => inputDevice is Gamepad) || _p1Input.devices.Contains(device))
+                        input = _p1Input;
+                    else if (!_p2Input.devices.Any(inputDevice => inputDevice is Gamepad) || _p1Input.devices.Contains(device))
+                        input = _p2Input;
 
                     break;
-                case PlayerID.Player2:
-                    if (_p2InputHandlers.Contains(request.PlayerInputHandler))
-                    {
-                        ActiveP2Handler = request.PlayerInputHandler;
-                        request.OnCompleted?.Invoke(ActiveP2Handler == request.PlayerInputHandler);
-                    }
+                case Keyboard:
+                    controlScheme = nameof(Keyboard);
+                    if (!_p1Input.devices.Any(inputDevice => inputDevice is Gamepad) && InputSystem.devices.Count(inputDevice => inputDevice is Keyboard) > 1)
+                        input = _p2Input;
 
                     break;
-                default: return;
             }
+
+            if (!input) return;
+
+            input.SwitchCurrentControlScheme(controlScheme);
+            InputUser.PerformPairingWithDevice(device, input.user);
         }
+
+        #endregion
+
+        #region Listener Handling
 
         private void RegisterPlayerInputHandler(PlayerInputHandlerRegistrationEvent @event)
         {
-            switch (@event.PlayerInputHandler.PlayerID)
+            @event.ActionMapCallback?.Invoke(GetActionMap(@event.PlayerID, @event.ActionMap));
+            if (!@event.Listener.IsValid) return;
+
+            switch (@event.PlayerID)
             {
                 case PlayerID.Player1:
-                    _p1InputHandlers.Add(@event.PlayerInputHandler);
-                    return;
+                    _p1InputListeners.Add(@event.Listener);
+                    break;
                 case PlayerID.Player2:
-                    _p2InputHandlers.Add(@event.PlayerInputHandler);
-                    return;
-                default: return;
+                    _p2InputListeners.Add(@event.Listener);
+                    break;
             }
+        }
+
+        private InputActionMap GetActionMap(PlayerID playerID, ActionMap type)
+        {
+            var actionAsset = playerID switch
+            {
+                PlayerID.Player1 => p1ActionAsset,
+                PlayerID.Player2 => p2ActionAsset,
+                _ => null
+            };
+
+            return !actionAsset ? null : actionAsset.actionMaps.FirstOrDefault(map => map.name == type.ToString());
         }
 
         private void UnregisterPlayerInputHandler(PlayerInputHandlerUnregistrationEvent @event)
         {
-            switch (@event.PlayerInputHandler.PlayerID)
+            if(_p1InputListeners.Contains(@event.Listener))
+                _p1InputListeners.Remove(@event.Listener);
+            else if (_p2InputListeners.Contains(@event.Listener))
+                _p2InputListeners.Remove(@event.Listener);
+        }
+
+        private void RequestInputAccess(PlayerInputAccessRequest request)
+        {
+            var listener = request.Listener;
+            if (!listener.IsValid) return;
+
+            var isActive = false;
+            var mapName = listener.ActionMap.ToString();
+            switch (listener.PlayerID)
             {
                 case PlayerID.Player1:
-                    _p1InputHandlers.Remove(@event.PlayerInputHandler);
+                    _p1Input.SwitchCurrentActionMap(mapName);
+                    if (_p1Input.currentActionMap.name == mapName)
+                    {
+                        ActiveP1Listener = listener;
+                        isActive = true;
+                    }
+
                     break;
                 case PlayerID.Player2:
-                    _p2InputHandlers.Remove(@event.PlayerInputHandler);
+                    _p2Input.SwitchCurrentActionMap(mapName);
+                    if (_p2Input.currentActionMap.name == mapName)
+                    {
+                        ActiveP2Listener = listener;
+                        isActive = true;
+                    }
+
                     break;
-                default: return;
+                default:
+                    Debug.LogError("Player input access request failed (click to find which object)", listener.GameObject);
+                    break;
             }
+
+            request.OnCompleted?.Invoke(isActive);
         }
-        
+
+        #endregion
+
         public void EnableAllInput()
         {
-            ActiveP1Handler?.Enable();
-            ActiveP2Handler?.Enable();
+            ActiveP1Listener?.TryEnable();
+            ActiveP2Listener?.TryEnable();
         }
 
         public void DisableAllInput()
         {
-            ActiveP1Handler?.Disable();
-            ActiveP2Handler?.Disable();
+            ActiveP1Listener?.Disable();
+            ActiveP2Listener?.Disable();
         }
     }
 
     public class PlayerInputHandlerRegistrationEvent : GameEvent
     {
-        public PlayerInputHandler PlayerInputHandler { get; }
+        public PlayerInputListener Listener { get; }
+        public PlayerID PlayerID { get; }
+        public ActionMap ActionMap { get; }
+        public Action<InputActionMap> ActionMapCallback { get; }
 
-        public PlayerInputHandlerRegistrationEvent(PlayerInputHandler playerInputHandler)
+        public PlayerInputHandlerRegistrationEvent(PlayerInputListener listener, PlayerID playerID, ActionMap actionMap, Action<InputActionMap> actionMapCallback)
         {
-            PlayerInputHandler = playerInputHandler;
+            Listener = listener;
+            PlayerID = playerID;
+            ActionMap = actionMap;
+            ActionMapCallback = actionMapCallback;
         }
     }
 
     public class PlayerInputHandlerUnregistrationEvent : GameEvent
     {
-        public PlayerInputHandler PlayerInputHandler { get; }
+        public PlayerInputListener Listener { get; }
 
-        public PlayerInputHandlerUnregistrationEvent(PlayerInputHandler playerInputHandler)
+        public PlayerInputHandlerUnregistrationEvent(PlayerInputListener listener)
         {
-            PlayerInputHandler = playerInputHandler;
+            Listener = listener;
         }
     }
 
     public class PlayerInputAccessRequest : GameEvent
     {
-        public PlayerInputHandler PlayerInputHandler { get; }
-        internal Action<bool> OnCompleted;
+        public PlayerInputListener Listener { get; }
+        internal readonly Action<bool> OnCompleted;
 
-        public PlayerInputAccessRequest(PlayerInputHandler playerInputHandler, Action<bool> callback)
+        public PlayerInputAccessRequest(PlayerInputListener listener, Action<bool> callback)
         {
-            PlayerInputHandler = playerInputHandler;
+            Listener = listener;
             OnCompleted = callback;
         }
     }

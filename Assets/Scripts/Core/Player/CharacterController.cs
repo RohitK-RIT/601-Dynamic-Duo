@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Game_Systems;
+using Core.Game_Systems.Player_Input;
 using Interaction;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -14,9 +14,10 @@ namespace Core.Player
         public PlayerID PlayerID => playerID;
 
         [SerializeField] private PlayerID playerID;
+        [FormerlySerializedAs("inputActionMap")] [SerializeField] private ActionMap actionMap;
         [SerializeField] private GameObject characterHUD;
 
-        private CharacterInputHandler _inputHandler;
+        private CharacterInputListener _inputListener;
         private CharacterBody _characterBody;
         private List<InteractiveObject> _interactableObjects;
 
@@ -66,11 +67,11 @@ namespace Core.Player
 
         private void EnableInput()
         {
-            _inputHandler ??= new CharacterInputHandler(PlayerID, this);
-            _inputHandler.Enable();
+            _inputListener ??= new CharacterInputListener(PlayerID, actionMap, this);
+            _inputListener.TryEnable();
 
-            _inputHandler.OnPlayerMoved += PlayerMove;
-            _inputHandler.OnPlayerInteract += PlayerInteract;
+            _inputListener.OnPlayerMoved += PlayerMove;
+            _inputListener.OnPlayerInteract += PlayerInteract;
         }
 
         private void OnDisable()
@@ -80,10 +81,10 @@ namespace Core.Player
 
         private void DisableInput()
         {
-            _inputHandler.Disable();
+            _inputListener.Disable();
 
-            _inputHandler.OnPlayerMoved -= PlayerMove;
-            _inputHandler.OnPlayerInteract -= PlayerInteract;
+            _inputListener.OnPlayerMoved -= PlayerMove;
+            _inputListener.OnPlayerInteract -= PlayerInteract;
         }
 
         private void PlayerMove(Vector2 movementDirection)
@@ -91,7 +92,6 @@ namespace Core.Player
             _characterBody.Move(movementDirection);
             if (_animator)
                 _animator.SetFloat(XDir, movementDirection.x);
-
         }
 
         private void PlayerInteract()
@@ -124,7 +124,7 @@ namespace Core.Player
             _interactableObjects.Insert(0, iObject);
 
             //Show Popup
-            if(_interactableObjects.Count > 0)
+            if (_interactableObjects.Count > 0)
             {
                 popupCanvas.enabled = true;
             }

@@ -1,5 +1,5 @@
 {
-    "name": "Player 2 Input",
+    "name": "P1 Input",
     "maps": [
         {
             "name": "Level",
@@ -35,7 +35,7 @@
             ],
             "bindings": [
                 {
-                    "name": "Arrow Keys",
+                    "name": "WASD",
                     "id": "cff23ed7-4b86-4400-a35a-83e1e0d9975b",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
@@ -48,7 +48,7 @@
                 {
                     "name": "up",
                     "id": "bb00bfaf-14c5-4595-911d-a77faa3e9ff8",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -59,7 +59,7 @@
                 {
                     "name": "down",
                     "id": "d557f151-9d96-401b-8476-c4f1e1dac7c0",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -70,7 +70,7 @@
                 {
                     "name": "left",
                     "id": "98839818-9faa-4963-8ae7-3221dd4e4086",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -81,7 +81,7 @@
                 {
                     "name": "right",
                     "id": "9a8d14a6-5d4f-4f50-a20b-83b6bff58c9a",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -103,7 +103,7 @@
                 {
                     "name": "",
                     "id": "5dfa7ce4-e882-4c5f-aab7-c2e52dac8c57",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -125,7 +125,7 @@
                 {
                     "name": "",
                     "id": "473e5c8b-889f-410d-8f53-003d4ac54c95",
-                    "path": "<Keyboard>/period",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -184,7 +184,7 @@
                 {
                     "name": "up",
                     "id": "7c40d51d-04f1-4e3c-a889-e205ad07cfed",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -195,7 +195,7 @@
                 {
                     "name": "down",
                     "id": "e78b0c7a-57b2-40d0-a00f-7659d17d4d09",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -206,7 +206,7 @@
                 {
                     "name": "left",
                     "id": "e41c9a26-c8c7-4089-8d9d-51fd6ac07fe9",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -217,7 +217,7 @@
                 {
                     "name": "right",
                     "id": "29e6756d-6b23-4264-98b4-621a2c026211",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -226,20 +226,64 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "c22540de-cd62-4913-8933-1e116cb1b807",
-                    "path": "<Gamepad>/leftStick",
+                    "name": "D-Pad",
+                    "id": "d1a06406-c399-4a31-9b3b-5ef2ad388fad",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "6fe92059-3c76-4112-87e7-f9921ba834d4",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Navigation",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "30ae4773-62a8-4512-97ba-b5ad0a031b63",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "5c7264d9-469f-4630-88d8-b364cb3b7112",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "322d2dbb-84f4-4cce-96d1-0f578ad032bb",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
                     "id": "02a9a21a-fdd1-4246-9934-30b53f54fa50",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -249,11 +293,11 @@
                 },
                 {
                     "name": "",
-                    "id": "876817de-1966-418a-a294-307794349369",
+                    "id": "be0ea74a-5d14-4e4d-80ce-4080174aa4ed",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -261,40 +305,40 @@
             ]
         },
         {
-            "name": "Wire Switch",
-            "id": "caf06895-633a-40ea-95fe-20ed208b46c9",
+            "name": "WireSwitch",
+            "id": "e305d892-9c2f-4fb1-8f68-803366e28e79",
             "actions": [
                 {
-                    "name": "Up Wire Button",
+                    "name": "Up",
                     "type": "Button",
-                    "id": "0b3594f0-0a46-430c-aaa9-ce37c33abf13",
+                    "id": "90bf33de-26cf-47cb-80b4-12e1759718a3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Down Wire Button",
+                    "name": "Down",
                     "type": "Button",
-                    "id": "4d09a695-ac49-4f3f-a7c3-4e1df96640e5",
+                    "id": "605786d3-9f38-4ad9-a6fe-95cfe936d801",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Left Wire Button",
+                    "name": "Left",
                     "type": "Button",
-                    "id": "bfa8be7c-a788-4854-b5a2-b5b215664c3c",
+                    "id": "6bfac708-ad66-4df7-b877-b45363dd5294",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right Wire Button",
+                    "name": "Right",
                     "type": "Button",
-                    "id": "8fcac925-44b8-4de9-b557-4727c981cb0a",
+                    "id": "44929ddd-056c-4a2f-9a7c-45f99f875ec5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -303,7 +347,7 @@
                 {
                     "name": "Interact",
                     "type": "Button",
-                    "id": "75fdbdc2-ac16-464c-953f-933ffe04bfb5",
+                    "id": "1a93216e-9f28-4ce1-8702-16bfbebacc15",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -313,96 +357,96 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "3a650125-f9f8-4f41-8a61-eadd5f4d25c7",
-                    "path": "<Keyboard>/upArrow",
+                    "id": "250177ba-2154-4ab8-8869-c43c70b71e85",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Up Wire Button",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a4f4cbbe-dd6c-4400-b9e7-956b7f2d439f",
+                    "id": "699027a9-08bf-4659-af42-9fa34d84d032",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Up Wire Button",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "2b24759a-95d5-4e5f-8597-7c486763c824",
-                    "path": "<Keyboard>/downArrow",
+                    "id": "4e64a9f2-49ac-429c-a63f-9cfcddc59b33",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Down Wire Button",
+                    "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d2d710a3-005b-42d7-b2a4-6a38bda32b5b",
-                    "path": "<Keyboard>/leftArrow",
+                    "id": "ba7041f5-a8fa-4bc4-8833-1970c54061d5",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Left Wire Button",
+                    "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "50ea8c15-0148-4eff-b2a5-c6c4feebb67b",
-                    "path": "<Keyboard>/rightArrow",
+                    "id": "c5bf6939-eb6b-444e-8654-c18c2d6793dc",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Right Wire Button",
+                    "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "1b4c84d0-c0d2-4e48-ae8c-bbf4ca3cab94",
+                    "id": "fcbac672-cae2-4296-b5e7-95aba0e8a4ca",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Down Wire Button",
+                    "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "8f103623-9144-4308-b9a1-1f5d13ced1a5",
+                    "id": "461e2b06-8959-4568-9953-c1b66ace7963",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Left Wire Button",
+                    "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "ceafb2c7-e06e-49c2-9eb5-a9f8d2eb9341",
+                    "id": "d26e4afd-b1a4-4fae-b9bb-1419f922573a",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Right Wire Button",
+                    "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "6d5d47b1-0067-44e3-8cdc-013c637277ca",
-                    "path": "<Keyboard>/ctrl",
+                    "id": "08439502-8d5e-40d2-8b08-8f1416e09717",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -412,7 +456,7 @@
                 },
                 {
                     "name": "",
-                    "id": "ad85eb69-9f3e-4f40-8d8f-3d018439ab10",
+                    "id": "647b34cd-684a-414b-b465-2c615b657f1d",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",

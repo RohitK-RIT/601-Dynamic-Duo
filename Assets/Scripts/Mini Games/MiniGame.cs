@@ -1,10 +1,12 @@
 using System;
+using Core.Game_Systems.Player_Input;
 using UnityEngine;
 
 namespace Mini_Games
 {
     public abstract class MiniGame : MonoBehaviour
     {
+        [SerializeField] protected ActionMap actionMap;
         public event Action<bool> OnClosed;
         protected bool IsCompleted;
 

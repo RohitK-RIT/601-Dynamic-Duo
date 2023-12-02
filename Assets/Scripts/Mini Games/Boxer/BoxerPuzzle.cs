@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Game_Systems;
+using Core.Game_Systems.Player_Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,7 +14,7 @@ namespace Mini_Games.Boxer
         [SerializeField] private Transform player1Pool, player2Pool;
         [SerializeField] private Color player1Color = Color.cyan, player1SelectedColor = Color.cyan, player2Color = Color.magenta, player2SelectedColor = Color.magenta;
 
-        private BoxerInputHandler _p1InputHandler, _p2InputHandler;
+        private BoxerInputListener _p1InputListener, _p2InputListener;
         private readonly Color[] _randomColors = { Color.red, Color.blue, Color.green, Color.yellow };
 
         private Panel[,] _answerGrid, _gameGrid;
@@ -103,29 +104,29 @@ namespace Mini_Games.Boxer
 
         private void EnableInput()
         {
-            _p1InputHandler ??= new BoxerInputHandler(PlayerID.Player1, this);
-            _p2InputHandler ??= new BoxerInputHandler(PlayerID.Player2, this);
+            _p1InputListener ??= new BoxerInputListener(PlayerID.Player1,actionMap, this);
+            _p2InputListener ??= new BoxerInputListener(PlayerID.Player2, actionMap, this);
 
-            _p1InputHandler.Enable();
-            _p2InputHandler.Enable();
+            _p1InputListener.TryEnable();
+            _p2InputListener.TryEnable();
 
-            _p1InputHandler.OnPlayerNavigate += ProcessP1NavInput;
-            _p2InputHandler.OnPlayerNavigate += ProcessP2NavInput;
+            _p1InputListener.OnPlayerNavigate += ProcessP1NavInput;
+            _p2InputListener.OnPlayerNavigate += ProcessP2NavInput;
 
-            _p1InputHandler.OnPlayerInteract += ProcessP1InteractionInput;
-            _p2InputHandler.OnPlayerInteract += ProcessP2InteractionInput;
+            _p1InputListener.OnPlayerInteract += ProcessP1InteractionInput;
+            _p2InputListener.OnPlayerInteract += ProcessP2InteractionInput;
         }
 
         private void DisableInput()
         {
-            _p1InputHandler.Disable();
-            _p2InputHandler.Disable();
+            _p1InputListener.Disable();
+            _p2InputListener.Disable();
 
-            _p1InputHandler.OnPlayerNavigate -= ProcessP1NavInput;
-            _p2InputHandler.OnPlayerNavigate -= ProcessP2NavInput;
+            _p1InputListener.OnPlayerNavigate -= ProcessP1NavInput;
+            _p2InputListener.OnPlayerNavigate -= ProcessP2NavInput;
 
-            _p1InputHandler.OnPlayerInteract -= ProcessP1InteractionInput;
-            _p2InputHandler.OnPlayerInteract -= ProcessP2InteractionInput;
+            _p1InputListener.OnPlayerInteract -= ProcessP1InteractionInput;
+            _p2InputListener.OnPlayerInteract -= ProcessP2InteractionInput;
         }
 
         private Panel[,] GetGrid(Transform panelTransform)

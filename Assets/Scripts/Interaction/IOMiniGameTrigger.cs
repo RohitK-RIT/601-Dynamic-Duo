@@ -9,7 +9,9 @@ namespace Interaction
     public class IOMiniGameTrigger : IOTaskTrigger
     {
         [SerializeField] private MiniGame miniGamePrefabToInstantiate;
-        [FormerlySerializedAs("gameObjectToDestroy")] [SerializeField] private GameObject doorToDestroy;
+
+        [FormerlySerializedAs("gameObjectToDestroy")] [SerializeField]
+        private GameObject doorToDestroy;
 
 
         private MiniGame _miniGameInstance;
@@ -50,7 +52,7 @@ namespace Interaction
                 }
             }
 
-            if(lightList.Count > 0)
+            if (lightList.Count > 0)
             {
                 foreach (GameObject go in wireList)
                 {
@@ -61,7 +63,7 @@ namespace Interaction
 
             if (doorToDestroy)
                 Destroy(doorToDestroy);
-            
+
             base.OnInteractionEnd(successful);
         }
     }

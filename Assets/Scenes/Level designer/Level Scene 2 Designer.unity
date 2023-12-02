@@ -353,8 +353,10 @@ MonoBehaviour:
   miniGamePrefabToInstantiate: {fileID: 4170055092910298910, guid: 1eb48d03905aace4e97271b245d346cd,
     type: 3}
   doorToDestroy: {fileID: 0}
-  wireList: []
-  wireMat: {fileID: 0}
+  wireList:
+  - {fileID: 248665471}
+  - {fileID: 2138477115}
+  wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
   lightList: []
 --- !u!65 &42439829
 BoxCollider:
@@ -1498,6 +1500,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 248484558}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &248665471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a624994ddd3c34a4aa491a3804863dd3,
+    type: 3}
+  m_PrefabInstance: {fileID: 292331741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &259206194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2440,7 +2448,7 @@ MonoBehaviour:
   controlDoor: {fileID: 1925283489}
   wireList:
   - {fileID: 1204467859}
-  wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
+  wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
   lightList:
   - {fileID: 1393471930}
 --- !u!65 &395919697
@@ -3231,7 +3239,7 @@ MonoBehaviour:
   wireList:
   - {fileID: 228114508}
   - {fileID: 505818459}
-  wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
+  wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
   lightList:
   - {fileID: 1121869768}
   - {fileID: 387514341}
@@ -5736,7 +5744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1184830152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8372,6 +8380,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1695221404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1697984977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1697984979}
+  - component: {fileID: 1697984978}
+  m_Layer: 0
+  m_Name: Global Volume Glowing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1697984978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697984977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 46bfdf3733523d240bfb9cf4a4a0fe3d, type: 2}
+--- !u!4 &1697984979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697984977}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.7, y: -75, z: 73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1707241321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8804,7 +8861,7 @@ MonoBehaviour:
   controlDoor: {fileID: 404671658}
   wireList:
   - {fileID: 1204733257}
-  wireMat: {fileID: 2100000, guid: 837accfa388d1824ab1146e4f3aff329, type: 2}
+  wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
   lightList:
   - {fileID: 2136436378}
 --- !u!65 &1868069620
@@ -10599,6 +10656,12 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &2138477115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fc6cd36d03e71744dbaa924409e450cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1695221404}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4332322712097910425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10859,3 +10922,4 @@ SceneRoots:
   - {fileID: 42439832}
   - {fileID: 2029626}
   - {fileID: 469035437}
+  - {fileID: 1697984979}

@@ -54,9 +54,10 @@ namespace Interaction
 
             if (lightList.Count > 0)
             {
-                foreach (GameObject go in wireList)
+                foreach (GameObject go in lightList)
                 {
                     Light light = go.GetComponent<Light>();
+                    Debug.Log("turn on the light");
                     light.enabled = true;
                 }
             }

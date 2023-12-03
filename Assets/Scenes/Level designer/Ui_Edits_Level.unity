@@ -3515,6 +3515,45 @@ Transform:
   - {fileID: 204696229}
   m_Father: {fileID: 1311224999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &520267745
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _WidthHeightRadius: {r: 729.9795, g: 322.267, b: 80, a: 0}
+  m_BuildTextureStacks: []
 --- !u!4 &529361040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8ebb5df09a8ad2c43bffae7565e0970e,
@@ -5136,45 +5175,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ebb5df09a8ad2c43bffae7565e0970e, type: 3}
---- !u!21 &952415709
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _WidthHeightRadius: {r: 729.9795, g: 322.267, b: 80, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1 &962420849
 GameObject:
   m_ObjectHideFlags: 0
@@ -9877,7 +9877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 952415709}
+  m_Material: {fileID: 520267745}
   m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -12897,36 +12897,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3685243864302108051, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
-      propertyPath: m_fontSize
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 3685243864302108051, guid: 35775dc8896e2234eaaf86b32cc3c80b,
-        type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: a7409908e00a61149a748efa0119d6b2,
         type: 2}
     - target: {fileID: 3685243864302108051, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
-      propertyPath: m_fontStyle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3685243864302108051, guid: 35775dc8896e2234eaaf86b32cc3c80b,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 3685243864302108051, guid: 35775dc8896e2234eaaf86b32cc3c80b,
-        type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -2614204795791917999, guid: a7409908e00a61149a748efa0119d6b2,
         type: 2}
-    - target: {fileID: 3685243864302108051, guid: 35775dc8896e2234eaaf86b32cc3c80b,
-        type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3685243864302108051, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
       propertyPath: m_hasFontAssetChanged

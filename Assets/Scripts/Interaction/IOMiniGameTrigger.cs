@@ -57,7 +57,6 @@ namespace Interaction
                 foreach (GameObject go in lightList)
                 {
                     Light light = go.GetComponent<Light>();
-                    Debug.Log("turn on the light");
                     light.enabled = true;
                 }
             }

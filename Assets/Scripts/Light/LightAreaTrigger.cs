@@ -23,7 +23,6 @@ public class LightAreaTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collision");
         light.enabled = true;
     }
 

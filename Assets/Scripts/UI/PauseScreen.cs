@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Core.Game_Systems.Player_Input;
+using CharacterController = Core.Player.CharacterController;
 
 public class PauseScreen : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class PauseScreen : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseScreen.SetActive(true);
+            PlayerInputSystem.Instance.DisableAllInput();
             //Debug.Log("Esc key was pressed!");
         }
     }
@@ -26,6 +29,7 @@ public class PauseScreen : MonoBehaviour
     public void ResumeGame()
     {
         pauseScreen.SetActive(false);
+        PlayerInputSystem.Instance.EnableAllInput();
     }
 
 

@@ -2,6 +2,7 @@ using Mini_Games;
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
+using System.Linq;
 using CharacterController = Core.Player.CharacterController;
 
 namespace Interaction
@@ -9,10 +10,12 @@ namespace Interaction
     public class IOMiniGameTrigger : IOTaskTrigger
     {
         [SerializeField] private MiniGame miniGamePrefabToInstantiate;
+        [SerializeField] private List<IOTaskTrigger> conditionalTasks;
 
         [FormerlySerializedAs("gameObjectToDestroy")] [SerializeField]
         private GameObject doorToDestroy;
 
+        public override bool Interactable => !IsCompleted && (!conditionalTasks.Any() || conditionalTasks.All(trigger => trigger.IsCompleted));
 
         private MiniGame _miniGameInstance;
 

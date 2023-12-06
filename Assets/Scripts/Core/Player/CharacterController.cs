@@ -121,40 +121,24 @@ namespace Core.Player
 
         public void AddInteractableObjects(InteractiveObject iObject)
         {
+            if(!iObject.Interactable) return;
+            
             _interactableObjects.Insert(0, iObject);
-
             //Show Popup
-            if (_interactableObjects.Count > 0)
-            {
-                popupCanvas.enabled = true;
-            }
-            else
-            {
-                popupCanvas.enabled = false;
-            }
+            popupCanvas.enabled = _interactableObjects.Count > 0;
         }
 
         public void RemoveInteractableObjects(InteractiveObject iObject)
         {
             _interactableObjects.Remove(iObject);
-
             //Hide popup
-            if (_interactableObjects.Count > 0)
-            {
-                popupCanvas.enabled = true;
-            }
-            else
-            {
-                popupCanvas.enabled = false;
-            }
+            popupCanvas.enabled = _interactableObjects.Count > 0;
         }
 
         private void FixedUpdate()
         {
             if (_characterBody.CharacterRigidBody.velocity.x == 0 && _animator)
-            {
                 _animator.SetFloat(XDir, 0);
-            }
         }
     }
 }

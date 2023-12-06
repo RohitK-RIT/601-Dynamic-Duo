@@ -510,6 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 1
+  actionMap: 0
   characterHUD: {fileID: 7984005186902750700}
 --- !u!95 &6964167129627790827
 Animator:
@@ -521,7 +522,7 @@ Animator:
   m_GameObject: {fileID: 5635313633509212604}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1f92c521d97ff7847a347d9662e82188, type: 2}
+  m_Controller: {fileID: 22100000, guid: 63c4c788dccbfd54ea1376d7c885b330, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

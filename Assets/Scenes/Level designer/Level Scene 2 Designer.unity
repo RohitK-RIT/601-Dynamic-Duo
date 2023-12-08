@@ -1804,45 +1804,6 @@ Transform:
   - {fileID: 1897439076}
   m_Father: {fileID: 1311224999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &263369035
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _WidthHeightRadius: {r: 729.9795, g: 322.267, b: 80, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1001 &266642498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7200,6 +7161,45 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1000446599}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1444763420
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _WidthHeightRadius: {r: 729.9795, g: 322.267, b: 80, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1 &1459651644
 GameObject:
   m_ObjectHideFlags: 0
@@ -8136,6 +8136,11 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7984005186902750700, guid: 9a36dfb1e3419b4478d540ba3734f9b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8396,7 +8401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 4cf9e071c0c153f4a9e4cb633d714aa8,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -8407,10 +8412,58 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4492304-fa52-4ba2-ae1c-30505855176f
+    m_ActionName: Level/Movement[/XInputControllerWindows/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 73b7cd8f-8f4a-4126-a563-0cbbdb945dd8
+    m_ActionName: Level/Begin Interaction[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9a6b038e-fa9f-4f0d-ac4c-cb0700667606
+    m_ActionName: Level/End Interaction[/XInputControllerWindows/buttonEast,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f39b985e-3b41-45a2-afde-12e8a3935f4c
+    m_ActionName: Level/PauseMenuOpenClose[/Keyboard/escape,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a0cf655e-3c2e-40c2-a3c4-23ab229159b9
+    m_ActionName: Boxer/Navigation[/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37cee60c-c3b5-492c-91cf-684683866bc0
+    m_ActionName: Boxer/Interact[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 90bf33de-26cf-47cb-80b4-12e1759718a3
+    m_ActionName: WireSwitch/Up[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 605786d3-9f38-4ad9-a6fe-95cfe936d801
+    m_ActionName: WireSwitch/Down[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6bfac708-ad66-4df7-b877-b45363dd5294
+    m_ActionName: WireSwitch/Left[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 44929ddd-056c-4a2f-9a7c-45f99f875ec5
+    m_ActionName: WireSwitch/Right[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a93216e-9f28-4ce1-8702-16bfbebacc15
+    m_ActionName: WireSwitch/Interact[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4af5fad-cb11-4b69-9614-3c327d03360a
+    m_ActionName: Menu/PauseMenuOpenClose[/Keyboard/escape,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 5b39d756-fa55-4734-a446-d82606aaa8b1
+  m_DefaultActionMap: Level
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1639526996
@@ -8425,6 +8478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3503438ce2aabf545be257bfc0d7332b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 2075812901}
 --- !u!4 &1639526997
 Transform:
   m_ObjectHideFlags: 0
@@ -11277,6 +11331,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2075812901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5359672612548140315, guid: 846a927ab121dd74e8d825014fc6e7c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1707241321}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2119603589
 GameObject:
   m_ObjectHideFlags: 0
@@ -11658,27 +11718,27 @@ PrefabInstance:
     - target: {fileID: 3972798056555766441, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3972798056555766441, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3972798056555766441, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3972798056555766441, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 3972798056555766441, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7314284286527138911, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
@@ -11688,7 +11748,7 @@ PrefabInstance:
     - target: {fileID: 7433025006768408038, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8284777417948632905, guid: 35775dc8896e2234eaaf86b32cc3c80b,
         type: 3}

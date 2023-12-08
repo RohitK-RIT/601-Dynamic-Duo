@@ -89,6 +89,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c71104f1-ef07-4473-bbb5-a43242a7dbdd",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "End Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "815f677b-2089-44b2-9eb6-0a645c3c84ef",
                     "path": "<Keyboard>/escape",
                     "interactions": "",

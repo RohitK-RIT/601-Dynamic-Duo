@@ -65,7 +65,7 @@ namespace Core.Player
             }
         }
 
-        private void EnableInput()
+        public void EnableInput()
         {
             _inputListener ??= new CharacterInputListener(PlayerID, actionMap, this);
             _inputListener.TryEnable();
@@ -109,12 +109,12 @@ namespace Core.Player
             DeactivatePanel();
         }
 
-        private void ActivatePanel()
+        public void ActivatePanel()
         {
             characterHUD.SetActive(true);
         }
 
-        private void DeactivatePanel()
+        public void DeactivatePanel()
         {
             characterHUD.SetActive(false);
         }

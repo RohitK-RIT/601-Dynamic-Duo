@@ -19,7 +19,8 @@ public class PauseScreen : MonoBehaviour
     void Update()
     {
 
-        if (InputManager.instance.PauseMenuOpenClose)
+        //if (InputManager.instance.PauseMenuOpenClose)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseScreen.SetActive(true);
             PlayerInputSystem.Instance.DisableAllInput();

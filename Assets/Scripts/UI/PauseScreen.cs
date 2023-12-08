@@ -18,11 +18,13 @@ public class PauseScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (InputManager.instance.PauseMenuOpenClose)
         {
             pauseScreen.SetActive(true);
             PlayerInputSystem.Instance.DisableAllInput();
-            //Debug.Log("Esc key was pressed!");
+            Debug.Log("pasue");
+
         }
     }
 

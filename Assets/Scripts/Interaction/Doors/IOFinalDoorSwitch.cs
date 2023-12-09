@@ -14,6 +14,10 @@ namespace Interaction.Doors
 
         private AudioSource _audioSource;
 
+        //Lights to control
+        [Header("Controlled Lights")]
+        public GameObject controlledLight;
+
         protected override void Start()
         {
             base.Start();
@@ -36,10 +40,22 @@ namespace Interaction.Doors
             // Can play and wait for some animation here.
             yield return null;
 
+            //Control lights
+            if (controlledLight)
+            {
+                Light light = controlledLight.GetComponent<Light>();
+                light.enabled = true;
+
+            }
+
+
             Destroy(controlDoor);
             if (_audioSource)
                 _audioSource.Play();
             new LevelCompletedEvent().Raise();
         }
+
+
+
     }
 }

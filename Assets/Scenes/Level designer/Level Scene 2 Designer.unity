@@ -299,7 +299,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
+      objectReference: {fileID: -555947257198386151, guid: 058576018170dcc4a843f31016f64c99,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: fb61711b016413b46bf6f6e57d94048f,
         type: 3}
       propertyPath: m_Name
@@ -452,10 +453,15 @@ MonoBehaviour:
   taskTitle: 
   controlDoor: {fileID: 0}
   wireList:
-  - {fileID: 1204733257}
+  - {fileID: 2138477115}
   wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
   lightList:
-  - {fileID: 0}
+  - {fileID: 1881164737}
+  - {fileID: 868651712}
+  - {fileID: 1811730937}
+  switchMat: {fileID: 2100000, guid: 2ecb2b1ff3e46cf43ac6d7e32c3973c1, type: 2}
+  switchLight: {fileID: 1980768050}
+  controlledObject: {fileID: 42439827}
 --- !u!65 &33967879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -527,13 +533,9 @@ MonoBehaviour:
   taskTitle: Complete the Boxer Puzzle
   miniGamePrefabToInstantiate: {fileID: 4170055092910298910, guid: 1eb48d03905aace4e97271b245d346cd,
     type: 3}
-  conditionalTasks:
-  - {fileID: 33967878}
-  - {fileID: 2059560835}
+  conditionalTasks: []
   doorToDestroy: {fileID: 0}
-  wireList:
-  - {fileID: 0}
-  - {fileID: 2138477115}
+  wireList: []
   wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
   lightList:
   - {fileID: 1594079553}
@@ -556,8 +558,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1.5106236, z: 3.728553}
-  m_Center: {x: 0.000000018379824, y: 0.24468821, z: 0.8642767}
+  m_Size: {x: 3.066003, y: 1.5106236, z: 2.710494}
+  m_Center: {x: -0.63, y: 0.24468821, z: 0.35524708}
 --- !u!23 &42439830
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -621,7 +623,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 137764854}
   - {fileID: 1808542527}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 12.033, z: 0}
@@ -637,7 +638,7 @@ GameObject:
   - component: {fileID: 65688457}
   - component: {fileID: 65688456}
   m_Layer: 0
-  m_Name: turns on when wire puzzle is completed
+  m_Name: Area4Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -688,7 +689,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65688454}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -936,6 +937,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 021197542f5bb7c49a01b47b3621d43c, type: 2}
     - target: {fileID: 919132149155446097, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_Name
@@ -995,57 +1001,57 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 42439832}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 5.867506
+      value: 5.8675056
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.867506
+      value: 5.867505
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 38.539173
+      value: 38.53917
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.01199913
+      value: -19.152498
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3800001
+      value: 1.3177452
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.03999996
+      value: 12.284122
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5600499
+      value: 0.511717
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5600499
+      value: -0.511717
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.431676
+      value: 0.48800185
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.43167585
+      value: 0.4880017
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e99d56cd0d6ebcc4b989a1018ffa7f4e,
         type: 3}
@@ -1094,7 +1100,7 @@ GameObject:
   - component: {fileID: 145682841}
   - component: {fileID: 145682840}
   m_Layer: 0
-  m_Name: turns on when both switchs in start area are ON
+  m_Name: Area3PowerSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1145,7 +1151,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145682838}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -1397,6 +1403,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 021197542f5bb7c49a01b47b3621d43c, type: 2}
     - target: {fileID: 919132149155446097, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_Name
@@ -2034,6 +2045,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.019999998, y: 0.019999994, z: 0.019999994}
   m_Center: {x: 0, y: 0.00000011920929, z: 0.0000000041909516}
+--- !u!1 &280517135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 345782834}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &294444081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2358,6 +2375,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 021197542f5bb7c49a01b47b3621d43c, type: 2}
     - target: {fileID: 919132149155446097, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_Name
@@ -2425,7 +2447,7 @@ GameObject:
   - component: {fileID: 387514344}
   - component: {fileID: 387514343}
   m_Layer: 0
-  m_Name: turns on when wire puzzle is completed
+  m_Name: Area4LeftPower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2476,7 +2498,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387514341}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -2688,7 +2710,12 @@ MonoBehaviour:
   wireList:
   - {fileID: 1204467859}
   wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
-  lightList: []
+  lightList:
+  - {fileID: 2136436378}
+  - {fileID: 1993244083}
+  switchMat: {fileID: 2100000, guid: 2ecb2b1ff3e46cf43ac6d7e32c3973c1, type: 2}
+  switchLight: {fileID: 1410509687}
+  controlledObject: {fileID: 0}
 --- !u!65 &395919697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2829,7 +2856,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395919695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44b2389cf6f79d346b2ec60aa5b9b33f, type: 3}
   m_Name: 
@@ -2851,7 +2878,7 @@ GameObject:
   - component: {fileID: 401360826}
   - component: {fileID: 401360825}
   m_Layer: 0
-  m_Name: turns on when blue button is pressed
+  m_Name: FinalDoorLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2902,7 +2929,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401360823}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -3062,6 +3089,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &404679879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fb61711b016413b46bf6f6e57d94048f,
+    type: 3}
+  m_PrefabInstance: {fileID: 10078986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &414424601 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 009990bdfd206d94db6ba49e93b4c779,
@@ -3314,9 +3347,9 @@ Transform:
   - {fileID: 387514342}
   - {fileID: 1881164738}
   - {fileID: 868651713}
+  - {fileID: 1811730938}
   - {fileID: 1594079554}
   - {fileID: 401360824}
-  - {fileID: 1811730938}
   - {fileID: 1184830154}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3520,7 +3553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &512671036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3699,7 +3732,6 @@ MonoBehaviour:
   - {fileID: 505818459}
   wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
   lightList:
-  - {fileID: 0}
   - {fileID: 387514341}
 --- !u!65 &636000304
 BoxCollider:
@@ -3720,8 +3752,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5031548, y: 1.16113, z: 1.737154}
-  m_Center: {x: 0.2738018, y: -0.080564976, z: 0.8837843}
+  m_Size: {x: 2.2299957, y: 1.16113, z: 1.737154}
+  m_Center: {x: 0.35240936, y: -0.080564976, z: 0.8837843}
 --- !u!4 &636000305
 Transform:
   m_ObjectHideFlags: 0
@@ -4038,6 +4070,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 239555783}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &736082090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 878163823}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &763976020
 GameObject:
   m_ObjectHideFlags: 0
@@ -4050,7 +4088,7 @@ GameObject:
   - component: {fileID: 763976023}
   - component: {fileID: 763976022}
   m_Layer: 0
-  m_Name: turns on when wire puzzle is completed
+  m_Name: Area4Door2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4101,7 +4139,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 763976020}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -4174,7 +4212,7 @@ GameObject:
   - component: {fileID: 795527904}
   - component: {fileID: 795527903}
   m_Layer: 0
-  m_Name: turns on when switch to left is interacted with
+  m_Name: Area3WireSwitchLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4225,7 +4263,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795527901}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -4743,7 +4781,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868651712}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -4810,57 +4848,57 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2119603590}
+    m_TransformParent: {fileID: 1568930498}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 55.539204
+      value: 0.7086879
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 55.539192
+      value: 0.7261594
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 55.539207
+      value: 1.8017601
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.92341
+      value: -0.009749898
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.231397
+      value: -0.0014979786
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.569458
+      value: -0.000022512293
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000029802322
+      value: 0.70698345
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -5.2011724e-12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: -0.70723015
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000029802322
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
@@ -4877,6 +4915,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 021197542f5bb7c49a01b47b3621d43c, type: 2}
     - target: {fileID: 919132149155446097, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
         type: 3}
       propertyPath: m_Name
@@ -5254,6 +5297,45 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1568930497}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &974665183
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _WidthHeightRadius: {r: 729.9795, g: 322.267, b: 80, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1001 &975035776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5885,7 +5967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1039255378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7347,7 +7429,7 @@ GameObject:
   - component: {fileID: 1371110088}
   - component: {fileID: 1371110087}
   m_Layer: 0
-  m_Name: turns on when player 2 interacts with switch
+  m_Name: Area2TopDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7398,15 +7480,15 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371110085}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.98217344, b: 0.740566, a: 1}
   m_Intensity: 120
   m_Range: 7.4925327
-  m_SpotAngle: 30.227228
-  m_InnerSpotAngle: 8.516828
+  m_SpotAngle: 71.236984
+  m_InnerSpotAngle: 40.413303
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -7598,7 +7680,7 @@ GameObject:
   - component: {fileID: 1393471933}
   - component: {fileID: 1393471932}
   m_Layer: 0
-  m_Name: Turns on when player two interacts with switch
+  m_Name: Area2Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7649,7 +7731,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393471930}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -7704,6 +7786,12 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1410509687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 120282518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1440200334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5658213143708035719, guid: 72788a1741e032f428d35abf50809da5,
@@ -7993,7 +8081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372f21ceb9ec41346ac38f14e4624c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensityChangeInterval: 0.6
+  intensityChangeInterval: 0.3
 --- !u!1 &1555270238
 GameObject:
   m_ObjectHideFlags: 0
@@ -8125,7 +8213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372f21ceb9ec41346ac38f14e4624c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensityChangeInterval: 0.6
+  intensityChangeInterval: 0.3
 --- !u!1001 &1563261773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8374,16 +8462,24 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 009990bdfd206d94db6ba49e93b4c779,
         type: 3}
       propertyPath: m_Name
-      value: Interact_box
+      value: Area3_LightSwitch_Interact_box
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 009990bdfd206d94db6ba49e93b4c779,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 878163824}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 009990bdfd206d94db6ba49e93b4c779,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1568930501}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 009990bdfd206d94db6ba49e93b4c779,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1568930504}
   m_SourcePrefab: {fileID: 100100000, guid: 009990bdfd206d94db6ba49e93b4c779, type: 3}
 --- !u!4 &1568930498 stripped
 Transform:
@@ -8406,12 +8502,35 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02, y: 0.019999998, z: 0.019999998}
-  m_Center: {x: -0.00000011920929, y: 0.00000011920929, z: 0.0000000018626451}
+  m_Size: {x: 0.14371361, y: 0.059170563, z: 0.027106129}
+  m_Center: {x: -0.0011679748, y: -0.0029280519, z: 0.0035530613}
+--- !u!114 &1568930504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969870279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edff3e6e6ee55814db723c72dcf154a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskTitle: 
+  controlDoor: {fileID: 0}
+  wireList:
+  - {fileID: 404679879}
+  wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
+  lightList:
+  - {fileID: 795527901}
+  - {fileID: 145682838}
+  switchMat: {fileID: 2100000, guid: 2ecb2b1ff3e46cf43ac6d7e32c3973c1, type: 2}
+  switchLight: {fileID: 736082090}
+  controlledObject: {fileID: 636000302}
 --- !u!1 &1574782614 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 463b413efa487a64798d233f67d1281c,
@@ -8668,7 +8787,7 @@ GameObject:
   - component: {fileID: 1594079556}
   - component: {fileID: 1594079555}
   m_Layer: 0
-  m_Name: turns on when player completes boxer puzzle
+  m_Name: EndSwitchLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8719,7 +8838,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594079553}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -9831,7 +9950,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811730937}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -10005,7 +10124,12 @@ MonoBehaviour:
   wireList:
   - {fileID: 1204733257}
   wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
-  lightList: []
+  lightList:
+  - {fileID: 1393471930}
+  - {fileID: 1371110085}
+  switchMat: {fileID: 2100000, guid: 2ecb2b1ff3e46cf43ac6d7e32c3973c1, type: 2}
+  switchLight: {fileID: 280517135}
+  controlledObject: {fileID: 0}
 --- !u!65 &1868069620
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10202,7 +10326,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881164737}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -10733,45 +10857,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4493585093827132993, guid: ae560e33c0e269049b91256b4f124673, type: 3}
---- !u!21 &1905893688
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _WidthHeightRadius: {r: 729.9795, g: 322.267, b: 80, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1 &1914528878
 GameObject:
   m_ObjectHideFlags: 0
@@ -11312,6 +11397,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2022516436}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1980768050 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ffceae3a2a01bf0419c2b5afd7d1d3b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 204696228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1993244083
 GameObject:
   m_ObjectHideFlags: 0
@@ -11324,7 +11415,7 @@ GameObject:
   - component: {fileID: 1993244086}
   - component: {fileID: 1993244085}
   m_Layer: 0
-  m_Name: turns on when player 1 interacts with switch
+  m_Name: Area2BottomDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11375,15 +11466,15 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993244083}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.98217344, b: 0.740566, a: 1}
   m_Intensity: 120
   m_Range: 7.4925327
-  m_SpotAngle: 30.227228
-  m_InnerSpotAngle: 8.516828
+  m_SpotAngle: 71.236984
+  m_InnerSpotAngle: 40.413303
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -11577,6 +11668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlDoor: {fileID: 1914528878}
+  controlledLight: {fileID: 401360823}
 --- !u!1 &2015146015
 GameObject:
   m_ObjectHideFlags: 0
@@ -11709,177 +11801,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ebb5df09a8ad2c43bffae7565e0970e, type: 3}
---- !u!1 &2059560833
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2059560837}
-  - component: {fileID: 2059560836}
-  - component: {fileID: 2059560835}
-  - component: {fileID: 2059560834}
-  m_Layer: 0
-  m_Name: RightLightTirgger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!82 &2059560834
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059560833}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 958254ad91b284146af0fb954efe3bf1, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.563
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &2059560835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059560833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edff3e6e6ee55814db723c72dcf154a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskTitle: 
-  controlDoor: {fileID: 0}
-  wireList:
-  - {fileID: 1204733257}
-  wireMat: {fileID: 2100000, guid: 9b963cd1e2904f64aabbf665d3a48889, type: 2}
-  lightList:
-  - {fileID: 1881164737}
-  - {fileID: 1811730937}
---- !u!65 &2059560836
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059560833}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.359146, y: 2.4878254, z: 1.4237423}
-  m_Center: {x: -0.5616703, y: -1.1032047, z: 0.4332857}
---- !u!4 &2059560837
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059560833}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.63, y: 2.36, z: 18.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2075812901 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5359672612548140315, guid: 846a927ab121dd74e8d825014fc6e7c6,
@@ -11920,7 +11841,6 @@ Transform:
   - {fileID: 990607964}
   - {fileID: 10078987}
   - {fileID: 1568930498}
-  - {fileID: 878163824}
   - {fileID: 859262542}
   - {fileID: 975035777}
   - {fileID: 1506909761}
@@ -12021,7 +11941,7 @@ GameObject:
   - component: {fileID: 2136436381}
   - component: {fileID: 2136436380}
   m_Layer: 0
-  m_Name: Turns on when player 1 interacts with switch
+  m_Name: Area2Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12072,7 +11992,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136436378}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -12430,10 +12350,10 @@ SceneRoots:
   - {fileID: 395919698}
   - {fileID: 1868069621}
   - {fileID: 636000305}
+  - {fileID: 137764853}
   - {fileID: 42439832}
   - {fileID: 2029626}
   - {fileID: 33967880}
-  - {fileID: 2059560837}
   - {fileID: 469035437}
   - {fileID: 1039255380}
   - {fileID: 512671038}

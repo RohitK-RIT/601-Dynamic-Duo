@@ -821,17 +821,37 @@ PrefabInstance:
     - target: {fileID: 750056364880244016, guid: 118b9c557407334428989d44d20a9e7e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 750056364880244016, guid: 118b9c557407334428989d44d20a9e7e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1846226832}
+      objectReference: {fileID: 1082262560}
     - target: {fileID: 750056364880244016, guid: 118b9c557407334428989d44d20a9e7e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 750056364880244016, guid: 118b9c557407334428989d44d20a9e7e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 750056364880244016, guid: 118b9c557407334428989d44d20a9e7e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 750056364880244016, guid: 118b9c557407334428989d44d20a9e7e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: CreditsScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 750056364880244016, guid: 118b9c557407334428989d44d20a9e7e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1369487211248594629, guid: 118b9c557407334428989d44d20a9e7e,
         type: 3}
@@ -1523,12 +1543,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 118b9c557407334428989d44d20a9e7e, type: 3}
---- !u!1 &1846226832 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7551206358662864222, guid: 118b9c557407334428989d44d20a9e7e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1846226831}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1911541872
 GameObject:
   m_ObjectHideFlags: 0

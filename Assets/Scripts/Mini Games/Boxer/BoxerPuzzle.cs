@@ -25,9 +25,9 @@ namespace Mini_Games.Boxer
 
         private readonly Dictionary<Vector3Int, Color> _answerDictionary = new()
         {
+            { new Vector3Int(0, 0, 0), Color.yellow },
             { new Vector3Int(1, 0, 0), Color.yellow },
             { new Vector3Int(2, 0, 1), Color.blue },
-            { new Vector3Int(0, 0, 0), Color.yellow },
             { new Vector3Int(0, 1, 1), Color.green },
             { new Vector3Int(1, 2, 1), Color.yellow },
             { new Vector3Int(2, 2, 0), Color.yellow }
@@ -38,8 +38,8 @@ namespace Mini_Games.Boxer
 
         private const float ChainMovementDelay = 0.1f;
 
-        private Panel P1CurrentPanel => GetPanel(_p1GridPos, true);
-        private Panel P2CurrentPanel => GetPanel(_p1GridPos, false);
+        private Panel P1CurrentPanel => GetPanel(_p1GridPos);
+        private Panel P2CurrentPanel => GetPanel(_p1GridPos);
 
         private Vector2Int P1GridPos
         {
@@ -47,9 +47,8 @@ namespace Mini_Games.Boxer
 
             set
             {
-                SetGridHighlight(_p1GridPos, _p1GridPos.Equals(_p2GridPos) ? player2Color : Color.clear);
-                _p1GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 2), Mathf.Clamp(value.y, 0, 3));
-                SetGridHighlight(_p1GridPos, Color.cyan);
+                SetGridHighlight(P1GridPos, Color.clear);
+                _p1GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 3), Mathf.Clamp(value.y, 0, 2));
             }
         }
 
@@ -59,29 +58,26 @@ namespace Mini_Games.Boxer
 
             set
             {
-                SetGridHighlight(_p2GridPos, _p1GridPos.Equals(_p2GridPos) ? player1Color : Color.clear, false);
-                _p2GridPos = new Vector2Int(Mathf.Clamp(value.x, 0, 2), Mathf.Clamp(value.y, 0, 3));
-                SetGridHighlight(_p2GridPos, Color.magenta, false);
+                SetGridHighlight(_p2GridPos, Color.clear);
+                _p2GridPos = new Vector2Int(Mathf.Clamp(value.x, 1, 4), Mathf.Clamp(value.y, 0, 2));
             }
         }
 
-        private Panel GetPanel(Vector2Int gridPos, bool isP1)
+        private Panel GetPanel(Vector2Int gridPos)
         {
-            Panel panel;
-            if (gridPos.y == 3)
+            var panel = gridPos.x switch
             {
-                var playerPanels = isP1 ? _p1Panels : _p2Panels;
-                panel = playerPanels[gridPos.x];
-            }
-            else
-                panel = _gameGrid[gridPos.x, gridPos.y];
+                0 => _p1Panels[gridPos.y],
+                4 => _p2Panels[gridPos.y],
+                _ => _gameGrid[gridPos.x - 1, gridPos.y]
+            };
 
             return panel;
         }
 
-        private void SetGridHighlight(Vector2Int gridPos, Color color, bool isP1 = true)
+        private void SetGridHighlight(Vector2Int gridPos, Color color)
         {
-            var panel = GetPanel(gridPos, isP1);
+            var panel = GetPanel(gridPos);
             panel.SetHighlightColor(color);
         }
 
@@ -92,7 +88,7 @@ namespace Mini_Games.Boxer
         {
             base.OnEnable();
 
-            _answerGrid = GetGrid(answerPanel);
+            // _answerGrid = GetGrid(answerPanel);
             _gameGrid = GetGrid(gamePanel);
 
             StartGame();
@@ -124,7 +120,7 @@ namespace Mini_Games.Boxer
 
             _p1InputListener.OnPlayerInteract += ProcessP1InteractionInput;
             _p2InputListener.OnPlayerInteract += ProcessP2InteractionInput;
-            
+
             _p1InputListener.OnBackPressed += CloseGame;
             _p2InputListener.OnBackPressed += CloseGame;
         }
@@ -139,7 +135,7 @@ namespace Mini_Games.Boxer
 
             _p1InputListener.OnPlayerInteract -= ProcessP1InteractionInput;
             _p2InputListener.OnPlayerInteract -= ProcessP2InteractionInput;
-            
+
             _p1InputListener.OnBackPressed -= CloseGame;
             _p2InputListener.OnBackPressed -= CloseGame;
         }
@@ -150,17 +146,17 @@ namespace Mini_Games.Boxer
 
             for (var i = 0; i < 3; i++)
             for (var j = 0; j < 3; j++)
-                gridData[j, i] = new Panel(new Vector2Int(j, i), panelTransform.GetChild(i * 3 + j));
+                gridData[j, i] = new Panel(panelTransform.GetChild(i * 3 + j));
 
             return gridData;
         }
 
         private void StartGame()
         {
-            ShowAnswer();
+            // ShowAnswer();
             InitPlayerPool();
-            P1GridPos = Vector2Int.zero;
-            P2GridPos = Vector2Int.zero;
+            P1GridPos = new Vector2Int(Random.Range(1, 4), Random.Range(0, 3));
+            P2GridPos = new Vector2Int(Random.Range(1, 4), Random.Range(0, 3));
         }
 
         private void CreateAnswer()
@@ -173,19 +169,19 @@ namespace Mini_Games.Boxer
                 var randomPoint = new Vector3Int(Random.Range(0, 3), Random.Range(0, 3), Random.Range(0, 2));
                 if (_answerDictionary.ContainsKey(randomPoint))
                     continue;
-            
+
                 i++;
-            
+
                 var checkingPoint = randomPoint;
                 checkingPoint.z = checkingPoint.z == 0 ? 1 : 0;
-            
+
                 //Assign random color to them.
                 var colorToExclude = Color.clear;
                 if (_answerDictionary.ContainsKey(checkingPoint))
                     colorToExclude = _answerGrid[checkingPoint.x, checkingPoint.y][checkingPoint.z].color;
-            
+
                 var randomColor = GetRandomColor(colorToExclude);
-            
+
                 _answerDictionary.Add(randomPoint, randomColor);
                 // Display the pattern.
                 _answerGrid[randomPoint.x, randomPoint.y][randomPoint.z].color = randomColor;
@@ -224,7 +220,7 @@ namespace Mini_Games.Boxer
 
             for (var i = 0; i < 3; i++)
             {
-                playerPanels[i] = new Panel(new Vector2Int(i, 4), playerPool.GetChild(i + 1));
+                playerPanels[i] = new Panel(playerPool.GetChild(i + 1));
                 var answer = _answerDictionary.ElementAt(i + (isPlayer1 ? 0 : 3));
 
                 playerPanels[i][answer.Key.z].color = answer.Value;
@@ -245,6 +241,9 @@ namespace Mini_Games.Boxer
             if (_p2SelectedPanel != null && P2CurrentPanel != _p2SelectedPanel)
                 _p2SelectedPanel.SetHighlightColor(player2SelectedColor);
 
+            GetPanel(P1GridPos).SetHighlightColor(player1Color);
+            GetPanel(P2GridPos).SetHighlightColor(player2Color);
+
             if (!IsAnswerAchieved) return;
 
             IsCompleted = true;
@@ -261,8 +260,7 @@ namespace Mini_Games.Boxer
                 if (playerNavInput.sqrMagnitude > 0)
                 {
                     _p1MoveTime = DateTime.Now;
-                    var newPlayer1GridPos = P1GridPos + playerNavInput * (Vector2Int.down + Vector2Int.right);
-                    P1GridPos = newPlayer1GridPos;
+                    P1GridPos += playerNavInput * (Vector2Int.right + Vector2Int.down);
                 }
             }
 
@@ -271,7 +269,7 @@ namespace Mini_Games.Boxer
 
         private void ProcessP1InteractionInput()
         {
-            var currentPanel = _p1GridPos.y == 3 ? _p1Panels[_p1GridPos.x] : _gameGrid[_p1GridPos.x, _p1GridPos.y];
+            var currentPanel = GetPanel(P1GridPos);
             if (_p1SelectedPanel != null)
             {
                 if (_p1SelectedPanel != currentPanel)
@@ -307,7 +305,7 @@ namespace Mini_Games.Boxer
                 if (playerNavInput.sqrMagnitude > 0)
                 {
                     _p2MoveTime = DateTime.Now;
-                    P2GridPos += playerNavInput * (Vector2Int.down + Vector2Int.right);
+                    P2GridPos += playerNavInput * (Vector2Int.right + Vector2Int.down);
                 }
             }
 
@@ -316,7 +314,7 @@ namespace Mini_Games.Boxer
 
         private void ProcessP2InteractionInput()
         {
-            var currentPanel = _p2GridPos.y == 3 ? _p2Panels[_p2GridPos.x] : _gameGrid[_p2GridPos.x, _p2GridPos.y];
+            var currentPanel = GetPanel(P2GridPos);
             if (_p2SelectedPanel != null)
             {
                 if (_p2SelectedPanel != currentPanel)

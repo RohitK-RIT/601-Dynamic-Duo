@@ -5,8 +5,6 @@ namespace Mini_Games.Boxer
 {
     public class Panel
     {
-        public readonly Vector2Int index;
-
         private readonly Image _highlight;
         private readonly Image _smallPanelImage;
         private readonly Image _bigPanelImage;
@@ -16,10 +14,8 @@ namespace Mini_Games.Boxer
 
         public bool IsEmpty => _smallPanelImage.color == Color.clear && _bigPanelImage.color == Color.clear;
 
-        public Panel(Vector2Int index, Transform panel)
+        public Panel(Transform panel)
         {
-            this.index = index;
-
             Transform = panel;
             GameObject = panel.gameObject;
 

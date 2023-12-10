@@ -268,12 +268,6 @@ namespace Core.Game_Systems.Player_Input
             ActiveP1Listener?.Disable();
             ActiveP2Listener?.Disable();
         }
-
-        private void Update()
-        {
-            if (ActiveP1Listener != null && ActiveP2Listener != null)
-                Debug.Log($"p1 Input {_p1Input.currentActionMap.name}\tp2 Input {_p2Input.currentActionMap.name}");
-        }
     }
 
     public class PlayerInputHandlerRegistrationEvent : GameEvent

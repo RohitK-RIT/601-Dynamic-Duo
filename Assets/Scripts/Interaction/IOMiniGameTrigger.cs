@@ -43,10 +43,10 @@ namespace Interaction
 
         protected override void OnInteractionEnd(bool successful)
         {
-            if(_miniGameInstance)
+            if (successful)
             {
                 _miniGameInstance.OnClosed -= OnInteractionEnd;
-                Interactable = !successful;
+                Interactable = false;
 
                 if (wireList.Count > 0)
                 {
@@ -64,7 +64,7 @@ namespace Interaction
                     }
                 }
 
-                if (doorToDestroy && successful)
+                if (doorToDestroy)
                     Destroy(doorToDestroy);
             }
 

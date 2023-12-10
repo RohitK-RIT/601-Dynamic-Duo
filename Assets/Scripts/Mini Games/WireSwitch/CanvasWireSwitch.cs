@@ -35,19 +35,8 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
     public Image p1Icon;
     public Image p2Icon;
 
-    //Players
-    private GameObject player1;
-    private GameObject player2;
-
-
     //Success Image
     public GameObject successImage;
-
-
-    //Player Controllers
-    private CharacterController characterController1;
-    private CharacterController characterController2;
-
 
     //Audio
     AudioSource audioSource;
@@ -84,15 +73,6 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
         //Player icons
         p1Icon.enabled = false;
         p2Icon.enabled = false;
-
-        this.enabled = true;
-
-        //Get player control
-        player1 = GameObject.Find("Player1");
-        player2 = GameObject.Find("Player2");
-        characterController1 = player1.GetComponent<CharacterController>();
-        characterController2 = player2.GetComponent<CharacterController>();
-
 
         audioSource = GetComponent<AudioSource>();
     }

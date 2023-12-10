@@ -3,6 +3,7 @@ using System.Linq;
 using Core.Game_Systems;
 using Core.Game_Systems.Player_Input;
 using Interaction;
+using Mini_Games;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,7 +15,10 @@ namespace Core.Player
         public PlayerID PlayerID => playerID;
 
         [SerializeField] private PlayerID playerID;
-        [FormerlySerializedAs("inputActionMap")] [SerializeField] private ActionMap actionMap;
+
+        [FormerlySerializedAs("inputActionMap")] [SerializeField]
+        private ActionMap actionMap;
+
         [SerializeField] private GameObject characterHUD;
 
         private CharacterInputListener _inputListener;
@@ -59,7 +63,7 @@ namespace Core.Player
             if (_firstRun)
             {
                 _firstRun = false;
-                Invoke(nameof(InitInputListeners),0.2f);
+                Invoke(nameof(InitInputListeners), 0.2f);
                 Invoke(nameof(EnableInput), 0.2f);
             }
             else
@@ -101,6 +105,7 @@ namespace Core.Player
 
             _hudListener.OnBackPressed += BackPressed;
         }
+
         private void DisableHUDInput()
         {
             _hudListener.Disable();
@@ -127,19 +132,22 @@ namespace Core.Player
             if (!_currentIObject) return;
 
             DisableInput();
-            EnableHUDInput();
+            if (_currentIObject is not IOMiniGameTrigger || !MiniGame.IsOpen)
+                EnableHUDInput();
             TogglePanel(true);
         }
 
         private void BackPressed()
         {
-            if(!_currentIObject) return;
-            
+            if (!_currentIObject) return;
+
             _currentIObject.OnCancelInteraction();
         }
 
         public void OnInteractionEnd(bool interactionComplete)
         {
+            _interactableObjects = _interactableObjects.FindAll(iObject => iObject.Interactable);
+            popupCanvas.enabled = _interactableObjects.Count > 0 || !interactionComplete;
             DisableHUDInput();
             EnableInput();
             TogglePanel(false);
@@ -152,8 +160,8 @@ namespace Core.Player
 
         public void AddInteractableObjects(InteractiveObject iObject)
         {
-            if(!iObject.Interactable) return;
-            
+            if (!iObject.Interactable) return;
+
             _interactableObjects.Insert(0, iObject);
             //Show Popup
             popupCanvas.enabled = _interactableObjects.Count > 0;

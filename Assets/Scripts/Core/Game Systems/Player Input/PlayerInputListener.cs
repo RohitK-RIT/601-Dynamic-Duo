@@ -6,7 +6,6 @@ namespace Core.Game_Systems.Player_Input
 {
     public abstract class PlayerInputListener
     {
-        internal bool IsActive;
         public PlayerID PlayerID { get; }
         public ActionMap ActionMap { get; }
         private MonoBehaviour Component { get; }
@@ -17,9 +16,10 @@ namespace Core.Game_Systems.Player_Input
         private bool _active;
         public bool IsValid => Map != null;
 
-        private bool Active
+        public bool Active
         {
-            set
+            get => IsValid && _active && Map.enabled;
+            private set
             {
                 _active = value;
                 if (_active)

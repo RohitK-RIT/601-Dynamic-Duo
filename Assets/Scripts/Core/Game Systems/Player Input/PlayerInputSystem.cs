@@ -25,7 +25,6 @@ namespace Core.Game_Systems.Player_Input
 
                 _activeP1Listener?.Disable();
                 _activeP1Listener = value;
-                _activeP1Listener.TryEnable();
             }
         }
 
@@ -38,7 +37,6 @@ namespace Core.Game_Systems.Player_Input
 
                 _activeP2Listener?.Disable();
                 _activeP2Listener = value;
-                _activeP2Listener?.TryEnable();
             }
         }
 
@@ -79,7 +77,7 @@ namespace Core.Game_Systems.Player_Input
 
             var gamepads = InputSystem.devices.Where(device => device is Gamepad).ToArray();
             var keyboards = InputSystem.devices.Where(device => device is Keyboard).ToArray();
-            
+
             if (gamepads.Any())
             {
                 _p1Input.SwitchCurrentControlScheme(nameof(Gamepad));
@@ -216,7 +214,7 @@ namespace Core.Game_Systems.Player_Input
 
         private void UnregisterPlayerInputHandler(PlayerInputHandlerUnregistrationEvent @event)
         {
-            if(_p1InputListeners.Contains(@event.Listener))
+            if (_p1InputListeners.Contains(@event.Listener))
                 _p1InputListeners.Remove(@event.Listener);
             else if (_p2InputListeners.Contains(@event.Listener))
                 _p2InputListeners.Remove(@event.Listener);
@@ -269,6 +267,12 @@ namespace Core.Game_Systems.Player_Input
         {
             ActiveP1Listener?.Disable();
             ActiveP2Listener?.Disable();
+        }
+
+        private void Update()
+        {
+            if (ActiveP1Listener != null && ActiveP2Listener != null)
+                Debug.Log($"p1 Input {_p1Input.currentActionMap.name}\tp2 Input {_p2Input.currentActionMap.name}");
         }
     }
 

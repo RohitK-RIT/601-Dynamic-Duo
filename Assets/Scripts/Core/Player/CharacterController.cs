@@ -22,7 +22,7 @@ namespace Core.Player
         [SerializeField] private GameObject characterHUD;
 
         private CharacterInputListener _inputListener;
-        private CharacterHUDInputListener _hudListener;
+        public CharacterHUDInputListener _hudListener;
         private CharacterBody _characterBody;
         private List<InteractiveObject> _interactableObjects;
         private InteractiveObject _currentIObject;
@@ -56,6 +56,13 @@ namespace Core.Player
             popupCanvasRectTrans = popupCanvas.GetComponent<RectTransform>();
 
             TogglePanel(false);
+        }
+
+
+        public string GetCancelKey()
+        {
+            _hudListener ??= new CharacterHUDInputListener(PlayerID, ActionMap.HUD, this);
+            return _hudListener.CancelKey;
         }
 
         private void OnEnable()

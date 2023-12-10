@@ -13,6 +13,8 @@ namespace Core.Player
         {
         }
 
+        public string CancelKey => Map["End Interaction"].GetBindingDisplayString();
+
         protected override void RegisterEvents()
         {
             Map["End Interaction"].performed += BackPressed;

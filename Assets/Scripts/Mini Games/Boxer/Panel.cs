@@ -35,12 +35,6 @@ namespace Mini_Games.Boxer
             _highlight.color = color;
         }
 
-        public void SetColor(int panelIndex, Color color)
-        {
-            this[panelIndex].color = color;
-        }
-
         public Image this[int i] => i == 0 ? _bigPanelImage : _smallPanelImage;
-        
     }
 }

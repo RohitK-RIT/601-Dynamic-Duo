@@ -22,7 +22,16 @@ namespace Mini_Games.Boxer
         private Vector2Int _p1GridPos, _p2GridPos;
         private Vector3Int _p1SelectedPanelPos, _p2SelectedPanelPos;
         private Panel _p1SelectedPanel, _p2SelectedPanel;
-        private Dictionary<Vector3Int, Color> _answerDictionary;
+
+        private readonly Dictionary<Vector3Int, Color> _answerDictionary = new()
+        {
+            { new Vector3Int(1, 0, 0), Color.yellow },
+            { new Vector3Int(2, 0, 1), Color.blue },
+            { new Vector3Int(0, 0, 0), Color.yellow },
+            { new Vector3Int(0, 1, 1), Color.green },
+            { new Vector3Int(1, 2, 1), Color.yellow },
+            { new Vector3Int(2, 2, 0), Color.yellow }
+        };
 
         private DateTime _p1MoveTime, _p2MoveTime;
         private bool _p1NotMoving, _p2NotMoving;
@@ -104,7 +113,7 @@ namespace Mini_Games.Boxer
 
         private void EnableInput()
         {
-            _p1InputListener ??= new BoxerInputListener(PlayerID.Player1,actionMap, this);
+            _p1InputListener ??= new BoxerInputListener(PlayerID.Player1, actionMap, this);
             _p2InputListener ??= new BoxerInputListener(PlayerID.Player2, actionMap, this);
 
             _p1InputListener.TryEnable();
@@ -142,7 +151,7 @@ namespace Mini_Games.Boxer
 
         private void StartGame()
         {
-            CreateAnswer();
+            ShowAnswer();
             InitPlayerPool();
             P1GridPos = Vector2Int.zero;
             P2GridPos = Vector2Int.zero;
@@ -150,29 +159,39 @@ namespace Mini_Games.Boxer
 
         private void CreateAnswer()
         {
-            _answerDictionary = new Dictionary<Vector3Int, Color>();
+            // Uncomment this
+            // _answerDictionary = new Dictionary<Vector3Int, Color>();
             for (var i = 0; i < 6;)
             {
                 // Get a random point in the grid.
                 var randomPoint = new Vector3Int(Random.Range(0, 3), Random.Range(0, 3), Random.Range(0, 2));
                 if (_answerDictionary.ContainsKey(randomPoint))
                     continue;
-
+            
                 i++;
-
+            
                 var checkingPoint = randomPoint;
                 checkingPoint.z = checkingPoint.z == 0 ? 1 : 0;
-
+            
                 //Assign random color to them.
                 var colorToExclude = Color.clear;
                 if (_answerDictionary.ContainsKey(checkingPoint))
                     colorToExclude = _answerGrid[checkingPoint.x, checkingPoint.y][checkingPoint.z].color;
-
+            
                 var randomColor = GetRandomColor(colorToExclude);
-
+            
                 _answerDictionary.Add(randomPoint, randomColor);
                 // Display the pattern.
                 _answerGrid[randomPoint.x, randomPoint.y][randomPoint.z].color = randomColor;
+                Debug.Log($"{randomPoint}\t{randomColor.ToString()}");
+            }
+        }
+
+        private void ShowAnswer()
+        {
+            foreach (var pair in _answerDictionary)
+            {
+                _answerGrid[pair.Key.x, pair.Key.y][pair.Key.z].color = pair.Value;
             }
         }
 

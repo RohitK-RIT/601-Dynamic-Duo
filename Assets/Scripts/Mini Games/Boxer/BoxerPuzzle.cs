@@ -124,6 +124,9 @@ namespace Mini_Games.Boxer
 
             _p1InputListener.OnPlayerInteract += ProcessP1InteractionInput;
             _p2InputListener.OnPlayerInteract += ProcessP2InteractionInput;
+            
+            _p1InputListener.OnBackPressed += CloseGame;
+            _p2InputListener.OnBackPressed += CloseGame;
         }
 
         private void DisableInput()
@@ -136,6 +139,9 @@ namespace Mini_Games.Boxer
 
             _p1InputListener.OnPlayerInteract -= ProcessP1InteractionInput;
             _p2InputListener.OnPlayerInteract -= ProcessP2InteractionInput;
+            
+            _p1InputListener.OnBackPressed -= CloseGame;
+            _p2InputListener.OnBackPressed -= CloseGame;
         }
 
         private Panel[,] GetGrid(Transform panelTransform)
@@ -242,6 +248,7 @@ namespace Mini_Games.Boxer
             if (!IsAnswerAchieved) return;
 
             IsCompleted = true;
+            CloseGame();
             Destroy(gameObject);
         }
 

@@ -23,6 +23,11 @@ namespace Mini_Games
             OnReset();
         }
 
+        protected void CloseGame()
+        {
+            Destroy(gameObject);
+        }
+
         protected virtual void OnDestroy()
         {
             OnReset();

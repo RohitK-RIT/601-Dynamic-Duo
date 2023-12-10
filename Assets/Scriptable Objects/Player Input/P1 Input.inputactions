@@ -136,6 +136,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "End Interaction",
+                    "type": "Button",
+                    "id": "47613402-e6bc-4f27-97fa-021a507cb376",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -270,6 +279,28 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5f31c94-fa7e-4241-ad6e-5113e0c00a4a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "End Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ce6005a-7301-469d-b18d-0c962e60407f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "End Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -317,6 +348,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "1a93216e-9f28-4ce1-8702-16bfbebacc15",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "End Interaction",
+                    "type": "Button",
+                    "id": "9c6c300e-23ac-45b2-b0c7-d5111749eeae",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -431,6 +471,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b54b7e5-683f-4ce5-ad51-42f447fee19b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "End Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d39d3a03-d834-40b7-87a5-41b79f28e0d2",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "End Interaction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

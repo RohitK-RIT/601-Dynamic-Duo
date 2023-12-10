@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace Mini_Games.WireSwitch
 {
-    public class WirePuzzleInputListener : PlayerInputListener
+    public class WirePuzzleInputListener : MiniGameInputListener
     {
         public bool UpPressed { get; private set; }
 
@@ -34,6 +34,7 @@ namespace Mini_Games.WireSwitch
 
         protected override void RegisterEvents()
         {
+            base.RegisterEvents();
             Map["Up"].performed += UpButtonPressed;
             Map["Up"].canceled += UpButtonReleased;
             Map["Down"].performed += DownButtonPressed;
@@ -47,6 +48,7 @@ namespace Mini_Games.WireSwitch
 
         protected override void UnregisterEvents()
         {
+            base.UnregisterEvents();
             Map["Up"].performed -= UpButtonPressed;
             Map["Up"].canceled -= UpButtonReleased;
             Map["Down"].performed -= DownButtonPressed;

@@ -1,13 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using Core.Game_Systems;
-using Core.Game_Systems.Player_Input;
-using Mini_Games.Boxer;
 using Mini_Games.WireSwitch;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
-using CharacterController = Core.Player.CharacterController;
 
 public class CanvasWireSwitch : Mini_Games.MiniGame
 {
@@ -102,12 +98,18 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
 
         _p1InputListener.TryEnable();
         _p2InputListener.TryEnable();
+        
+        _p1InputListener.OnBackPressed += CloseGame;
+        _p2InputListener.OnBackPressed += CloseGame;
     }
 
     private void DisableInput()
     {
         _p1InputListener.Disable();
         _p2InputListener.Disable();
+        
+        _p1InputListener.OnBackPressed -= CloseGame;
+        _p2InputListener.OnBackPressed -= CloseGame;
     }
 
     void Start()
@@ -150,8 +152,8 @@ public class CanvasWireSwitch : Mini_Games.MiniGame
 
                 //retrieve player control
                 IsCompleted = true;
-
-                Destroy(gameObject);
+                CloseGame();
+                
                 return;
             }
         }

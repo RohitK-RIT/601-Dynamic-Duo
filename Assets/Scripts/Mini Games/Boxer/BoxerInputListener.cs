@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Mini_Games.Boxer
 {
-    public class BoxerInputListener : PlayerInputListener
+    public class BoxerInputListener : MiniGameInputListener
     {
         public event Action<Vector2Int> OnPlayerNavigate;
         public event Action OnPlayerInteract;
@@ -21,6 +21,7 @@ namespace Mini_Games.Boxer
 
         protected override void RegisterEvents()
         {
+            base.RegisterEvents();
             Map["Navigation"].performed += PlayerNavigate;
             Map["Navigation"].canceled += PlayerNavigateCanceled;
             Map["Interact"].performed += BeginInteraction;
@@ -28,6 +29,7 @@ namespace Mini_Games.Boxer
 
         protected override void UnregisterEvents()
         {
+            base.UnregisterEvents();
             Map["Navigation"].performed -= PlayerNavigate;
             Map["Navigation"].canceled -= PlayerNavigateCanceled;
             Map["Interact"].performed -= BeginInteraction;

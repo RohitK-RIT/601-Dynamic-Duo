@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press       to cancel
+  m_text: "Press       \n\nto cancel"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a7409908e00a61149a748efa0119d6b2, type: 2}
   m_sharedMaterial: {fileID: -2614204795791917999, guid: a7409908e00a61149a748efa0119d6b2,
@@ -1101,6 +1101,7 @@ GameObject:
   - component: {fileID: 7478848300651029695}
   - component: {fileID: 5315697758746775145}
   - component: {fileID: 1561196474410030778}
+  - component: {fileID: 5083837510506249465}
   m_Layer: 5
   m_Name: ButtonCheck
   m_TagString: Untagged
@@ -1124,8 +1125,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 205.95006, y: -280}
-  m_SizeDelta: {x: -411.89987, y: -560}
+  m_AnchoredPosition: {x: 245.25505, y: -280}
+  m_SizeDelta: {x: -490.5099, y: -560}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5315697758746775145
 CanvasRenderer:
@@ -1225,6 +1226,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5083837510506249465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147923265321733964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc882c807e623144a833302d29af79bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5359672612548140315}
 --- !u!1 &8989165959174414271
 GameObject:
   m_ObjectHideFlags: 0

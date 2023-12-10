@@ -26,6 +26,11 @@ namespace Interaction
             return true;
         }
 
+        public void OnCancelInteraction()
+        {
+            OnInteractionEnd(false);
+        }
+
         protected virtual void OnInteractionEnd(bool successful)
         {
             Interactable = !successful;

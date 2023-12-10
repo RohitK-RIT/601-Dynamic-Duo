@@ -4,6 +4,7 @@ namespace Core.Game_Systems.Player_Input
     {
         Level,
         Boxer,
-        WireSwitch
+        WireSwitch,
+        HUD
     }
 }

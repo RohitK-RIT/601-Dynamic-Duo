@@ -43,29 +43,30 @@ namespace Interaction
 
         protected override void OnInteractionEnd(bool successful)
         {
-            _miniGameInstance.OnClosed -= OnInteractionEnd;
-            Interactable = !successful;
-
-            if (wireList.Count > 0)
+            if(_miniGameInstance)
             {
-                foreach (GameObject go in wireList)
-                {
-                    Renderer renderer = go.GetComponent<Renderer>();
-                    renderer.material = wireMat;
-                }
-            }
+                _miniGameInstance.OnClosed -= OnInteractionEnd;
+                Interactable = !successful;
 
-            if (lightList.Count > 0)
-            {
-                foreach (GameObject go in lightList)
+                if (wireList.Count > 0)
                 {
-                    Light light = go.GetComponent<Light>();
-                    light.enabled = true;
+                    foreach (var wireRenderer in wireList.Select(go => go.GetComponent<Renderer>()))
+                    {
+                        wireRenderer.material = wireMat;
+                    }
                 }
-            }
 
-            if (doorToDestroy)
-                Destroy(doorToDestroy);
+                if (lightList.Count > 0)
+                {
+                    foreach (var lightSource in lightList.Select(go => go.GetComponent<Light>()))
+                    {
+                        lightSource.enabled = true;
+                    }
+                }
+
+                if (doorToDestroy && successful)
+                    Destroy(doorToDestroy);
+            }
 
             base.OnInteractionEnd(successful);
         }

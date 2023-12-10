@@ -18,8 +18,10 @@ namespace Core.Player
         [SerializeField] private GameObject characterHUD;
 
         private CharacterInputListener _inputListener;
+        private CharacterHUDInputListener _hudListener;
         private CharacterBody _characterBody;
         private List<InteractiveObject> _interactableObjects;
+        private InteractiveObject _currentIObject;
 
         private Animator _animator;
 
@@ -49,7 +51,7 @@ namespace Core.Player
             popupCanvas.enabled = false;
             popupCanvasRectTrans = popupCanvas.GetComponent<RectTransform>();
 
-            DeactivatePanel();
+            TogglePanel(false);
         }
 
         private void OnEnable()
@@ -57,6 +59,7 @@ namespace Core.Player
             if (_firstRun)
             {
                 _firstRun = false;
+                Invoke(nameof(InitInputListeners),0.2f);
                 Invoke(nameof(EnableInput), 0.2f);
             }
             else
@@ -65,18 +68,23 @@ namespace Core.Player
             }
         }
 
-        public void EnableInput()
+        private void OnDisable()
+        {
+            DisableInput();
+        }
+
+        private void InitInputListeners()
         {
             _inputListener ??= new CharacterInputListener(PlayerID, actionMap, this);
+            _hudListener ??= new CharacterHUDInputListener(PlayerID, ActionMap.HUD, this);
+        }
+
+        private void EnableInput()
+        {
             _inputListener.TryEnable();
 
             _inputListener.OnPlayerMoved += PlayerMove;
             _inputListener.OnPlayerInteract += PlayerInteract;
-        }
-
-        private void OnDisable()
-        {
-            DisableInput();
         }
 
         private void DisableInput()
@@ -85,6 +93,19 @@ namespace Core.Player
 
             _inputListener.OnPlayerMoved -= PlayerMove;
             _inputListener.OnPlayerInteract -= PlayerInteract;
+        }
+
+        private void EnableHUDInput()
+        {
+            _hudListener.TryEnable();
+
+            _hudListener.OnBackPressed += BackPressed;
+        }
+        private void DisableHUDInput()
+        {
+            _hudListener.Disable();
+
+            _hudListener.OnBackPressed -= BackPressed;
         }
 
         private void PlayerMove(Vector2 movementDirection)
@@ -97,26 +118,36 @@ namespace Core.Player
         private void PlayerInteract()
         {
             if (_interactableObjects.Count <= 0) return;
-            if (!_interactableObjects.Any(iObject => iObject.OnHandleInteractee(this))) return;
+            foreach (var iObject in _interactableObjects.Where(iObject => iObject.OnHandleInteractee(this)))
+            {
+                _currentIObject = iObject;
+                break;
+            }
+
+            if (!_currentIObject) return;
 
             DisableInput();
-            ActivatePanel();
+            EnableHUDInput();
+            TogglePanel(true);
+        }
+
+        private void BackPressed()
+        {
+            if(!_currentIObject) return;
+            
+            _currentIObject.OnCancelInteraction();
         }
 
         public void OnInteractionEnd(bool interactionComplete)
         {
+            DisableHUDInput();
             EnableInput();
-            DeactivatePanel();
+            TogglePanel(false);
         }
 
-        public void ActivatePanel()
+        private void TogglePanel(bool toggle)
         {
-            characterHUD.SetActive(true);
-        }
-
-        public void DeactivatePanel()
-        {
-            characterHUD.SetActive(false);
+            characterHUD.SetActive(toggle);
         }
 
         public void AddInteractableObjects(InteractiveObject iObject)

@@ -5,7 +5,7 @@ using CharacterController = Core.Player.CharacterController;
 
 namespace Interaction.Doors
 {
-    public class IOOpenDoorTrigger : IOTaskTrigger
+    public class IOLightSwitch : IOTaskTrigger
     {
         AudioSource audioSource;
 
@@ -13,8 +13,7 @@ namespace Interaction.Doors
 
 
         //Physical wires
-        [Header("Controlled Wires")]
-        public List<GameObject> wireList = new List<GameObject>();
+        [Header("Controlled Wires")] public List<GameObject> wireList = new List<GameObject>();
         public Material wireMat;
 
         [Space(10)]
@@ -22,13 +21,12 @@ namespace Interaction.Doors
         [Header("Controlled Lights")]
         public List<GameObject> lightList = new List<GameObject>();
 
-        [Space(10)]
-        [Header("Controlled Power Switches")]
+        [Space(10)] [Header("Controlled Power Switches")]
         public Material switchMat;
+
         public GameObject switchLight;
 
-        [Space(10)]
-        [Header("Controlled the availability of other game objects")]
+        [Space(10)] [Header("Controlled the availability of other game objects")]
         public GameObject controlledObject;
 
         protected override void Start()
@@ -37,11 +35,10 @@ namespace Interaction.Doors
             audioSource = GetComponent<AudioSource>();
 
             //Make the controlled Objects unavailable
-            if(controlledObject)
+            if (controlledObject)
             {
                 controlledObject.SetActive(false);
             }
-            
         }
 
         public override bool OnHandleInteractee(CharacterController controller)
@@ -57,11 +54,9 @@ namespace Interaction.Doors
         {
             yield return null;
 
-            OnInteractionEnd(true);
-
 
             //Control wires
-            if(wireList.Count > 0)
+            if (wireList.Count > 0)
             {
                 foreach (GameObject go in wireList)
                 {
@@ -81,14 +76,14 @@ namespace Interaction.Doors
             }
 
             //Control switch light
-            if(switchLight)
+            if (switchLight)
             {
                 Renderer renderer = switchLight.GetComponent<Renderer>();
                 renderer.material = switchMat;
             }
 
             //Control other game objects' availability
-            if(controlledObject)
+            if (controlledObject)
             {
                 controlledObject.SetActive(true);
             }
@@ -97,18 +92,13 @@ namespace Interaction.Doors
             {
                 Destroy(controlDoor);
             }
-            
-            if(audioSource)
+
+            if (audioSource)
             {
                 audioSource.Play();
             }
             
-        }
-
-        protected override void OnInteractionEnd(bool successful)
-        {
-            base.OnInteractionEnd(successful);
-            Interactable = !successful;
+            OnInteractionEnd(true);
         }
     }
 }

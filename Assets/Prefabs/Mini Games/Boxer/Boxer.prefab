@@ -69,10 +69,11 @@ MonoBehaviour:
 
 
     Select
-    - P1 (E) & P2 (right ctrl)
+    - P1 (E / A (gamepad)) & P2 (right ctrl / A (gamepad))
 
 
-    Quit - P1 (Q) & P2 (Backspace)'
+    Quit - P1 (Q / B
+    (gamepad)) & P2 (Backspace / B (gamepad))'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
